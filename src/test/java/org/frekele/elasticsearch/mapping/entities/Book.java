@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch.entities;
+package org.frekele.elasticsearch.mapping.entities;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticField;

@@ -1,7 +1,7 @@
-package org.frekele.elasticsearch;
+package org.frekele.elasticsearch.mapping;
 
-import org.frekele.elasticsearch.entities.Book;
-import org.frekele.elasticsearch.entities.NoBook;
+import org.frekele.elasticsearch.mapping.entities.Book;
+import org.frekele.elasticsearch.mapping.entities.NoBook;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

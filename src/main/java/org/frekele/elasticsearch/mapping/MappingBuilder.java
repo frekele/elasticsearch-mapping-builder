@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch;
+package org.frekele.elasticsearch.mapping;
 
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;

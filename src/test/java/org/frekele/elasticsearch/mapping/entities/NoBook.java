@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch.entities;
+package org.frekele.elasticsearch.mapping.entities;
 
 public class NoBook {
 
