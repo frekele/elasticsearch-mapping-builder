@@ -2,9 +2,9 @@ package org.frekele.elasticsearch;
 
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.frekele.elasticsearch.annotations.ElasticDocument;
-import org.frekele.elasticsearch.annotations.ElasticField;
-import org.frekele.elasticsearch.exceptions.InvalidDocumentClassException;
+import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
+import org.frekele.elasticsearch.mapping.annotations.ElasticField;
+import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
 
 import java.io.IOException;
 import java.io.Serializable;

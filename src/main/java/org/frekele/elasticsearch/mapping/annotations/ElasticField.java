@@ -1,15 +1,15 @@
-package org.frekele.elasticsearch.annotations;
+package org.frekele.elasticsearch.mapping.annotations;
+
+import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ElasticDocument {
+public @interface ElasticField {
 
-    //Document name Type.
-    String value();
-
+    FieldType type();
 }

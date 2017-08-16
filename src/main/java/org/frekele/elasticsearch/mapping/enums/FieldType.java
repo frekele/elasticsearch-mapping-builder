@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch.enums;
+package org.frekele.elasticsearch.mapping.enums;
 
 public enum FieldType {
 

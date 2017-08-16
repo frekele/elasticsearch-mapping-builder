@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch.exceptions;
+package org.frekele.elasticsearch.mapping.exceptions;
 
 import java.io.Serializable;
 

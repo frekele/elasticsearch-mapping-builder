@@ -1,6 +1,6 @@
-package org.frekele.elasticsearch.annotations;
+package org.frekele.elasticsearch.mapping.annotations;
 
-import org.frekele.elasticsearch.enums.FieldType;
+import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,9 +1,9 @@
 package org.frekele.elasticsearch.entities;
 
-import org.frekele.elasticsearch.annotations.ElasticDocument;
-import org.frekele.elasticsearch.annotations.ElasticField;
-import org.frekele.elasticsearch.annotations.ElasticFields;
-import org.frekele.elasticsearch.enums.FieldType;
+import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
+import org.frekele.elasticsearch.mapping.annotations.ElasticField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticFields;
+import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 @ElasticDocument("book")
 public class Book {
