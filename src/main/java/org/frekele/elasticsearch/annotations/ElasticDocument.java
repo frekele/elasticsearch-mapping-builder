@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 public @interface ElasticDocument {
 
     //Document name Type.
-    String value() default "";
+    String value();
 
 }
