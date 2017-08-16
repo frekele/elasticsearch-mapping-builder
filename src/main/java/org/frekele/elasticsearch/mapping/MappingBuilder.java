@@ -55,7 +55,7 @@ public class MappingBuilder implements Serializable {
     XContentBuilder build() throws IOException {
         if (this.mapping == null) {
             this.mapping = XContentFactory.jsonBuilder();
-           //this.mapping.prettyPrint();
+            //this.mapping.prettyPrint();
             //BEGIN
             this.mapping.startObject();
             this.mapping.startObject("mappings");
