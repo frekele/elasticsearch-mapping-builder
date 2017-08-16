@@ -4,27 +4,14 @@
 /.cargo/
 /target/
 /.idea/
-/.idea/sonarqube/
-#/.idea/libraries/
 /.tmp/
-/node_modules/
 /dist/
-/artifact/
-/.sass-cache/
-/src/main/webapp/bower_components/
 ######################
 
 
 ######################
 #       Files        #
 ######################
-#/.idea/workspace.xml
-/.idea/tasks.xml
-/.idea/datasources.xml
-/.idea/dataSources.ids
-/npm-debug.log
-/preview/preview.zip
-/documentation/index.html
 elasticsearch-mapping-builder.iml
 ######################
 
