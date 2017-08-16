@@ -9,9 +9,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Fields {
+public @interface ElasticField {
 
     FieldType type();
-
-    Field[] fields();
 }

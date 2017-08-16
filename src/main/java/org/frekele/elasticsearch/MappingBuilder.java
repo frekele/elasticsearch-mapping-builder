@@ -1,5 +1,7 @@
 package org.frekele.elasticsearch;
 
-public class MappingBuilder {
+import java.io.Serializable;
+
+public interface MappingBuilder extends Serializable {
 
 }
