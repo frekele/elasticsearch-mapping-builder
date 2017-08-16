@@ -1,11 +1,11 @@
 package org.frekele.elasticsearch.entities;
 
+import org.frekele.elasticsearch.annotations.Document;
 import org.frekele.elasticsearch.annotations.Field;
 import org.frekele.elasticsearch.annotations.Fields;
-import org.frekele.elasticsearch.annotations.Mapping;
 import org.frekele.elasticsearch.enums.FieldType;
 
-@Mapping
+@Document("book")
 public class Book {
 
     @Field(type = FieldType.LONG)
