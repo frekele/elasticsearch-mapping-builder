@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>elasticsearch-mapping-builder</name>
+
+    <groupId>org.frekele.elasticsearch</groupId>
+    <artifactId>elasticsearch-mapping-builder</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>jar</packaging>
+    <url>https://github.com/frekele/elasticsearch-mapping-builder</url>
+
+    <scm>
+        <url>https://github.com/frekele/elasticsearch-mapping-builder</url>
+        <connection>scm:git:https://github.com/frekele/elasticsearch-mapping-builder.git</connection>
+        <developerConnection>scm:git:https://github.com/frekele/elasticsearch-mapping-builder.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <url>https://github.com/frekele/elasticsearch-mapping-builder/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <properties>
+        <encoding>UTF-8</encoding>
+        <file.encoding>UTF-8</file.encoding>
+        <console.encoding>UTF-8</console.encoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+
+        <project.scm.id>github</project.scm.id>
+
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+    </build>
+
+    <profiles>
+    </profiles>
+
+</project>
