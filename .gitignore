@@ -1,0 +1,76 @@
+######################
+#    Directories     #
+######################
+/.cargo/
+/target/
+/.idea/
+/.idea/sonarqube/
+#/.idea/libraries/
+/.tmp/
+/node_modules/
+/dist/
+/artifact/
+/.sass-cache/
+/src/main/webapp/bower_components/
+######################
+
+
+######################
+#       Files        #
+######################
+#/.idea/workspace.xml
+/.idea/tasks.xml
+/.idea/datasources.xml
+/.idea/dataSources.ids
+/npm-debug.log
+/preview/preview.zip
+/documentation/index.html
+######################
+
+
+######################
+#  Compiled Source   #
+######################
+*.class
+*.dll
+*.exe
+*.cache
+######################
+
+
+######################
+#      Packages      #
+######################
+# it’s better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+######################
+
+
+######################
+# OS generated files #
+######################
+*/.DS_Store
+.DS_Store
+.DS_Store?
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.lnk
+Desktop.ini
+######################
+
+
+######################
+# Logs and databases #
+######################
+*.log
+*.sqlite
+######################
