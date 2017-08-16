@@ -1,7 +1,7 @@
 package org.frekele.elasticsearch;
 
-import org.elasticsearch.search.SearchHit;
 import org.frekele.elasticsearch.entities.Book;
+import org.frekele.elasticsearch.entities.NoBook;
 import org.frekele.elasticsearch.exceptions.InvalidDocumentClassException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -25,7 +25,7 @@ public class MappingBuilderTest {
         boolean result = MappingBuilder.isElasticDocument(Book.class);
         assertEquals(result, true);
 
-        result = MappingBuilder.isElasticDocument(SearchHit.class);
+        result = MappingBuilder.isElasticDocument(NoBook.class);
         assertEquals(result, false);
     }
 
@@ -37,8 +37,18 @@ public class MappingBuilderTest {
 
     @Test(expectedExceptions = InvalidDocumentClassException.class)
     public void validateElasticDocumentTestWithError() throws Exception {
-        MappingBuilder mappingBuilder = new MappingBuilder(SearchHit.class);
+        MappingBuilder mappingBuilder = new MappingBuilder(NoBook.class);
         mappingBuilder.validateElasticDocument();
+    }
+
+    @Test
+    public void sourceAsStringTest() throws Exception {
+        String expected = "{\"mappings\":{\"book\":{\"properties\":{\"id\":{\"type\":\"long\"},\"name\":{\"type\":\"text\"}}}}}";
+        MappingBuilder mappingBuilder = new MappingBuilder(Book.class);
+        String result = mappingBuilder.sourceAsString();
+
+        assertEquals(result, expected);
+        System.out.println(result);
     }
 
 //    @Test
