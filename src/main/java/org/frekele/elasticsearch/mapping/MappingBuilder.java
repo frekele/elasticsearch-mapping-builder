@@ -33,6 +33,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
 import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
+import org.frekele.elasticsearch.mapping.exceptions.MaxRecursiveLevelClassException;
 import org.frekele.elasticsearch.mapping.values.DateFieldValue;
 import org.frekele.elasticsearch.mapping.values.NumericFieldValue;
 import org.frekele.elasticsearch.mapping.values.RangeFieldValue;
@@ -41,11 +42,15 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MappingBuilder implements Serializable {
+
+    private int MAX_RECURSIVE_LEVEL = 20;
 
     private List<Class> docsClass;
 
@@ -718,7 +723,26 @@ public class MappingBuilder implements Serializable {
         this.closeSuffixName(subField);
     }
 
-    void recursiveFields(Field[] fields) throws IOException {
+    Field[] getInnerFields(Field field) {
+        if (field.getGenericType() instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = ((ParameterizedType) field.getGenericType());
+            Type type = parameterizedType.getActualTypeArguments()[0];
+            try {
+                return Class.forName(((Class) type).getCanonicalName()).getDeclaredFields();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new InvalidDocumentClassException(e.getCause());
+            }
+        } else {
+            return field.getType().getDeclaredFields();
+        }
+    }
+
+    void recursiveFields(Field[] fields, int level) throws IOException {
+        if (level > MAX_RECURSIVE_LEVEL) {
+            throw new MaxRecursiveLevelClassException("Max json level has reached " + MAX_RECURSIVE_LEVEL);
+        }
+        ++level;
         if (fields != null && fields.length > 0) {
             this.mapping.startObject("properties");
             for (Field field : fields) {
@@ -728,12 +752,12 @@ public class MappingBuilder implements Serializable {
                         ElasticObjectField elasticDocument = field.getAnnotation(ElasticObjectField.class);
                         this.dynamic(elasticDocument.dynamic());
                         this.enabledJson(elasticDocument.enabledJson());
-                        this.recursiveFields(field.getType().getDeclaredFields());
+                        this.recursiveFields(this.getInnerFields(field), level);
                     } else if (field.isAnnotationPresent(ElasticNestedField.class)) {
                         ElasticNestedField elasticDocument = field.getAnnotation(ElasticNestedField.class);
                         this.nested(true);
                         this.dynamic(elasticDocument.dynamic());
-                        this.recursiveFields(field.getType().getDeclaredFields());
+                        this.recursiveFields(this.getInnerFields(field), level);
                     } else {
                         List<Annotation> annotationList = getElasticFieldAnnotations(field);
                         if (!annotationList.isEmpty()) {
@@ -779,7 +803,7 @@ public class MappingBuilder implements Serializable {
                 this.dynamic(elasticDocument.dynamic());
 
                 Field[] fields = clazz.getDeclaredFields();
-                this.recursiveFields(fields);
+                this.recursiveFields(fields, 0);
 
                 //ElasticDocument
                 this.mapping.endObject();

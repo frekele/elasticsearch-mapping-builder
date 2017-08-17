@@ -6,6 +6,8 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticNestedField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticObjectField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 
+import java.util.List;
+
 @ElasticDocument(value = "person")
 public class Person {
 
@@ -16,10 +18,16 @@ public class Person {
     private String name;
 
     @ElasticObjectField
-    private Address address;
+    private Address objectAddress;
+
+    @ElasticObjectField
+    private List<Address> listObjectAddress;
 
     @ElasticNestedField
-    private Address address2;
+    private Address nestedAddress;
+
+    @ElasticNestedField
+    private List<Address> listNestedAddress;
 
     public Person() {
     }
