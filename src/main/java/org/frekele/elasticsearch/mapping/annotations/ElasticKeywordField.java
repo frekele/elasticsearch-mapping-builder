@@ -16,6 +16,8 @@ public @interface ElasticKeywordField {
 
     FieldType type = FieldType.KEYWORD;
 
+    String suffixName() default "keyword";
+
     String analyzer() default "";
 
     float boost() default 1.0f;

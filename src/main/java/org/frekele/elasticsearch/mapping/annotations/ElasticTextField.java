@@ -17,6 +17,8 @@ public @interface ElasticTextField {
 
     FieldType type = FieldType.TEXT;
 
+    String suffixName() default "text";
+
     String analyzer() default "";
 
     float boost() default 1.0f;

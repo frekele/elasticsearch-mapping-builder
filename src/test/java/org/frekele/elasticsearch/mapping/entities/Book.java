@@ -10,9 +10,9 @@ public class Book {
     private Long id;
 
     @ElasticTextField()
+    @ElasticKeywordField()
     private String name;
 
-    @ElasticKeywordField()
     private String description;
 
     public Book() {

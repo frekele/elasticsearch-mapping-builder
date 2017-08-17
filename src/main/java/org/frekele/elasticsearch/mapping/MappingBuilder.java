@@ -9,6 +9,7 @@ import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassExceptio
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,68 +42,44 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    public XContentBuilder source() throws IOException {
-        if (this.mapping == null) {
-            return build();
-        } else {
-            return this.mapping;
-        }
+    static boolean containElasticFieldAnnotation(Field field) {
+        List<Annotation> result = getElasticFieldAnnotations(field);
+        return (result != null && !result.isEmpty());
     }
 
-    public String sourceAsString() throws IOException {
-        return this.source().string();
+    static boolean isElasticFieldAnnotation(Annotation annotation) {
+        return (annotation instanceof ElasticTextField || annotation instanceof ElasticKeywordField);
     }
 
-    XContentBuilder build() throws IOException {
-        if (this.mapping == null) {
-            this.mapping = XContentFactory.jsonBuilder();
-            this.mapping.prettyPrint();
-            //BEGIN
-            this.mapping.startObject();
-            this.mapping.startObject("mappings");
-
-            for (Class clazz : this.docsClass) {
-                ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
-                this.mapping.startObject(elasticDocument.value());
-                Field[] fields = clazz.getDeclaredFields();
-
-                if (fields != null && fields.length > 0) {
-                    this.mapping.startObject("properties");
-
-                    for (Field field : fields) {
-                        if (field.isAnnotationPresent(ElasticTextField.class)) {
-                            ElasticTextField elasticField = field.getAnnotation(ElasticTextField.class);
-                            this.mapping.startObject(field.getName());
-                            this.processElasticTextField(elasticField);
-                            //class type
-                            this.mapping.endObject();
-                        }
-                        if (field.isAnnotationPresent(ElasticKeywordField.class)) {
-                            ElasticKeywordField elasticField = field.getAnnotation(ElasticKeywordField.class);
-                            this.mapping.startObject(field.getName());
-                            this.processElasticKeywordField(elasticField);
-                            //class type
-                            this.mapping.endObject();
-                        }
-                    }
-
-                    //properties
-                    this.mapping.endObject();
+    static List<Annotation> getElasticFieldAnnotations(Field field) {
+        List<Annotation> result = new ArrayList<>();
+        Annotation[] annotations = field.getDeclaredAnnotations();
+        if (annotations != null && annotations.length != 0) {
+            for (Annotation annotation : annotations) {
+                if (isElasticFieldAnnotation(annotation)) {
+                    result.add(annotation);
                 }
-
-                //ElasticDocument
-                this.mapping.endObject();
             }
-
-            //mappings
-            this.mapping.endObject();
-            //END
-            this.mapping.endObject();
+            return result;
+        } else {
+            return null;
         }
-        return this.mapping;
     }
 
-    void processElasticTextField(ElasticTextField elasticField) throws IOException {
+    void processElasticField(Annotation annotation, boolean subField) throws IOException {
+        if (annotation instanceof ElasticTextField) {
+            this.processElasticField((ElasticTextField) annotation, subField);
+        }
+        if (annotation instanceof ElasticKeywordField) {
+            this.processElasticField((ElasticKeywordField) annotation, subField);
+        }
+    }
+
+    void processElasticField(ElasticTextField elasticField, boolean subField) throws IOException {
+        if (subField) {
+            //Add suffixName to subField;
+            this.mapping.startObject(elasticField.suffixName());
+        }
         this.mapping.field("type", ElasticTextField.type.getName());
         if (!elasticField.analyzer().isEmpty()) {
             this.mapping.field("analyzer", elasticField.analyzer());
@@ -154,10 +131,18 @@ public class MappingBuilder implements Serializable {
         if (!elasticField.termVector().isEmpty()) {
             this.mapping.field("term_vector", elasticField.termVector());
         }
+        if (subField) {
+            //Close suffixName to subField;
+            this.mapping.endObject();
+        }
     }
 
-    void processElasticKeywordField(ElasticKeywordField elasticField) throws IOException {
-        this.mapping.field("type", ElasticTextField.type.getName());
+    void processElasticField(ElasticKeywordField elasticField, boolean subField) throws IOException {
+        if (subField) {
+            //Add suffixName to subField;
+            this.mapping.startObject(elasticField.suffixName());
+        }
+        this.mapping.field("type", ElasticKeywordField.type.getName());
         if (!elasticField.analyzer().isEmpty()) {
             this.mapping.field("analyzer", elasticField.analyzer());
         }
@@ -197,14 +182,77 @@ public class MappingBuilder implements Serializable {
         if (!elasticField.normalizer().isEmpty()) {
             this.mapping.field("normalizer", elasticField.normalizer());
         }
+        if (subField) {
+            //Close suffixName to subField;
+            this.mapping.endObject();
+        }
     }
 
-    public XContentBuilder old() throws IOException {
-        XContentBuilder mapping = XContentFactory.jsonBuilder().startObject().startObject("type1")
-            .startObject("properties")
-            .startObject("text").field("type", "text").field("analyzer", "keyword").endObject()
-            .endObject()
-            .endObject().endObject();
-        return mapping;
+    public XContentBuilder source() throws IOException {
+        if (this.mapping == null) {
+            return build();
+        } else {
+            return this.mapping;
+        }
+    }
+
+    public String sourceAsString() throws IOException {
+        return this.source().string();
+    }
+
+    XContentBuilder build() throws IOException {
+        if (this.mapping == null) {
+            this.mapping = XContentFactory.jsonBuilder();
+            this.mapping.prettyPrint();
+            //BEGIN
+            this.mapping.startObject();
+            this.mapping.startObject("mappings");
+
+            for (Class clazz : this.docsClass) {
+                ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
+                this.mapping.startObject(elasticDocument.value());
+                Field[] fields = clazz.getDeclaredFields();
+
+                if (fields != null && fields.length > 0) {
+                    this.mapping.startObject("properties");
+                    for (Field field : fields) {
+                        if (containElasticFieldAnnotation(field)) {
+                            this.mapping.startObject(field.getName());
+                            List<Annotation> annotationList = getElasticFieldAnnotations(field);
+                            if (!annotationList.isEmpty()) {
+                                //Get main Field (The First)
+                                Annotation mainAnnotation = annotationList.get(0);
+                                this.processElasticField(mainAnnotation, false);
+                                annotationList.remove(mainAnnotation);
+
+                                //If contains more fields.
+                                if (!annotationList.isEmpty()) {
+                                    this.mapping.startObject("fields");
+                                    for (Annotation otherAnnotation : annotationList) {
+                                        this.processElasticField(otherAnnotation, true);
+                                    }
+                                    //fields
+                                    this.mapping.endObject();
+                                }
+                            }
+                            //field
+                            this.mapping.endObject();
+                        }
+                    }
+
+                    //properties
+                    this.mapping.endObject();
+                }
+
+                //ElasticDocument
+                this.mapping.endObject();
+            }
+
+            //mappings
+            this.mapping.endObject();
+            //END
+            this.mapping.endObject();
+        }
+        return this.mapping;
     }
 }
