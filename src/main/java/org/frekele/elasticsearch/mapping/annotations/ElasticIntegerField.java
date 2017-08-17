@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">elasticsearch number integer field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">elasticsearch integer number field</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
