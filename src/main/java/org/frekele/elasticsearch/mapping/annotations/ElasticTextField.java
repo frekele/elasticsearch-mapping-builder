@@ -44,4 +44,5 @@ public @interface ElasticTextField {
     String similarity() default "";
 
     String termVector() default "";
+
 }
