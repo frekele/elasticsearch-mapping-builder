@@ -120,7 +120,7 @@ public enum FieldType {
 
     //## Percolator type - (https://www.elastic.co/guide/en/elasticsearch/reference/current/percolator.html)
     //### The percolator field type parses a json structure into a native query and stores that query, so that the percolate query can use it to match provided documents.
-    PERCOLATO("percolator");
+    PERCOLATOR("percolator");
     //###################################################################
 
     private String name;
