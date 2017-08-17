@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ElasticFielddataFrequencyFilter {
 
-    boolean enabled() default false;
+    boolean actived() default false;
 
     int min() default -1;
 
