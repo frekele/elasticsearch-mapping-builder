@@ -12,6 +12,8 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticFloatRangeField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticGeoPointField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticGeoShapeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticHalfFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticIntegerField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticIntegerRangeField;
@@ -50,6 +52,22 @@ public class MappingBuilder implements Serializable {
             this.docsClass = new ArrayList<>(0);
         }
         this.validateElasticDocument();
+    }
+
+    public XContentBuilder source() throws IOException {
+        return build(false);
+    }
+
+    public XContentBuilder source(boolean pretty) throws IOException {
+        return build(pretty);
+    }
+
+    public String sourceAsString() throws IOException {
+        return this.source().string();
+    }
+
+    public String sourceAsString(boolean pretty) throws IOException {
+        return this.source(pretty).string();
     }
 
     static boolean isElasticDocument(Class documentClass) {
@@ -102,7 +120,9 @@ public class MappingBuilder implements Serializable {
                 //Range datatypes
                 || annotation instanceof ElasticIntegerRangeField || annotation instanceof ElasticFloatRangeField
                 || annotation instanceof ElasticLongRangeField || annotation instanceof ElasticDoubleRangeField
-                || annotation instanceof ElasticIpRangeField || annotation instanceof ElasticDateRangeField);
+                || annotation instanceof ElasticIpRangeField || annotation instanceof ElasticDateRangeField
+                //Geo datatypes
+                || annotation instanceof ElasticGeoPointField || annotation instanceof ElasticGeoShapeField);
 
     }
 
@@ -156,6 +176,12 @@ public class MappingBuilder implements Serializable {
             this.processElasticField((ElasticIpRangeField) annotation, subField);
         } else if (annotation instanceof ElasticDateRangeField) {
             this.processElasticField((ElasticDateRangeField) annotation, subField);
+        }
+        //Geo datatypes
+        else if (annotation instanceof ElasticGeoPointField) {
+            this.processElasticField((ElasticGeoPointField) annotation, subField);
+        } else if (annotation instanceof ElasticGeoShapeField) {
+            this.processElasticField((ElasticGeoShapeField) annotation, subField);
         }
     }
 
@@ -321,6 +347,50 @@ public class MappingBuilder implements Serializable {
     void locale(String locale) throws IOException {
         if (!locale.isEmpty()) {
             this.mapping.field("locale", locale);
+        }
+    }
+
+    void tree(String tree) throws IOException {
+        if (!tree.isEmpty()) {
+            this.mapping.field("tree", tree);
+        }
+    }
+
+    void precision(String precision) throws IOException {
+        if (!precision.isEmpty()) {
+            this.mapping.field("precision", precision);
+        }
+    }
+
+    void treeLevels(String treeLevels) throws IOException {
+        if (!treeLevels.isEmpty()) {
+            this.mapping.field("tree_levels", treeLevels);
+        }
+    }
+
+    void strategy(String strategy) throws IOException {
+        if (!strategy.isEmpty()) {
+            this.mapping.field("strategy", strategy);
+        }
+    }
+
+    void distanceErrorPct(float distanceErrorPct) throws IOException {
+        //Default 0.025f
+        if (distanceErrorPct != 0.025f) {
+            this.mapping.field("distance_error_pct", distanceErrorPct);
+        }
+    }
+
+    void orientation(String orientation) throws IOException {
+        if (!orientation.isEmpty()) {
+            this.mapping.field("orientation", orientation);
+        }
+    }
+
+    void pointsOnly(boolean pointsOnly) throws IOException {
+        //Default false
+        if (pointsOnly) {
+            this.mapping.field("points_only", pointsOnly);
         }
     }
 
@@ -516,20 +586,24 @@ public class MappingBuilder implements Serializable {
         this.processElasticField(vo, subField);
     }
 
-    public XContentBuilder source() throws IOException {
-        return build(false);
+    void processElasticField(ElasticGeoPointField elasticField, boolean subField) throws IOException {
+        this.startSuffixName(subField, elasticField.suffixName());
+        this.type(elasticField.type);
+        this.ignoreMalformed(elasticField.ignoreMalformed());
+        this.closeSuffixName(subField);
     }
 
-    public XContentBuilder source(boolean pretty) throws IOException {
-        return build(pretty);
-    }
-
-    public String sourceAsString() throws IOException {
-        return this.source().string();
-    }
-
-    public String sourceAsString(boolean pretty) throws IOException {
-        return this.source(pretty).string();
+    void processElasticField(ElasticGeoShapeField elasticField, boolean subField) throws IOException {
+        this.startSuffixName(subField, elasticField.suffixName());
+        this.type(elasticField.type);
+        this.tree(elasticField.tree());
+        this.precision(elasticField.precision());
+        this.treeLevels(elasticField.treeLevels());
+        this.strategy(elasticField.strategy());
+        this.distanceErrorPct(elasticField.distanceErrorPct());
+        this.orientation(elasticField.orientation());
+        this.pointsOnly(elasticField.pointsOnly());
+        this.closeSuffixName(subField);
     }
 
     XContentBuilder build(boolean pretty) throws IOException {
