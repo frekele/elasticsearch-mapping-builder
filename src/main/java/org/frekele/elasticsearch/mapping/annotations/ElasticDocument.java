@@ -15,4 +15,5 @@ public @interface ElasticDocument {
     //Document name Type.
     String value();
 
+    boolean dynamic() default true;
 }
