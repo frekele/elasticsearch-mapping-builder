@@ -8,6 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * A single-precision 32-bit IEEE 754 floating point.
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">elasticsearch float number field</a>
  */
 @Target(ElementType.FIELD)

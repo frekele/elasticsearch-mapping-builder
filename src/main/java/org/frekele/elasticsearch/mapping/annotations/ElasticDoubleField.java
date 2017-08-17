@@ -8,6 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * A double-precision 64-bit IEEE 754 floating point.
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">elasticsearch double number field</a>
  */
 @Target(ElementType.FIELD)
