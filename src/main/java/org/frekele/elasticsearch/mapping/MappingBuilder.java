@@ -207,6 +207,13 @@ public class MappingBuilder implements Serializable {
         }
     }
 
+    void nested(boolean nested) throws IOException {
+        //Default false
+        if (nested) {
+            this.mapping.field("nested", nested);
+        }
+    }
+
     void dynamic(boolean dynamic) throws IOException {
         //Default true
         if (!dynamic) {
@@ -260,7 +267,7 @@ public class MappingBuilder implements Serializable {
     }
 
     void fielddataFrequencyFilter(ElasticFielddataFrequencyFilter fielddataFrequencyFilter) throws IOException {
-        if (fielddataFrequencyFilter.enabled()) {
+        if (fielddataFrequencyFilter.actived()) {
             this.mapping.startObject("fielddata_frequency_filter");
             this.mapping.field("min", fielddataFrequencyFilter.min());
             this.mapping.field("max", fielddataFrequencyFilter.max());
@@ -724,6 +731,7 @@ public class MappingBuilder implements Serializable {
                         this.recursiveFields(field.getType().getDeclaredFields());
                     } else if (field.isAnnotationPresent(ElasticNestedField.class)) {
                         ElasticNestedField elasticDocument = field.getAnnotation(ElasticNestedField.class);
+                        this.nested(true);
                         this.dynamic(elasticDocument.dynamic());
                         this.recursiveFields(field.getType().getDeclaredFields());
                     } else {
