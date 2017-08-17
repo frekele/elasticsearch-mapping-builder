@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * A field to index full-text values, such as the body of an email or the description of a product.
+ * The binary type accepts a binary value as a Base64 encoded string. The field is not stored by default and is not searchable.
  *
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/binary.html">elasticsearch binary field</a>
  */
