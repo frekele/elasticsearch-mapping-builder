@@ -1,23 +1,18 @@
 package org.frekele.elasticsearch.mapping.entities;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
-import org.frekele.elasticsearch.mapping.annotations.ElasticField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticFields;
+import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
-import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 @ElasticDocument("book")
 public class Book {
 
-    @ElasticField(type = FieldType.LONG)
     private Long id;
 
     @ElasticTextField()
     private String name;
 
-    @ElasticFields(type = FieldType.TEXT, fields = {
-        @ElasticField(type = FieldType.KEYWORD)}
-    )
+    @ElasticKeywordField()
     private String description;
 
     public Book() {
