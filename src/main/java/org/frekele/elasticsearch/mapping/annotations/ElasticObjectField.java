@@ -19,4 +19,8 @@ public @interface ElasticObjectField {
     FieldType type = FieldType.OBJECT;
 
     boolean dynamic() default true;
+
+    //If false, just store the field without indexing it.
+    boolean enabled() default true;
+
 }
