@@ -45,7 +45,7 @@ public class MappingBuilderTest {
     public void sourceAsStringTest() throws Exception {
         String expected = "{\"mappings\":{\"book\":{\"properties\":{\"id\":{\"type\":\"long\"},\"name\":{\"type\":\"text\"}}}}}";
         MappingBuilder mappingBuilder = new MappingBuilder(Book.class);
-        String result = mappingBuilder.sourceAsString();
+        String result = mappingBuilder.sourceAsString(true);
 
         // assertEquals(result, expected);
         System.out.println(result);

@@ -404,21 +404,27 @@ public class MappingBuilder implements Serializable {
     }
 
     public XContentBuilder source() throws IOException {
-        if (this.mapping == null) {
-            return build();
-        } else {
-            return this.mapping;
-        }
+        return build(false);
+    }
+
+    public XContentBuilder source(boolean pretty) throws IOException {
+        return build(pretty);
     }
 
     public String sourceAsString() throws IOException {
         return this.source().string();
     }
 
-    XContentBuilder build() throws IOException {
+    public String sourceAsString(boolean pretty) throws IOException {
+        return this.source(pretty).string();
+    }
+
+    XContentBuilder build(boolean pretty) throws IOException {
         if (this.mapping == null) {
             this.mapping = XContentFactory.jsonBuilder();
-            this.mapping.prettyPrint();
+            if (pretty) {
+                this.mapping.prettyPrint();
+            }
             //BEGIN
             this.mapping.startObject();
             this.mapping.startObject("mappings");
