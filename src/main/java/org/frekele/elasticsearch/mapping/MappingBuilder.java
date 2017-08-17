@@ -72,43 +72,7 @@ public class MappingBuilder implements Serializable {
                         if (field.isAnnotationPresent(ElasticTextField.class)) {
                             ElasticTextField elasticField = field.getAnnotation(ElasticTextField.class);
                             this.mapping.startObject(field.getName());
-                            this.mapping.field("type", ElasticTextField.type.getName());
-                            if (!elasticField.analyzer().isEmpty()) {
-                                this.mapping.field("analyzer", elasticField.analyzer());
-                            }
-                            //Default "fielddata" : false
-                            if (elasticField.fielddata()) {
-                                this.mapping.field("fielddata", elasticField.fielddata());
-                            }
-                            if (elasticField.fielddataFrequencyFilter().enabled()) {
-                                this.mapping.startObject("fielddata_frequency_filter");
-                                this.mapping.field("min", elasticField.fielddataFrequencyFilter().min());
-                                this.mapping.field("max", elasticField.fielddataFrequencyFilter().max());
-                                this.mapping.field("min_segment_size", elasticField.fielddataFrequencyFilter().minSegmentSize());
-                                //fielddata_frequency_filter
-                                this.mapping.endObject();
-                            }
-                            this.mapping.field("index", elasticField.index());
-                            if (!elasticField.indexOptions().isEmpty()) {
-                                this.mapping.field("index_options", elasticField.indexOptions());
-                            }
-                            this.mapping.field("norms", elasticField.norms());
-                            this.mapping.field("positionIncrementGap", elasticField.positionIncrementGap());
-                            this.mapping.field("store", elasticField.store());
-
-                            if (!elasticField.searchAnalyzer().isEmpty()) {
-                                this.mapping.field("search_analyzer", elasticField.searchAnalyzer());
-                            }
-                            if (!elasticField.searchQuoteAnalyzer().isEmpty()) {
-                                this.mapping.field("search_quote_analyzer", elasticField.searchQuoteAnalyzer());
-                            }
-                            if (!elasticField.similarity().isEmpty()) {
-                                this.mapping.field("similarity", elasticField.similarity());
-                            }
-                            if (!elasticField.termVector().isEmpty()) {
-                                this.mapping.field("term_vector", elasticField.termVector());
-                            }
-
+                            this.processElasticTextField(elasticField);
                             //class type
                             this.mapping.endObject();
                         }
@@ -128,6 +92,60 @@ public class MappingBuilder implements Serializable {
             this.mapping.endObject();
         }
         return this.mapping;
+    }
+
+    void processElasticTextField(ElasticTextField elasticField) throws IOException {
+        this.mapping.field("type", ElasticTextField.type.getName());
+        if (!elasticField.analyzer().isEmpty()) {
+            this.mapping.field("analyzer", elasticField.analyzer());
+        }
+        //default 100
+        if (elasticField.boost() != 1.0f) {
+            this.mapping.field("boost", elasticField.boost());
+        }
+        //Default false
+        if (elasticField.fielddata()) {
+            this.mapping.field("fielddata", elasticField.fielddata());
+        }
+        if (elasticField.fielddataFrequencyFilter().enabled()) {
+            this.mapping.startObject("fielddata_frequency_filter");
+            this.mapping.field("min", elasticField.fielddataFrequencyFilter().min());
+            this.mapping.field("max", elasticField.fielddataFrequencyFilter().max());
+            this.mapping.field("min_segment_size", elasticField.fielddataFrequencyFilter().minSegmentSize());
+            //fielddata_frequency_filter
+            this.mapping.endObject();
+        }
+        //Default true
+        if (!elasticField.index()) {
+            this.mapping.field("index", elasticField.index());
+        }
+        if (!elasticField.indexOptions().isEmpty()) {
+            this.mapping.field("index_options", elasticField.indexOptions());
+        }
+        //Default true
+        if (!elasticField.norms()) {
+            this.mapping.field("norms", elasticField.norms());
+        }
+        //default 100
+        if (elasticField.positionIncrementGap() != 100) {
+            this.mapping.field("positionIncrementGap", elasticField.positionIncrementGap());
+        }
+        //Default false
+        if (elasticField.store()) {
+            this.mapping.field("store", elasticField.store());
+        }
+        if (!elasticField.searchAnalyzer().isEmpty()) {
+            this.mapping.field("search_analyzer", elasticField.searchAnalyzer());
+        }
+        if (!elasticField.searchQuoteAnalyzer().isEmpty()) {
+            this.mapping.field("search_quote_analyzer", elasticField.searchQuoteAnalyzer());
+        }
+        if (!elasticField.similarity().isEmpty()) {
+            this.mapping.field("similarity", elasticField.similarity());
+        }
+        if (!elasticField.termVector().isEmpty()) {
+            this.mapping.field("term_vector", elasticField.termVector());
+        }
     }
 
     public XContentBuilder old() throws IOException {
