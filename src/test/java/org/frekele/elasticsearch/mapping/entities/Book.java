@@ -2,11 +2,13 @@ package org.frekele.elasticsearch.mapping.entities;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 
 @ElasticDocument("book")
 public class Book {
 
+    @ElasticLongField
     private Long id;
 
     @ElasticTextField()
