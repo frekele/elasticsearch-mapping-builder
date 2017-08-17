@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.entities;
 
+import org.frekele.elasticsearch.mapping.annotations.ElasticBinaryField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
@@ -27,6 +28,9 @@ public class Book {
 
     @ElasticBooleanField
     private Boolean active;
+
+    @ElasticBinaryField
+    private String blob;
 
     public Book() {
     }

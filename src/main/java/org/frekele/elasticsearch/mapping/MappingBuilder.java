@@ -2,6 +2,7 @@ package org.frekele.elasticsearch.mapping;
 
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.frekele.elasticsearch.mapping.annotations.ElasticBinaryField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticByteField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
@@ -87,7 +88,10 @@ public class MappingBuilder implements Serializable {
                 //Date datatype
                 || annotation instanceof ElasticDateField
                 //Boolean datatype
-                || annotation instanceof ElasticBooleanField);
+                || annotation instanceof ElasticBooleanField
+                //Binary datatype
+                || annotation instanceof ElasticBinaryField);
+
     }
 
     void processElasticAnnotationField(Annotation annotation, boolean subField) throws IOException {
@@ -122,6 +126,10 @@ public class MappingBuilder implements Serializable {
         //Boolean datatype
         else if (annotation instanceof ElasticBooleanField) {
             this.processElasticField((ElasticBooleanField) annotation, subField);
+        }
+        //Binary datatype
+        else if (annotation instanceof ElasticBinaryField) {
+            this.processElasticField((ElasticBinaryField) annotation, subField);
         }
     }
 
@@ -417,6 +425,14 @@ public class MappingBuilder implements Serializable {
         this.docValues(elasticField.docValues());
         this.index(elasticField.index());
         this.nullValue(elasticField.nullValue());
+        this.store(elasticField.store());
+        this.closeSuffixName(subField);
+    }
+
+    void processElasticField(ElasticBinaryField elasticField, boolean subField) throws IOException {
+        this.startSuffixName(subField, elasticField.suffixName());
+        this.type(elasticField.type);
+        this.docValues(elasticField.docValues());
         this.store(elasticField.store());
         this.closeSuffixName(subField);
     }
