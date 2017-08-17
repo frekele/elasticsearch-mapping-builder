@@ -5,6 +5,7 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import org.frekele.elasticsearch.mapping.annotations.ElasticBinaryField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticByteField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticCompletionField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
@@ -17,13 +18,16 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticGeoShapeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticHalfFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticIntegerField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticIntegerRangeField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticIpField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticIpRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongRangeField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticPercolatorField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticScaledFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
 import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
@@ -122,7 +126,11 @@ public class MappingBuilder implements Serializable {
                 || annotation instanceof ElasticLongRangeField || annotation instanceof ElasticDoubleRangeField
                 || annotation instanceof ElasticIpRangeField || annotation instanceof ElasticDateRangeField
                 //Geo datatypes
-                || annotation instanceof ElasticGeoPointField || annotation instanceof ElasticGeoShapeField);
+                || annotation instanceof ElasticGeoPointField || annotation instanceof ElasticGeoShapeField
+                //Specialised datatypes
+                || annotation instanceof ElasticIpField || annotation instanceof ElasticCompletionField
+                || annotation instanceof ElasticTokenCountField || annotation instanceof ElasticPercolatorField
+        );
 
     }
 
@@ -182,6 +190,16 @@ public class MappingBuilder implements Serializable {
             this.processElasticField((ElasticGeoPointField) annotation, subField);
         } else if (annotation instanceof ElasticGeoShapeField) {
             this.processElasticField((ElasticGeoShapeField) annotation, subField);
+        }
+        //Specialised datatypes
+        else if (annotation instanceof ElasticIpField) {
+            this.processElasticField((ElasticIpField) annotation, subField);
+        } else if (annotation instanceof ElasticCompletionField) {
+            this.processElasticField((ElasticCompletionField) annotation, subField);
+        } else if (annotation instanceof ElasticTokenCountField) {
+            this.processElasticField((ElasticTokenCountField) annotation, subField);
+        } else if (annotation instanceof ElasticPercolatorField) {
+            this.processElasticField((ElasticPercolatorField) annotation, subField);
         }
     }
 
@@ -394,6 +412,34 @@ public class MappingBuilder implements Serializable {
         }
     }
 
+    void preserveSeparators(boolean preserveSeparators) throws IOException {
+        //Default true
+        if (!preserveSeparators) {
+            this.mapping.field("preserve_separators", preserveSeparators);
+        }
+    }
+
+    void preservePositionIncrements(boolean preservePositionIncrements) throws IOException {
+        //Default true
+        if (!preservePositionIncrements) {
+            this.mapping.field("preserve_position_increments", preservePositionIncrements);
+        }
+    }
+
+    void maxInputLength(int maxInputLength) throws IOException {
+        //Default 50
+        if (maxInputLength != 50) {
+            this.mapping.field("max_input_length", maxInputLength);
+        }
+    }
+
+    void enablePositionIncrements(boolean enablePositionIncrements) throws IOException {
+        //Default false
+        if (enablePositionIncrements) {
+            this.mapping.field("enable_position_increments", enablePositionIncrements);
+        }
+    }
+
     void processElasticField(ElasticTextField elasticField, boolean subField) throws IOException {
         this.startSuffixName(subField, elasticField.suffixName());
         this.type(elasticField.type);
@@ -603,6 +649,47 @@ public class MappingBuilder implements Serializable {
         this.distanceErrorPct(elasticField.distanceErrorPct());
         this.orientation(elasticField.orientation());
         this.pointsOnly(elasticField.pointsOnly());
+        this.closeSuffixName(subField);
+    }
+
+    void processElasticField(ElasticIpField elasticField, boolean subField) throws IOException {
+        this.startSuffixName(subField, elasticField.suffixName());
+        this.type(elasticField.type);
+        this.boost(elasticField.boost());
+        this.docValues(elasticField.docValues());
+        this.index(elasticField.index());
+        this.nullValue(elasticField.nullValue());
+        this.store(elasticField.store());
+        this.closeSuffixName(subField);
+    }
+
+    void processElasticField(ElasticCompletionField elasticField, boolean subField) throws IOException {
+        this.startSuffixName(subField, elasticField.suffixName());
+        this.type(elasticField.type);
+        this.analyzer(elasticField.analyzer());
+        this.searchAnalyzer(elasticField.searchAnalyzer());
+        this.preserveSeparators(elasticField.preserveSeparators());
+        this.preservePositionIncrements(elasticField.preservePositionIncrements());
+        this.maxInputLength(elasticField.maxInputLength());
+        this.closeSuffixName(subField);
+    }
+
+    void processElasticField(ElasticTokenCountField elasticField, boolean subField) throws IOException {
+        this.startSuffixName(subField, elasticField.suffixName());
+        this.type(elasticField.type);
+        this.analyzer(elasticField.analyzer());
+        this.enablePositionIncrements(elasticField.enablePositionIncrements());
+        this.boost(elasticField.boost());
+        this.docValues(elasticField.docValues());
+        this.index(elasticField.index());
+        this.nullValue(elasticField.nullValue());
+        this.store(elasticField.store());
+        this.closeSuffixName(subField);
+    }
+
+    void processElasticField(ElasticPercolatorField elasticField, boolean subField) throws IOException {
+        this.startSuffixName(subField, elasticField.suffixName());
+        this.type(elasticField.type);
         this.closeSuffixName(subField);
     }
 
