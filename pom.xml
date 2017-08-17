@@ -49,6 +49,18 @@
         <system>GitHub Issues</system>
     </issueManagement>
 
+    <ciManagement>
+        <system>Travis-CI</system>
+        <url>https://travis-ci.org/frekele/elasticsearch-mapping-builder</url>
+    </ciManagement>
+
+    <distributionManagement>
+        <site>
+            <id>github</id>
+            <url>gitsite:git@github.com/frekele/elasticsearch-mapping-builder.git</url>
+        </site>
+    </distributionManagement>
+
     <properties>
         <encoding>UTF-8</encoding>
         <file.encoding>UTF-8</file.encoding>
