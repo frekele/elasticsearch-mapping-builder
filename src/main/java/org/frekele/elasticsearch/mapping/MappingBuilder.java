@@ -50,7 +50,7 @@ import java.util.List;
 
 public class MappingBuilder implements Serializable {
 
-    private int MAX_RECURSIVE_LEVEL = 20;
+    private int MAX_RECURSIVE_LEVEL = 50;
 
     private List<Class> docsClass;
 
@@ -740,7 +740,8 @@ public class MappingBuilder implements Serializable {
 
     void recursiveFields(Field[] fields, int level) throws IOException {
         if (level > MAX_RECURSIVE_LEVEL) {
-            throw new MaxRecursiveLevelClassException("Max json level has reached " + MAX_RECURSIVE_LEVEL);
+            return;
+          //  throw new MaxRecursiveLevelClassException("Max json level has reached " + MAX_RECURSIVE_LEVEL);
         }
         ++level;
         if (fields != null && fields.length > 0) {
