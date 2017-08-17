@@ -21,6 +21,6 @@ public @interface ElasticObjectField {
     boolean dynamic() default true;
 
     //If false, just store the field without indexing it.
-    boolean enabled() default true;
+    boolean enabledJson() default true;
 
 }

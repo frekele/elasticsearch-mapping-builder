@@ -23,6 +23,8 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticIpRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongRangeField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticNestedField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticObjectField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticPercolatorField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticScaledFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
@@ -125,6 +127,8 @@ public class MappingBuilder implements Serializable {
                 || annotation instanceof ElasticIntegerRangeField || annotation instanceof ElasticFloatRangeField
                 || annotation instanceof ElasticLongRangeField || annotation instanceof ElasticDoubleRangeField
                 || annotation instanceof ElasticIpRangeField || annotation instanceof ElasticDateRangeField
+                //Complex datatypes
+                || annotation instanceof ElasticObjectField || annotation instanceof ElasticNestedField
                 //Geo datatypes
                 || annotation instanceof ElasticGeoPointField || annotation instanceof ElasticGeoShapeField
                 //Specialised datatypes
@@ -200,6 +204,20 @@ public class MappingBuilder implements Serializable {
             this.processElasticField((ElasticTokenCountField) annotation, subField);
         } else if (annotation instanceof ElasticPercolatorField) {
             this.processElasticField((ElasticPercolatorField) annotation, subField);
+        }
+    }
+
+    void dynamic(boolean dynamic) throws IOException {
+        //Default true
+        if (!dynamic) {
+            this.mapping.field("dynamic", dynamic);
+        }
+    }
+
+    void enabledJson(boolean enabledJson) throws IOException {
+        //Default true
+        if (!enabledJson) {
+            this.mapping.field("enabled", enabledJson);
         }
     }
 
@@ -693,6 +711,50 @@ public class MappingBuilder implements Serializable {
         this.closeSuffixName(subField);
     }
 
+    void recursiveFields(Field[] fields) throws IOException {
+        if (fields != null && fields.length > 0) {
+            this.mapping.startObject("properties");
+            for (Field field : fields) {
+                if (containElasticFieldAnnotation(field)) {
+                    this.mapping.startObject(field.getName());
+                    if (field.isAnnotationPresent(ElasticObjectField.class)) {
+                        ElasticObjectField elasticDocument = field.getAnnotation(ElasticObjectField.class);
+                        this.dynamic(elasticDocument.dynamic());
+                        this.enabledJson(elasticDocument.enabledJson());
+                        this.recursiveFields(field.getType().getDeclaredFields());
+                    } else if (field.isAnnotationPresent(ElasticNestedField.class)) {
+                        ElasticNestedField elasticDocument = field.getAnnotation(ElasticNestedField.class);
+                        this.dynamic(elasticDocument.dynamic());
+                        this.recursiveFields(field.getType().getDeclaredFields());
+                    } else {
+                        List<Annotation> annotationList = getElasticFieldAnnotations(field);
+                        if (!annotationList.isEmpty()) {
+                            //Get main Field (The First)
+                            Annotation mainAnnotation = annotationList.get(0);
+                            this.processElasticAnnotationField(mainAnnotation, false);
+                            annotationList.remove(mainAnnotation);
+
+                            //If contains more fields.
+                            if (!annotationList.isEmpty()) {
+                                this.mapping.startObject("fields");
+                                for (Annotation otherAnnotation : annotationList) {
+                                    this.processElasticAnnotationField(otherAnnotation, true);
+                                }
+                                //fields
+                                this.mapping.endObject();
+                            }
+                        }
+                    }
+                    //field
+                    this.mapping.endObject();
+
+                }
+            }
+            //properties
+            this.mapping.endObject();
+        }
+    }
+
     XContentBuilder build(boolean pretty) throws IOException {
         if (this.mapping == null) {
             this.mapping = XContentFactory.jsonBuilder();
@@ -706,37 +768,11 @@ public class MappingBuilder implements Serializable {
             for (Class clazz : this.docsClass) {
                 ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
                 this.mapping.startObject(elasticDocument.value());
+                this.dynamic(elasticDocument.dynamic());
+
                 Field[] fields = clazz.getDeclaredFields();
+                this.recursiveFields(fields);
 
-                if (fields != null && fields.length > 0) {
-                    this.mapping.startObject("properties");
-                    for (Field field : fields) {
-                        if (containElasticFieldAnnotation(field)) {
-                            this.mapping.startObject(field.getName());
-                            List<Annotation> annotationList = getElasticFieldAnnotations(field);
-                            if (!annotationList.isEmpty()) {
-                                //Get main Field (The First)
-                                Annotation mainAnnotation = annotationList.get(0);
-                                this.processElasticAnnotationField(mainAnnotation, false);
-                                annotationList.remove(mainAnnotation);
-
-                                //If contains more fields.
-                                if (!annotationList.isEmpty()) {
-                                    this.mapping.startObject("fields");
-                                    for (Annotation otherAnnotation : annotationList) {
-                                        this.processElasticAnnotationField(otherAnnotation, true);
-                                    }
-                                    //fields
-                                    this.mapping.endObject();
-                                }
-                            }
-                            //field
-                            this.mapping.endObject();
-                        }
-                    }
-                    //properties
-                    this.mapping.endObject();
-                }
                 //ElasticDocument
                 this.mapping.endObject();
             }
@@ -747,4 +783,5 @@ public class MappingBuilder implements Serializable {
         }
         return this.mapping;
     }
+
 }
