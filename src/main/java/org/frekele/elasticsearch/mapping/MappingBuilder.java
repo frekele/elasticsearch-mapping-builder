@@ -6,20 +6,28 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticBinaryField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticByteField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticDateRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticFloatField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticFloatRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticHalfFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticIntegerField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticIntegerRangeField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticIpRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticLongRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticScaledFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
+import org.frekele.elasticsearch.mapping.values.DateFieldValue;
 import org.frekele.elasticsearch.mapping.values.NumericFieldValue;
+import org.frekele.elasticsearch.mapping.values.RangeFieldValue;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -90,7 +98,11 @@ public class MappingBuilder implements Serializable {
                 //Boolean datatype
                 || annotation instanceof ElasticBooleanField
                 //Binary datatype
-                || annotation instanceof ElasticBinaryField);
+                || annotation instanceof ElasticBinaryField
+                //Range datatypes
+                || annotation instanceof ElasticIntegerRangeField || annotation instanceof ElasticFloatRangeField
+                || annotation instanceof ElasticLongRangeField || annotation instanceof ElasticDoubleRangeField
+                || annotation instanceof ElasticIpRangeField || annotation instanceof ElasticDateRangeField);
 
     }
 
@@ -130,6 +142,20 @@ public class MappingBuilder implements Serializable {
         //Binary datatype
         else if (annotation instanceof ElasticBinaryField) {
             this.processElasticField((ElasticBinaryField) annotation, subField);
+        }
+        //Range datatypes
+        else if (annotation instanceof ElasticIntegerRangeField) {
+            this.processElasticField((ElasticIntegerRangeField) annotation, subField);
+        } else if (annotation instanceof ElasticFloatRangeField) {
+            this.processElasticField((ElasticFloatRangeField) annotation, subField);
+        } else if (annotation instanceof ElasticLongRangeField) {
+            this.processElasticField((ElasticLongRangeField) annotation, subField);
+        } else if (annotation instanceof ElasticDoubleRangeField) {
+            this.processElasticField((ElasticDoubleRangeField) annotation, subField);
+        } else if (annotation instanceof ElasticIpRangeField) {
+            this.processElasticField((ElasticIpRangeField) annotation, subField);
+        } else if (annotation instanceof ElasticDateRangeField) {
+            this.processElasticField((ElasticDateRangeField) annotation, subField);
         }
     }
 
@@ -405,17 +431,10 @@ public class MappingBuilder implements Serializable {
     }
 
     void processElasticField(ElasticDateField elasticField, boolean subField) throws IOException {
-        this.startSuffixName(subField, elasticField.suffixName());
-        this.type(elasticField.type);
-        this.boost(elasticField.boost());
-        this.docValues(elasticField.docValues());
-        this.format(elasticField.format());
-        this.locale(elasticField.locale());
-        this.ignoreMalformed(elasticField.ignoreMalformed());
-        this.index(elasticField.index());
-        this.nullValue(elasticField.nullValue());
-        this.store(elasticField.store());
-        this.closeSuffixName(subField);
+        DateFieldValue vo = new DateFieldValue(elasticField.type, elasticField.suffixName(), elasticField.boost(),
+            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(),
+            elasticField.index(), elasticField.nullValue(), elasticField.store());
+        this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticBooleanField elasticField, boolean subField) throws IOException {
@@ -435,6 +454,66 @@ public class MappingBuilder implements Serializable {
         this.docValues(elasticField.docValues());
         this.store(elasticField.store());
         this.closeSuffixName(subField);
+    }
+
+    void processElasticField(RangeFieldValue vo, boolean subField) throws IOException {
+        this.startSuffixName(subField, vo.getSuffixName());
+        this.type(vo.getType());
+        this.coerce(vo.getCoerce());
+        this.boost(vo.getBoost());
+        this.index(vo.getIndex());
+        this.store(vo.getStore());
+        this.closeSuffixName(subField);
+    }
+
+    void processElasticField(ElasticIntegerRangeField elasticField, boolean subField) throws IOException {
+        RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
+            elasticField.boost(), elasticField.index(), elasticField.store());
+        this.processElasticField(vo, subField);
+    }
+
+    void processElasticField(ElasticFloatRangeField elasticField, boolean subField) throws IOException {
+        RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
+            elasticField.boost(), elasticField.index(), elasticField.store());
+        this.processElasticField(vo, subField);
+    }
+
+    void processElasticField(ElasticLongRangeField elasticField, boolean subField) throws IOException {
+        RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
+            elasticField.boost(), elasticField.index(), elasticField.store());
+        this.processElasticField(vo, subField);
+    }
+
+    void processElasticField(ElasticDoubleRangeField elasticField, boolean subField) throws IOException {
+        RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
+            elasticField.boost(), elasticField.index(), elasticField.store());
+        this.processElasticField(vo, subField);
+    }
+
+    void processElasticField(ElasticIpRangeField elasticField, boolean subField) throws IOException {
+        RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
+            elasticField.boost(), elasticField.index(), elasticField.store());
+        this.processElasticField(vo, subField);
+    }
+
+    void processElasticField(DateFieldValue vo, boolean subField) throws IOException {
+        this.type(vo.getType());
+        this.boost(vo.getBoost());
+        this.docValues(vo.getDocValues());
+        this.format(vo.getFormat());
+        this.locale(vo.getLocale());
+        this.ignoreMalformed(vo.getIgnoreMalformed());
+        this.index(vo.getIndex());
+        this.nullValue(vo.getNullValue());
+        this.store(vo.getStore());
+        this.closeSuffixName(subField);
+    }
+
+    void processElasticField(ElasticDateRangeField elasticField, boolean subField) throws IOException {
+        DateFieldValue vo = new DateFieldValue(elasticField.type, elasticField.suffixName(), elasticField.boost(),
+            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(),
+            elasticField.index(), elasticField.nullValue(), elasticField.store());
+        this.processElasticField(vo, subField);
     }
 
     public XContentBuilder source() throws IOException {
