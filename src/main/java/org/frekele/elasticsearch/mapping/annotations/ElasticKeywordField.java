@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * A field to index structured content such as email addresses, hostnames, status codes, zip codes or tags.
+ *
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/keyword.html">elasticsearch keyword field</a>
  */
 @Target(ElementType.FIELD)

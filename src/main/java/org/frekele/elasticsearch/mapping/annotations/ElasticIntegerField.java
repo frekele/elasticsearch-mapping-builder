@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * A signed 32-bit integer with a minimum value of -231 and a maximum value of 231-1.
+ *
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">elasticsearch integer number field</a>
  */
 @Target(ElementType.FIELD)
