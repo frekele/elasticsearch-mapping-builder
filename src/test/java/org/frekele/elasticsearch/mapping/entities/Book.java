@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.entities;
 
+import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
@@ -23,6 +24,9 @@ public class Book {
 
     @ElasticDateField
     private OffsetDateTime releaseDate;
+
+    @ElasticBooleanField
+    private Boolean active;
 
     public Book() {
     }

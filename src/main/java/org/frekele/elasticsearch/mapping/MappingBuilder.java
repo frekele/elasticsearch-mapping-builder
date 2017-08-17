@@ -2,6 +2,7 @@ package org.frekele.elasticsearch.mapping;
 
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticByteField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
@@ -84,7 +85,9 @@ public class MappingBuilder implements Serializable {
                 || annotation instanceof ElasticDoubleField || annotation instanceof ElasticFloatField
                 || annotation instanceof ElasticHalfFloatField || annotation instanceof ElasticScaledFloatField
                 //Date datatype
-                || annotation instanceof ElasticDateField);
+                || annotation instanceof ElasticDateField
+                //Boolean datatype
+                || annotation instanceof ElasticBooleanField);
     }
 
     void processElasticAnnotationField(Annotation annotation, boolean subField) throws IOException {
@@ -115,6 +118,10 @@ public class MappingBuilder implements Serializable {
         //Date datatype
         else if (annotation instanceof ElasticDateField) {
             this.processElasticField((ElasticDateField) annotation, subField);
+        }
+        //Boolean datatype
+        else if (annotation instanceof ElasticBooleanField) {
+            this.processElasticField((ElasticBooleanField) annotation, subField);
         }
     }
 
@@ -403,6 +410,17 @@ public class MappingBuilder implements Serializable {
         this.closeSuffixName(subField);
     }
 
+    void processElasticField(ElasticBooleanField elasticField, boolean subField) throws IOException {
+        this.startSuffixName(subField, elasticField.suffixName());
+        this.type(elasticField.type);
+        this.boost(elasticField.boost());
+        this.docValues(elasticField.docValues());
+        this.index(elasticField.index());
+        this.nullValue(elasticField.nullValue());
+        this.store(elasticField.store());
+        this.closeSuffixName(subField);
+    }
+
     public XContentBuilder source() throws IOException {
         return build(false);
     }
@@ -460,15 +478,12 @@ public class MappingBuilder implements Serializable {
                             this.mapping.endObject();
                         }
                     }
-
                     //properties
                     this.mapping.endObject();
                 }
-
                 //ElasticDocument
                 this.mapping.endObject();
             }
-
             //mappings
             this.mapping.endObject();
             //END
