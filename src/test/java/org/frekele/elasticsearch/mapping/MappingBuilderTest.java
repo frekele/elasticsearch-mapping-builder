@@ -10,6 +10,9 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
+/**
+ * @author frekele - Leandro Kersting de Freitas
+ */
 public class MappingBuilderTest {
 
     @BeforeMethod

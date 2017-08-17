@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
  * The geo_shape datatype facilitates the indexing of and searching with arbitrary geo shapes such as rectangles and polygons.
  * It should be used when either the data being indexed or the queries being executed contain shapes other than just points.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html">elasticsearch geo shape field</a>
  */
 @Target(ElementType.FIELD)

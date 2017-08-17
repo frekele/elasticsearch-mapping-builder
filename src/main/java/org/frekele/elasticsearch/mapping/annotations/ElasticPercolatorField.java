@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
  * The percolator field type has no settings.
  * Just configuring the percolator field type is sufficient to instruct Elasticsearch to treat a field as a query.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/percolator.html">elasticsearch percolator field</a>
  */
 @Target(ElementType.FIELD)

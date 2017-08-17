@@ -12,6 +12,7 @@ import java.lang.annotation.Target;
  * This is a navigational feature to guide users to relevant results as they are typing, improving search precision.
  * It is not meant for spell correction or did-you-mean functionality like the term or phrase suggesters.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html">elasticsearch completion field</a>
  */
 @Target(ElementType.FIELD)

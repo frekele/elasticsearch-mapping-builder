@@ -2,6 +2,9 @@ package org.frekele.elasticsearch.mapping.exceptions;
 
 import java.io.Serializable;
 
+/**
+ * @author frekele - Leandro Kersting de Freitas
+ */
 public class MaxRecursiveLevelClassException extends RuntimeException implements Serializable {
 
     private static final long serialVersionUID = 1L;

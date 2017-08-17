@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 /**
  * A range of double-precision 64-bit IEEE 754 floating point values.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/range.html">elasticsearch double range field</a>
  */
 @Target(ElementType.FIELD)

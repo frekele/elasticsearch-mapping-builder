@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 /**
  * The binary type accepts a binary value as a Base64 encoded string. The field is not stored by default and is not searchable.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/binary.html">elasticsearch binary field</a>
  */
 @Target(ElementType.FIELD)

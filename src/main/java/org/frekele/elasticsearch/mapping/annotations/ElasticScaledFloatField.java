@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 /**
  * A floating point that is backed by a long and a fixed scaling factor.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">elasticsearch scaled float number field</a>
  */
 @Target(ElementType.FIELD)

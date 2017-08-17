@@ -14,6 +14,7 @@ import java.lang.annotation.Target;
  * - to integrate distance into a document’s relevance score.
  * - to sort documents by distance.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html">elasticsearch geo point field</a>
  */
 @Target(ElementType.FIELD)

@@ -2,6 +2,9 @@ package org.frekele.elasticsearch.mapping.values;
 
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
+/**
+ * @author frekele - Leandro Kersting de Freitas
+ */
 public class DateFieldValue {
 
     private FieldType type;

@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 /**
  * A signed 8-bit integer with a minimum value of -128 and a maximum value of 127.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">elasticsearch byte number field</a>
  */
 @Target(ElementType.FIELD)

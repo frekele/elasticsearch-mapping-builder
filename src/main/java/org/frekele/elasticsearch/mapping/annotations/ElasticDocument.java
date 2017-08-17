@@ -7,6 +7,8 @@ import java.lang.annotation.Target;
 
 /**
  * Document Type.
+ *
+ * @author frekele - Leandro Kersting de Freitas
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

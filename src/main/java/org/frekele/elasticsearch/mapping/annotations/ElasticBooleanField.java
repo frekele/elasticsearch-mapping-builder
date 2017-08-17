@@ -11,6 +11,7 @@ import java.lang.annotation.Target;
  * Boolean fields accept JSON true and false values, but can also accept strings and numbers which are interpreted as either true or false:
  * - False values    false, "false", "off", "no", "0", "" (empty string), 0, 0.0
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/boolean.html">elasticsearch boolean field</a>
  */
 @Target(ElementType.FIELD)

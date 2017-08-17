@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 /**
  * The nested type is a specialised version of the object datatype that allows arrays of objects to be indexed and queried independently of each other..
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html">elasticsearch nested field</a>
  */
 @Target(ElementType.FIELD)

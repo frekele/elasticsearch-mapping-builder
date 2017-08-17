@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 /**
  * A range of date values represented as unsigned 64-bit integer milliseconds elapsed since system epoch.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/range.html">elasticsearch date range field</a>
  */
 @Target(ElementType.FIELD)

@@ -1,5 +1,8 @@
 package org.frekele.elasticsearch.mapping.enums;
 
+/**
+ * @author frekele - Leandro Kersting de Freitas
+ */
 public enum FieldType {
 
     //###################################################################

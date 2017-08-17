@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
  * - a long number representing milliseconds-since-the-epoch.
  * - an integer representing seconds-since-the-epoch.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html">elasticsearch date field</a>
  */
 @Target(ElementType.FIELD)

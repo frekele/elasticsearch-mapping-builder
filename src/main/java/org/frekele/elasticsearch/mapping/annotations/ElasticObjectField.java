@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 /**
  * JSON documents are hierarchical in nature: the document may contain inner objects which, in turn, may contain inner objects themselves.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/object.html">elasticsearch object field</a>
  */
 @Target(ElementType.FIELD)

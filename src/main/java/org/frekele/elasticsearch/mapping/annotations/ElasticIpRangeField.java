@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 /**
  * A range of ip values supporting either IPv4 or IPv6 (or mixed) addresses.
  *
+ * @author frekele - Leandro Kersting de Freitas
  * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/range.html">elasticsearch ip range field</a>
  */
 @Target(ElementType.FIELD)
