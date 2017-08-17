@@ -18,4 +18,5 @@ public @interface ElasticNestedField {
 
     FieldType type = FieldType.NESTED;
 
+    boolean dynamic() default true;
 }

@@ -18,4 +18,5 @@ public @interface ElasticObjectField {
 
     FieldType type = FieldType.OBJECT;
 
+    boolean dynamic() default true;
 }
