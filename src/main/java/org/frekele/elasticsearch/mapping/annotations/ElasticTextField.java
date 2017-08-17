@@ -19,7 +19,7 @@ public @interface ElasticTextField {
 
     String analyzer() default "";
 
-    //float boost() default 1.0f;
+    float boost() default 1.0f;
 
     boolean fielddata() default false;
 
