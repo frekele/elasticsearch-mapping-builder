@@ -3,6 +3,7 @@ package org.frekele.elasticsearch.mapping;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.frekele.elasticsearch.mapping.annotations.ElasticByteField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticFloatField;
@@ -74,11 +75,16 @@ public class MappingBuilder implements Serializable {
     }
 
     static boolean isElasticFieldAnnotation(Annotation annotation) {
-        return (annotation instanceof ElasticTextField || annotation instanceof ElasticKeywordField
-            || annotation instanceof ElasticLongField || annotation instanceof ElasticIntegerField
-            || annotation instanceof ElasticShortField || annotation instanceof ElasticByteField
-            || annotation instanceof ElasticDoubleField || annotation instanceof ElasticFloatField
-            || annotation instanceof ElasticHalfFloatField || annotation instanceof ElasticScaledFloatField);
+        return (
+            //String datatypes
+            annotation instanceof ElasticTextField || annotation instanceof ElasticKeywordField
+                //Numeric datatypes
+                || annotation instanceof ElasticLongField || annotation instanceof ElasticIntegerField
+                || annotation instanceof ElasticShortField || annotation instanceof ElasticByteField
+                || annotation instanceof ElasticDoubleField || annotation instanceof ElasticFloatField
+                || annotation instanceof ElasticHalfFloatField || annotation instanceof ElasticScaledFloatField
+                //Date datatype
+                || annotation instanceof ElasticDateField);
     }
 
     void processElasticAnnotationField(Annotation annotation, boolean subField) throws IOException {
@@ -105,6 +111,10 @@ public class MappingBuilder implements Serializable {
             this.processElasticField((ElasticHalfFloatField) annotation, subField);
         } else if (annotation instanceof ElasticScaledFloatField) {
             this.processElasticField((ElasticScaledFloatField) annotation, subField);
+        }
+        //Date datatype
+        else if (annotation instanceof ElasticDateField) {
+            this.processElasticField((ElasticDateField) annotation, subField);
         }
     }
 
@@ -261,6 +271,18 @@ public class MappingBuilder implements Serializable {
         }
     }
 
+    void format(String format) throws IOException {
+        if (!format.isEmpty()) {
+            this.mapping.field("format", format);
+        }
+    }
+
+    void locale(String locale) throws IOException {
+        if (!locale.isEmpty()) {
+            this.mapping.field("locale", locale);
+        }
+    }
+
     void processElasticField(ElasticTextField elasticField, boolean subField) throws IOException {
         this.startSuffixName(subField, elasticField.suffixName());
         this.type(elasticField.type);
@@ -365,6 +387,20 @@ public class MappingBuilder implements Serializable {
             elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store(), elasticField.scalingFactor());
         this.processElasticField(vo, subField);
+    }
+
+    void processElasticField(ElasticDateField elasticField, boolean subField) throws IOException {
+        this.startSuffixName(subField, elasticField.suffixName());
+        this.type(elasticField.type);
+        this.boost(elasticField.boost());
+        this.docValues(elasticField.docValues());
+        this.format(elasticField.format());
+        this.locale(elasticField.locale());
+        this.ignoreMalformed(elasticField.ignoreMalformed());
+        this.index(elasticField.index());
+        this.nullValue(elasticField.nullValue());
+        this.store(elasticField.store());
+        this.closeSuffixName(subField);
     }
 
     public XContentBuilder source() throws IOException {
