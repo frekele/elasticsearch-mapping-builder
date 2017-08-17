@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
+import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -7,6 +8,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/text.html">elasticsearch text field</a>
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ElasticTextField {

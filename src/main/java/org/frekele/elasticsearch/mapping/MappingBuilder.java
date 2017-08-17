@@ -3,7 +3,7 @@ package org.frekele.elasticsearch.mapping;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
-import org.frekele.elasticsearch.mapping.annotations.ElasticField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ public class MappingBuilder implements Serializable {
 
     private List<Class> docsClass;
 
-    XContentBuilder mapping;
+    private XContentBuilder mapping;
 
     public MappingBuilder(Class... documentClass) {
         if (documentClass != null && documentClass.length > 0) {
@@ -55,7 +55,7 @@ public class MappingBuilder implements Serializable {
     XContentBuilder build() throws IOException {
         if (this.mapping == null) {
             this.mapping = XContentFactory.jsonBuilder();
-            //this.mapping.prettyPrint();
+            this.mapping.prettyPrint();
             //BEGIN
             this.mapping.startObject();
             this.mapping.startObject("mappings");
@@ -69,10 +69,47 @@ public class MappingBuilder implements Serializable {
                     this.mapping.startObject("properties");
 
                     for (Field field : fields) {
-                        if (field.isAnnotationPresent(ElasticField.class)) {
-                            ElasticField elasticField = field.getAnnotation(ElasticField.class);
+                        if (field.isAnnotationPresent(ElasticTextField.class)) {
+                            ElasticTextField elasticField = field.getAnnotation(ElasticTextField.class);
                             this.mapping.startObject(field.getName());
-                            this.mapping.field("type", elasticField.type().toString().toLowerCase());
+                            this.mapping.field("type", ElasticTextField.type.getName());
+                            if (!elasticField.analyzer().isEmpty()) {
+                                this.mapping.field("analyzer", elasticField.analyzer());
+                            }
+                            //Default "fielddata" : false
+                            if (elasticField.fielddata()) {
+                                this.mapping.field("fielddata", elasticField.fielddata());
+                            }
+                            if (elasticField.fielddataFrequencyFilter().enabled()) {
+                                this.mapping.startObject("fielddata_frequency_filter");
+                                this.mapping.field("min", elasticField.fielddataFrequencyFilter().min());
+                                this.mapping.field("max", elasticField.fielddataFrequencyFilter().max());
+                                this.mapping.field("min_segment_size", elasticField.fielddataFrequencyFilter().minSegmentSize());
+                                //fielddata_frequency_filter
+                                this.mapping.endObject();
+                            }
+                            this.mapping.field("index", elasticField.index());
+                            if (!elasticField.indexOptions().isEmpty()) {
+                                this.mapping.field("index_options", elasticField.indexOptions());
+                            }
+                            this.mapping.field("norms", elasticField.norms());
+                            this.mapping.field("positionIncrementGap", elasticField.positionIncrementGap());
+                            this.mapping.field("store", elasticField.store());
+
+                            if (!elasticField.searchAnalyzer().isEmpty()) {
+                                this.mapping.field("search_analyzer", elasticField.searchAnalyzer());
+                            }
+                            if (!elasticField.searchQuoteAnalyzer().isEmpty()) {
+                                this.mapping.field("search_quote_analyzer", elasticField.searchQuoteAnalyzer());
+                            }
+                            if (!elasticField.similarity().isEmpty()) {
+                                this.mapping.field("similarity", elasticField.similarity());
+                            }
+                            if (!elasticField.termVector().isEmpty()) {
+                                this.mapping.field("term_vector", elasticField.termVector());
+                            }
+
+                            //class type
                             this.mapping.endObject();
                         }
                     }

@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch.mapping.annotations;
+package org.frekele.elasticsearch.mapping.annotations.values;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
