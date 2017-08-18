@@ -27,7 +27,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>jar</packaging>
-    <url>https://github.com/frekele/elasticsearch-mapping-builder</url>
+    <url>http://elasticsearch-mapping-builder.frekele.org</url>
     <inceptionYear>2017</inceptionYear>
 
     <licenses>
