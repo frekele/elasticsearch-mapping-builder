@@ -342,6 +342,16 @@ public class MappingBuilder implements Serializable {
         }
     }
 
+    void copyTo(String[] copyTo) throws IOException {
+        if (copyTo != null && copyTo.length > 0) {
+            if (copyTo.length == 1) {
+                this.mapping.field("copy_to", copyTo[0]);
+            } else {
+                this.mapping.array("copy_to", copyTo);
+            }
+        }
+    }
+
     void docValues(boolean docValues) throws IOException {
         //Default false
         if (docValues) {
@@ -488,6 +498,7 @@ public class MappingBuilder implements Serializable {
         this.searchQuoteAnalyzer(elasticField.searchQuoteAnalyzer());
         this.similarity(elasticField.similarity());
         this.termVector(elasticField.termVector());
+        this.copyTo(elasticField.copyTo());
         this.closeSuffixName(subField);
     }
 

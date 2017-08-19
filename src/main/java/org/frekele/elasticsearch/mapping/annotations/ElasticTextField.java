@@ -48,4 +48,6 @@ public @interface ElasticTextField {
 
     String termVector() default "";
 
+    String[] copyTo() default {};
+
 }

@@ -14,7 +14,7 @@ public class Person {
     @ElasticLongField
     private Long id;
 
-    @ElasticTextField
+    @ElasticTextField(copyTo = {"sdkfjsdklf"})
     private String name;
 
     @ElasticObjectField
