@@ -2,6 +2,7 @@ package org.frekele.elasticsearch.mapping.annotations;
 
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
+import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -26,7 +27,7 @@ public @interface ElasticTextField {
     String analyzer() default "";
 
     @Deprecated
-    float boost() default 1.0f;
+    FloatValue boost() default @FloatValue(ignore = true);
 
     BoolValue fielddata() default @BoolValue(ignore = true);
 

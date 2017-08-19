@@ -1,6 +1,7 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
+import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -25,7 +26,7 @@ public @interface ElasticHalfFloatField {
     BoolValue coerce() default @BoolValue(ignore = true);
 
     @Deprecated
-    float boost() default 1.0f;
+    FloatValue boost() default @FloatValue(ignore = true);
 
     BoolValue docValues() default @BoolValue(ignore = true);
 

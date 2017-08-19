@@ -1,6 +1,7 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
+import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -31,7 +32,7 @@ public @interface ElasticGeoShapeField {
 
     String strategy() default "";
 
-    float distanceErrorPct() default 0.025f;
+    FloatValue distanceErrorPct() default @FloatValue(ignore = true);
 
     String orientation() default "";
 

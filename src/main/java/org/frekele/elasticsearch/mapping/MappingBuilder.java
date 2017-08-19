@@ -32,6 +32,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
+import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
 import org.frekele.elasticsearch.mapping.values.DateFieldValue;
@@ -215,12 +216,22 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    boolean isBoolValue(BoolValue boolValue) {
+    boolean valueEnabled(BoolValue boolValue) {
         return boolValue != null && !boolValue.ignore();
     }
 
+    boolean valueEnabled(FloatValue floatValue) {
+        return floatValue != null && !floatValue.ignore();
+    }
+
     void addField(String name, BoolValue value) throws IOException {
-        if (this.isBoolValue(value)) {
+        if (this.valueEnabled(value)) {
+            this.mapping.field(name, value.value());
+        }
+    }
+
+    void addField(String name, FloatValue value) throws IOException {
+        if (this.valueEnabled(value)) {
             this.mapping.field(name, value.value());
         }
     }
@@ -262,11 +273,8 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void boost(float boost) throws IOException {
-        //default 1.0
-        if (boost != 1.0f) {
-            this.mapping.field("boost", boost);
-        }
+    void boost(FloatValue boost) throws IOException {
+        this.addField("boost", boost);
     }
 
     void fielddata(BoolValue fielddata) throws IOException {
@@ -416,11 +424,8 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void distanceErrorPct(float distanceErrorPct) throws IOException {
-        //Default 0.025f
-        if (distanceErrorPct != 0.025f) {
-            this.mapping.field("distance_error_pct", distanceErrorPct);
-        }
+    void distanceErrorPct(FloatValue distanceErrorPct) throws IOException {
+        this.addField("distance_error_pct", distanceErrorPct);
     }
 
     void orientation(String orientation) throws IOException {

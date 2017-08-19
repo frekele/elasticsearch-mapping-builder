@@ -1,6 +1,7 @@
 package org.frekele.elasticsearch.mapping.values;
 
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
+import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 /**
@@ -14,7 +15,7 @@ public class NumericFieldValue {
 
     private BoolValue coerce;
 
-    private float boost;
+    private FloatValue boost;
 
     private BoolValue docValues;
 
@@ -31,7 +32,7 @@ public class NumericFieldValue {
     public NumericFieldValue() {
     }
 
-    public NumericFieldValue(FieldType type, String suffixName, BoolValue coerce, float boost, BoolValue docValues, BoolValue ignoreMalformed,
+    public NumericFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost, BoolValue docValues, BoolValue ignoreMalformed,
                              BoolValue index, String nullValue, BoolValue store, int scalingFactor) {
         this.type = type;
         this.suffixName = suffixName;
@@ -69,11 +70,11 @@ public class NumericFieldValue {
         this.coerce = coerce;
     }
 
-    public float getBoost() {
+    public FloatValue getBoost() {
         return boost;
     }
 
-    public void setBoost(float boost) {
+    public void setBoost(FloatValue boost) {
         this.boost = boost;
     }
 

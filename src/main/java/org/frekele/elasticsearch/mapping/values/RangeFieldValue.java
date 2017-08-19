@@ -1,6 +1,7 @@
 package org.frekele.elasticsearch.mapping.values;
 
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
+import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 /**
@@ -14,7 +15,7 @@ public class RangeFieldValue {
 
     private BoolValue coerce;
 
-    private float boost;
+    private FloatValue boost;
 
     private BoolValue index;
 
@@ -23,7 +24,7 @@ public class RangeFieldValue {
     public RangeFieldValue() {
     }
 
-    public RangeFieldValue(FieldType type, String suffixName, BoolValue coerce, float boost, BoolValue index, BoolValue store) {
+    public RangeFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost, BoolValue index, BoolValue store) {
         this.type = type;
         this.suffixName = suffixName;
         this.coerce = coerce;
@@ -56,11 +57,11 @@ public class RangeFieldValue {
         this.coerce = coerce;
     }
 
-    public float getBoost() {
+    public FloatValue getBoost() {
         return boost;
     }
 
-    public void setBoost(float boost) {
+    public void setBoost(FloatValue boost) {
         this.boost = boost;
     }
 
