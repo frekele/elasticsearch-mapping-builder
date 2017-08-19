@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -26,19 +27,19 @@ public @interface ElasticKeywordField {
     @Deprecated
     float boost() default 1.0f;
 
-    boolean docValues() default false;
+    Bool docValues() default @Bool(ignore = true);
 
     int ignoreAbove() default 256;
 
-    boolean index() default true;
+    Bool index() default @Bool(ignore = true);
 
     String indexOptions() default "";
 
-    boolean norms() default true;
+    Bool norms() default @Bool(ignore = true);
 
     String nullValue() default "";
 
-    boolean store() default false;
+    Bool store() default @Bool(ignore = true);
 
     String similarity() default "";
 

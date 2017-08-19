@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.values;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 /**
@@ -11,18 +12,18 @@ public class RangeFieldValue {
 
     private String suffixName;
 
-    private boolean coerce;
+    private Bool coerce;
 
     private float boost;
 
-    private boolean index;
+    private Bool index;
 
-    private boolean store;
+    private Bool store;
 
     public RangeFieldValue() {
     }
 
-    public RangeFieldValue(FieldType type, String suffixName, boolean coerce, float boost, boolean index, boolean store) {
+    public RangeFieldValue(FieldType type, String suffixName, Bool coerce, float boost, Bool index, Bool store) {
         this.type = type;
         this.suffixName = suffixName;
         this.coerce = coerce;
@@ -47,11 +48,11 @@ public class RangeFieldValue {
         this.suffixName = suffixName;
     }
 
-    public boolean getCoerce() {
+    public Bool getCoerce() {
         return coerce;
     }
 
-    public void setCoerce(boolean coerce) {
+    public void setCoerce(Bool coerce) {
         this.coerce = coerce;
     }
 
@@ -63,19 +64,19 @@ public class RangeFieldValue {
         this.boost = boost;
     }
 
-    public boolean getIndex() {
+    public Bool getIndex() {
         return index;
     }
 
-    public void setIndex(boolean index) {
+    public void setIndex(Bool index) {
         this.index = index;
     }
 
-    public boolean getStore() {
+    public Bool getStore() {
         return store;
     }
 
-    public void setStore(boolean store) {
+    public void setStore(Bool store) {
         this.store = store;
     }
 }

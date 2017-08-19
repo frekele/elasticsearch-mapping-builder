@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -21,7 +22,7 @@ public @interface ElasticBinaryField {
 
     String suffixName() default "binary";
 
-    boolean docValues() default false;
+    Bool docValues() default @Bool(ignore = true);
 
-    boolean store() default false;
+    Bool store() default @Bool(ignore = true);
 }

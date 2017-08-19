@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
@@ -27,19 +28,19 @@ public @interface ElasticTextField {
     @Deprecated
     float boost() default 1.0f;
 
-    boolean fielddata() default false;
+    Bool fielddata() default @Bool(ignore = true);
 
     ElasticFielddataFrequencyFilter fielddataFrequencyFilter() default @ElasticFielddataFrequencyFilter();
 
-    boolean index() default true;
+    Bool index() default @Bool(ignore = true);
 
     String indexOptions() default "";
 
-    boolean norms() default true;
+    Bool norms() default @Bool(ignore = true);
 
     int positionIncrementGap() default 100;
 
-    boolean store() default false;
+    Bool store() default @Bool(ignore = true);
 
     String searchAnalyzer() default "";
 

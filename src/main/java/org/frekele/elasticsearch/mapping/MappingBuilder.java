@@ -30,6 +30,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticScaledFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
@@ -214,24 +215,13 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void nested(boolean nested) throws IOException {
-        //Default false
-        if (nested) {
-            this.mapping.field("nested", nested);
-        }
+    boolean isBoolValue(Bool boolValue) {
+        return boolValue != null && !boolValue.ignore();
     }
 
-    void dynamic(boolean dynamic) throws IOException {
-        //Default true
-        if (!dynamic) {
-            this.mapping.field("dynamic", dynamic);
-        }
-    }
-
-    void enabledJson(boolean enabledJson) throws IOException {
-        //Default true
-        if (!enabledJson) {
-            this.mapping.field("enabled", enabledJson);
+    void addField(String name, Bool value) throws IOException {
+        if (this.isBoolValue(value)) {
+            this.mapping.field(name, value.value());
         }
     }
 
@@ -247,6 +237,19 @@ public class MappingBuilder implements Serializable {
             //Add suffixName to subField;
             this.mapping.endObject();
         }
+    }
+
+    //Direct set.
+    void nested(boolean nested) throws IOException {
+        this.mapping.field("nested", nested);
+    }
+
+    void dynamic(Bool dynamic) throws IOException {
+        this.addField("dynamic", dynamic);
+    }
+
+    void enabledJson(Bool enabledJson) throws IOException {
+        this.addField("enabled", enabledJson);
     }
 
     void type(FieldType type) throws IOException {
@@ -266,11 +269,8 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void fielddata(boolean fielddata) throws IOException {
-        //Default false
-        if (fielddata) {
-            this.mapping.field("fielddata", fielddata);
-        }
+    void fielddata(Bool fielddata) throws IOException {
+        this.addField("fielddata", fielddata);
     }
 
     void fielddataFrequencyFilter(ElasticFielddataFrequencyFilter fielddataFrequencyFilter) throws IOException {
@@ -284,11 +284,8 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void index(boolean index) throws IOException {
-        //Default true
-        if (!index) {
-            this.mapping.field("index", index);
-        }
+    void index(Bool index) throws IOException {
+        this.addField("index", index);
     }
 
     void indexOptions(String indexOptions) throws IOException {
@@ -297,11 +294,8 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void norms(boolean norms) throws IOException {
-        //Default true
-        if (!norms) {
-            this.mapping.field("norms", norms);
-        }
+    void norms(Bool norms) throws IOException {
+        this.addField("norms", norms);
     }
 
     void positionIncrementGap(int positionIncrementGap) throws IOException {
@@ -311,11 +305,8 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void store(boolean store) throws IOException {
-        //Default false
-        if (store) {
-            this.mapping.field("store", store);
-        }
+    void store(Bool store) throws IOException {
+        this.addField("store", store);
     }
 
     void searchAnalyzer(String searchAnalyzer) throws IOException {
@@ -352,11 +343,8 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void docValues(boolean docValues) throws IOException {
-        //Default false
-        if (docValues) {
-            this.mapping.field("doc_values", docValues);
-        }
+    void docValues(Bool docValues) throws IOException {
+        this.addField("doc_values", docValues);
     }
 
     void ignoreAbove(int ignoreAbove) throws IOException {
@@ -378,18 +366,12 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void coerce(boolean coerce) throws IOException {
-        //Default true
-        if (!coerce) {
-            this.mapping.field("coerce", coerce);
-        }
+    void coerce(Bool coerce) throws IOException {
+        this.addField("coerce", coerce);
     }
 
-    void ignoreMalformed(boolean ignoreMalformed) throws IOException {
-        //Default false
-        if (ignoreMalformed) {
-            this.mapping.field("ignore_malformed", ignoreMalformed);
-        }
+    void ignoreMalformed(Bool ignoreMalformed) throws IOException {
+        this.addField("ignore_malformed", ignoreMalformed);
     }
 
     void scalingFactor(int scalingFactor) throws IOException {
@@ -447,25 +429,16 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void pointsOnly(boolean pointsOnly) throws IOException {
-        //Default false
-        if (pointsOnly) {
-            this.mapping.field("points_only", pointsOnly);
-        }
+    void pointsOnly(Bool pointsOnly) throws IOException {
+        this.addField("points_only", pointsOnly);
     }
 
-    void preserveSeparators(boolean preserveSeparators) throws IOException {
-        //Default true
-        if (!preserveSeparators) {
-            this.mapping.field("preserve_separators", preserveSeparators);
-        }
+    void preserveSeparators(Bool preserveSeparators) throws IOException {
+        this.addField("preserve_separators", preserveSeparators);
     }
 
-    void preservePositionIncrements(boolean preservePositionIncrements) throws IOException {
-        //Default true
-        if (!preservePositionIncrements) {
-            this.mapping.field("preserve_position_increments", preservePositionIncrements);
-        }
+    void preservePositionIncrements(Bool preservePositionIncrements) throws IOException {
+        this.addField("preserve_position_increments", preservePositionIncrements);
     }
 
     void maxInputLength(int maxInputLength) throws IOException {
@@ -475,11 +448,8 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void enablePositionIncrements(boolean enablePositionIncrements) throws IOException {
-        //Default false
-        if (enablePositionIncrements) {
-            this.mapping.field("enable_position_increments", enablePositionIncrements);
-        }
+    void enablePositionIncrements(Bool enablePositionIncrements) throws IOException {
+        this.addField("enable_position_increments", enablePositionIncrements);
     }
 
     void processElasticField(ElasticTextField elasticField, boolean subField) throws IOException {

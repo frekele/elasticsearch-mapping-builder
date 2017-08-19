@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.values;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 /**
@@ -13,25 +14,25 @@ public class DateFieldValue {
 
     private float boost;
 
-    private boolean docValues;
+    private Bool docValues;
 
     private String format;
 
     private String locale;
 
-    private boolean ignoreMalformed;
+    private Bool ignoreMalformed;
 
-    private boolean index;
+    private Bool index;
 
     private String nullValue;
 
-    private boolean store;
+    private Bool store;
 
     public DateFieldValue() {
     }
 
-    public DateFieldValue(FieldType type, String suffixName, float boost, boolean docValues, String format, String locale,
-                          boolean ignoreMalformed, boolean index, String nullValue, boolean store) {
+    public DateFieldValue(FieldType type, String suffixName, float boost, Bool docValues, String format, String locale,
+                          Bool ignoreMalformed, Bool index, String nullValue, Bool store) {
         this.type = type;
         this.suffixName = suffixName;
         this.boost = boost;
@@ -68,11 +69,11 @@ public class DateFieldValue {
         this.boost = boost;
     }
 
-    public boolean getDocValues() {
+    public Bool getDocValues() {
         return docValues;
     }
 
-    public void setDocValues(boolean docValues) {
+    public void setDocValues(Bool docValues) {
         this.docValues = docValues;
     }
 
@@ -92,19 +93,19 @@ public class DateFieldValue {
         this.locale = locale;
     }
 
-    public boolean getIgnoreMalformed() {
+    public Bool getIgnoreMalformed() {
         return ignoreMalformed;
     }
 
-    public void setIgnoreMalformed(boolean ignoreMalformed) {
+    public void setIgnoreMalformed(Bool ignoreMalformed) {
         this.ignoreMalformed = ignoreMalformed;
     }
 
-    public boolean getIndex() {
+    public Bool getIndex() {
         return index;
     }
 
-    public void setIndex(boolean index) {
+    public void setIndex(Bool index) {
         this.index = index;
     }
 
@@ -116,11 +117,11 @@ public class DateFieldValue {
         this.nullValue = nullValue;
     }
 
-    public boolean getStore() {
+    public Bool getStore() {
         return store;
     }
 
-    public void setStore(boolean store) {
+    public void setStore(Bool store) {
         this.store = store;
     }
 }

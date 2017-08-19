@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -27,9 +28,9 @@ public @interface ElasticCompletionField {
 
     String searchAnalyzer() default "";
 
-    boolean preserveSeparators() default true;
+    Bool preserveSeparators() default @Bool(ignore = true);
 
-    boolean preservePositionIncrements() default true;
+    Bool preservePositionIncrements() default @Bool(ignore = true);
 
     int maxInputLength() default 50;
 }

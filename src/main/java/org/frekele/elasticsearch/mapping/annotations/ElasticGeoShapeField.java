@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -34,7 +35,7 @@ public @interface ElasticGeoShapeField {
 
     String orientation() default "";
 
-    boolean pointsOnly() default false;
+    Bool pointsOnly() default @Bool(ignore = true);
 
 }
 

@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -25,6 +26,6 @@ public @interface ElasticGeoPointField {
 
     String suffixName() default "geoPoint";
 
-    boolean ignoreMalformed() default false;
+    Bool ignoreMalformed() default @Bool(ignore = true);
 
 }

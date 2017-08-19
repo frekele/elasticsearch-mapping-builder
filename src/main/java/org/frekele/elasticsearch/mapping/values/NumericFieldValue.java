@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.values;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 /**
@@ -11,27 +12,27 @@ public class NumericFieldValue {
 
     private String suffixName;
 
-    private boolean coerce;
+    private Bool coerce;
 
     private float boost;
 
-    private boolean docValues;
+    private Bool docValues;
 
-    private boolean ignoreMalformed;
+    private Bool ignoreMalformed;
 
-    private boolean index;
+    private Bool index;
 
     private String nullValue;
 
-    private boolean store;
+    private Bool store;
 
     private int scalingFactor;
 
     public NumericFieldValue() {
     }
 
-    public NumericFieldValue(FieldType type, String suffixName, boolean coerce, float boost, boolean docValues, boolean ignoreMalformed,
-                             boolean index, String nullValue, boolean store, int scalingFactor) {
+    public NumericFieldValue(FieldType type, String suffixName, Bool coerce, float boost, Bool docValues, Bool ignoreMalformed,
+                             Bool index, String nullValue, Bool store, int scalingFactor) {
         this.type = type;
         this.suffixName = suffixName;
         this.coerce = coerce;
@@ -60,11 +61,11 @@ public class NumericFieldValue {
         this.suffixName = suffixName;
     }
 
-    public boolean getCoerce() {
+    public Bool getCoerce() {
         return coerce;
     }
 
-    public void setCoerce(boolean coerce) {
+    public void setCoerce(Bool coerce) {
         this.coerce = coerce;
     }
 
@@ -76,27 +77,27 @@ public class NumericFieldValue {
         this.boost = boost;
     }
 
-    public boolean getDocValues() {
+    public Bool getDocValues() {
         return docValues;
     }
 
-    public void setDocValues(boolean docValues) {
+    public void setDocValues(Bool docValues) {
         this.docValues = docValues;
     }
 
-    public boolean getIgnoreMalformed() {
+    public Bool getIgnoreMalformed() {
         return ignoreMalformed;
     }
 
-    public void setIgnoreMalformed(boolean ignoreMalformed) {
+    public void setIgnoreMalformed(Bool ignoreMalformed) {
         this.ignoreMalformed = ignoreMalformed;
     }
 
-    public boolean getIndex() {
+    public Bool getIndex() {
         return index;
     }
 
-    public void setIndex(boolean index) {
+    public void setIndex(Bool index) {
         this.index = index;
     }
 
@@ -108,11 +109,11 @@ public class NumericFieldValue {
         this.nullValue = nullValue;
     }
 
-    public boolean getStore() {
+    public Bool getStore() {
         return store;
     }
 
-    public void setStore(boolean store) {
+    public void setStore(Bool store) {
         this.store = store;
     }
 

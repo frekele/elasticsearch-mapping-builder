@@ -1,5 +1,7 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,5 +19,5 @@ public @interface ElasticDocument {
     //Document name Type.
     String value();
 
-    boolean dynamic() default true;
+    Bool dynamic() default @Bool(ignore = true);
 }

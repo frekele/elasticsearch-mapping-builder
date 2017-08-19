@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
+import org.frekele.elasticsearch.mapping.annotations.values.Bool;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -19,9 +20,9 @@ public @interface ElasticObjectField {
 
     FieldType type = FieldType.OBJECT;
 
-    boolean dynamic() default true;
+    Bool dynamic() default @Bool(ignore = true);
 
     //If false, just store the field without indexing it.
-    boolean enabledJson() default true;
+    Bool enabledJson() default @Bool(ignore = true);
 
 }
