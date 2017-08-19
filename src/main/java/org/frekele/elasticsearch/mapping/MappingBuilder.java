@@ -841,6 +841,13 @@ public class MappingBuilder implements Serializable {
                     this.mapping.endObject();
                 }
 
+                //_routing
+                if (isNotEmpty(elasticDocument.parent())) {
+                    this.mapping.startObject("_routing");
+                    this.mapping.field("required", elasticDocument.requiredRouting().value());
+                    this.mapping.endObject();
+                }
+
                 this.dynamic(elasticDocument.dynamic());
                 this.includeInAll(elasticDocument.includeInAll());
 

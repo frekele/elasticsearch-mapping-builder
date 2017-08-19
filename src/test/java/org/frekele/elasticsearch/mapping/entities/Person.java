@@ -2,11 +2,7 @@ package org.frekele.elasticsearch.mapping.entities;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticNestedField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticObjectField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
-
-import java.util.List;
 
 @ElasticDocument(value = "person",parent = "sdfsdfd")
 public class Person {
