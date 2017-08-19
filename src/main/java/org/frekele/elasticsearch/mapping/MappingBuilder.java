@@ -36,6 +36,7 @@ import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.annotations.values.IntValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
+import org.frekele.elasticsearch.mapping.exceptions.MaxRecursiveLevelClassException;
 import org.frekele.elasticsearch.mapping.values.DateFieldValue;
 import org.frekele.elasticsearch.mapping.values.NumericFieldValue;
 import org.frekele.elasticsearch.mapping.values.RangeFieldValue;
@@ -718,8 +719,7 @@ public class MappingBuilder implements Serializable {
 
     void recursiveFields(Field[] fields, int level) throws IOException {
         if (level > MAX_RECURSIVE_LEVEL) {
-            return;
-            //  throw new MaxRecursiveLevelClassException("Max json level has reached " + MAX_RECURSIVE_LEVEL);
+            throw new MaxRecursiveLevelClassException("Max json level has reached " + MAX_RECURSIVE_LEVEL);
         }
         ++level;
         if (fields != null && fields.length > 0) {
