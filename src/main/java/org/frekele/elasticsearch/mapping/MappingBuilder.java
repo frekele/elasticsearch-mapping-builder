@@ -33,6 +33,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
 import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
+import org.frekele.elasticsearch.mapping.annotations.values.IntValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
 import org.frekele.elasticsearch.mapping.values.DateFieldValue;
@@ -224,6 +225,10 @@ public class MappingBuilder implements Serializable {
         return floatValue != null && !floatValue.ignore();
     }
 
+    boolean valueEnabled(IntValue intValue) {
+        return intValue != null && !intValue.ignore();
+    }
+
     void addField(String name, BoolValue value) throws IOException {
         if (this.valueEnabled(value)) {
             this.mapping.field(name, value.value());
@@ -231,6 +236,12 @@ public class MappingBuilder implements Serializable {
     }
 
     void addField(String name, FloatValue value) throws IOException {
+        if (this.valueEnabled(value)) {
+            this.mapping.field(name, value.value());
+        }
+    }
+
+    void addField(String name, IntValue value) throws IOException {
         if (this.valueEnabled(value)) {
             this.mapping.field(name, value.value());
         }
@@ -306,11 +317,8 @@ public class MappingBuilder implements Serializable {
         this.addField("norms", norms);
     }
 
-    void positionIncrementGap(int positionIncrementGap) throws IOException {
-        //default 100
-        if (positionIncrementGap != 100) {
-            this.mapping.field("positionIncrementGap", positionIncrementGap);
-        }
+    void positionIncrementGap(IntValue positionIncrementGap) throws IOException {
+        this.addField("position_increment_gap", positionIncrementGap);
     }
 
     void store(BoolValue store) throws IOException {
@@ -355,11 +363,8 @@ public class MappingBuilder implements Serializable {
         this.addField("doc_values", docValues);
     }
 
-    void ignoreAbove(int ignoreAbove) throws IOException {
-        //default 256
-        if (ignoreAbove != 256) {
-            this.mapping.field("ignore_above", ignoreAbove);
-        }
+    void ignoreAbove(IntValue ignoreAbove) throws IOException {
+        this.addField("ignore_above", ignoreAbove);
     }
 
     void nullValue(String nullValue) throws IOException {
@@ -382,10 +387,8 @@ public class MappingBuilder implements Serializable {
         this.addField("ignore_malformed", ignoreMalformed);
     }
 
-    void scalingFactor(int scalingFactor) throws IOException {
-        if (scalingFactor != -1) {
-            this.mapping.field("scaling_factor", scalingFactor);
-        }
+    void scalingFactor(IntValue scalingFactor) throws IOException {
+        this.addField("scaling_factor", scalingFactor);
     }
 
     void format(String format) throws IOException {
@@ -446,11 +449,8 @@ public class MappingBuilder implements Serializable {
         this.addField("preserve_position_increments", preservePositionIncrements);
     }
 
-    void maxInputLength(int maxInputLength) throws IOException {
-        //Default 50
-        if (maxInputLength != 50) {
-            this.mapping.field("max_input_length", maxInputLength);
-        }
+    void maxInputLength(IntValue maxInputLength) throws IOException {
+        this.addField("max_input_length", maxInputLength);
     }
 
     void enablePositionIncrements(BoolValue enablePositionIncrements) throws IOException {
@@ -511,49 +511,49 @@ public class MappingBuilder implements Serializable {
     void processElasticField(ElasticLongField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
             elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
-            elasticField.index(), elasticField.nullValue(), elasticField.store(), -1);
+            elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticIntegerField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
             elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
-            elasticField.index(), elasticField.nullValue(), elasticField.store(), -1);
+            elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticShortField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
             elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
-            elasticField.index(), elasticField.nullValue(), elasticField.store(), -1);
+            elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticByteField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
             elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
-            elasticField.index(), elasticField.nullValue(), elasticField.store(), -1);
+            elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticDoubleField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
             elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
-            elasticField.index(), elasticField.nullValue(), elasticField.store(), -1);
+            elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticFloatField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
             elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
-            elasticField.index(), elasticField.nullValue(), elasticField.store(), -1);
+            elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticHalfFloatField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
             elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
-            elasticField.index(), elasticField.nullValue(), elasticField.store(), -1);
+            elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 

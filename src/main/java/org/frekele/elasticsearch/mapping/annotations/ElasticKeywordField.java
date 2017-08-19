@@ -2,6 +2,7 @@ package org.frekele.elasticsearch.mapping.annotations;
 
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
+import org.frekele.elasticsearch.mapping.annotations.values.IntValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -30,7 +31,7 @@ public @interface ElasticKeywordField {
 
     BoolValue docValues() default @BoolValue(ignore = true);
 
-    int ignoreAbove() default 256;
+    IntValue ignoreAbove() default @IntValue(ignore = true);
 
     BoolValue index() default @BoolValue(ignore = true);
 
