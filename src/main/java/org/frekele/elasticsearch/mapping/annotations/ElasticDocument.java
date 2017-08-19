@@ -22,4 +22,9 @@ public @interface ElasticDocument {
     BoolValue dynamic() default @BoolValue(ignore = true);
 
     BoolValue includeInAll() default @BoolValue(ignore = true);
+
+    String parent() default "";
+
+    BoolValue eagerGlobalOrdinals() default @BoolValue(ignore = true);
+
 }

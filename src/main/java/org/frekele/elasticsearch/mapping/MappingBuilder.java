@@ -229,6 +229,10 @@ public class MappingBuilder implements Serializable {
         return intValue != null && !intValue.ignore();
     }
 
+    boolean isNotEmpty(String value) {
+        return value != null && !value.isEmpty();
+    }
+
     void addField(String name, BoolValue value) throws IOException {
         if (this.isValueEnabled(value)) {
             this.mapping.field(name, value.value());
@@ -286,6 +290,10 @@ public class MappingBuilder implements Serializable {
 
     void boost(FloatValue boost) throws IOException {
         this.addField("boost", boost);
+    }
+
+    void eagerGlobalOrdinals(BoolValue eagerGlobalOrdinals) throws IOException {
+        this.addField("eager_global_ordinals", eagerGlobalOrdinals);
     }
 
     void fielddata(BoolValue fielddata) throws IOException {
@@ -751,19 +759,24 @@ public class MappingBuilder implements Serializable {
             for (Field field : fields) {
                 if (containElasticFieldAnnotation(field)) {
                     this.mapping.startObject(field.getName());
+                    //Object.
                     if (field.isAnnotationPresent(ElasticObjectField.class)) {
                         ElasticObjectField elasticDocument = field.getAnnotation(ElasticObjectField.class);
                         this.dynamic(elasticDocument.dynamic());
                         this.enabledJson(elasticDocument.enabledJson());
                         this.recursiveFields(this.getInnerFields(field), level);
                         this.includeInAll(elasticDocument.includeInAll());
-                    } else if (field.isAnnotationPresent(ElasticNestedField.class)) {
+                    }
+                    //Nested.
+                    else if (field.isAnnotationPresent(ElasticNestedField.class)) {
                         ElasticNestedField elasticDocument = field.getAnnotation(ElasticNestedField.class);
                         this.nested(true);
                         this.dynamic(elasticDocument.dynamic());
                         this.includeInAll(elasticDocument.includeInAll());
                         this.recursiveFields(this.getInnerFields(field), level);
-                    } else {
+                    }
+                    //Fields.
+                    else {
                         List<Annotation> annotationList = getElasticFieldAnnotations(field);
                         if (!annotationList.isEmpty()) {
                             //Get main Field (The First)
@@ -805,6 +818,15 @@ public class MappingBuilder implements Serializable {
             for (Class clazz : this.docsClass) {
                 ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
                 this.mapping.startObject(elasticDocument.value());
+
+                //Parent
+                if (isNotEmpty(elasticDocument.parent())) {
+                    this.mapping.startObject("_parent");
+                    this.mapping.field("type", elasticDocument.parent());
+                    this.eagerGlobalOrdinals(elasticDocument.eagerGlobalOrdinals());
+                    this.mapping.endObject();
+                }
+
                 this.dynamic(elasticDocument.dynamic());
                 this.includeInAll(elasticDocument.includeInAll());
 
