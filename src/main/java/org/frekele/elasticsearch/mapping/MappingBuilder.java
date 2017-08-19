@@ -756,10 +756,12 @@ public class MappingBuilder implements Serializable {
                         this.dynamic(elasticDocument.dynamic());
                         this.enabledJson(elasticDocument.enabledJson());
                         this.recursiveFields(this.getInnerFields(field), level);
+                        this.includeInAll(elasticDocument.includeInAll());
                     } else if (field.isAnnotationPresent(ElasticNestedField.class)) {
                         ElasticNestedField elasticDocument = field.getAnnotation(ElasticNestedField.class);
                         this.nested(true);
                         this.dynamic(elasticDocument.dynamic());
+                        this.includeInAll(elasticDocument.includeInAll());
                         this.recursiveFields(this.getInnerFields(field), level);
                     } else {
                         List<Annotation> annotationList = getElasticFieldAnnotations(field);
@@ -804,6 +806,7 @@ public class MappingBuilder implements Serializable {
                 ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
                 this.mapping.startObject(elasticDocument.value());
                 this.dynamic(elasticDocument.dynamic());
+                this.includeInAll(elasticDocument.includeInAll());
 
                 Field[] fields = clazz.getDeclaredFields();
                 this.recursiveFields(fields, 0);
