@@ -25,6 +25,11 @@ public @interface ElasticDocument {
 
     String parent() default "";
 
-    BoolValue eagerGlobalOrdinals() default @BoolValue(ignore = true);
+    BoolValue eagerGlobalOrdinalsParent() default @BoolValue(ignore = true);
+
+    BoolValue enabledAll() default @BoolValue(ignore = true);
+
+    //add store into _all
+    BoolValue storeAll() default @BoolValue(ignore = true);
 
 }

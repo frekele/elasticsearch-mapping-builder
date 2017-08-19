@@ -821,11 +821,23 @@ public class MappingBuilder implements Serializable {
                 ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
                 this.mapping.startObject(elasticDocument.value());
 
-                //Parent
+                //_parent
                 if (isNotEmpty(elasticDocument.parent())) {
                     this.mapping.startObject("_parent");
                     this.mapping.field("type", elasticDocument.parent());
-                    this.eagerGlobalOrdinals(elasticDocument.eagerGlobalOrdinals());
+                    this.eagerGlobalOrdinals(elasticDocument.eagerGlobalOrdinalsParent());
+                    this.mapping.endObject();
+                }
+
+                //_all
+                if (isValueEnabled(elasticDocument.enabledAll()) || isValueEnabled(elasticDocument.storeAll())) {
+                    this.mapping.startObject("_all");
+                    if (isValueEnabled(elasticDocument.enabledAll())) {
+                        this.mapping.field("enabled", elasticDocument.enabledAll().value());
+                    }
+                    if (isValueEnabled(elasticDocument.enabledAll())) {
+                        this.mapping.field("store", elasticDocument.storeAll().value());
+                    }
                     this.mapping.endObject();
                 }
 
