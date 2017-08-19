@@ -23,6 +23,7 @@ public @interface ElasticKeywordField {
 
     String analyzer() default "";
 
+    @Deprecated
     float boost() default 1.0f;
 
     boolean docValues() default false;

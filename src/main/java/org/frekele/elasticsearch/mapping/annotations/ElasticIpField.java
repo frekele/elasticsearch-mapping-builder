@@ -21,6 +21,7 @@ public @interface ElasticIpField {
 
     String suffixName() default "ip";
 
+    @Deprecated
     float boost() default 1.0f;
 
     boolean docValues() default false;

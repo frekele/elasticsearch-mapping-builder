@@ -24,6 +24,7 @@ public @interface ElasticTextField {
 
     String analyzer() default "";
 
+    @Deprecated
     float boost() default 1.0f;
 
     boolean fielddata() default false;

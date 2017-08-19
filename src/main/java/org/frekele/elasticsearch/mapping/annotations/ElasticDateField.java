@@ -24,6 +24,7 @@ public @interface ElasticDateField {
 
     String suffixName() default "date";
 
+    @Deprecated
     float boost() default 1.0f;
 
     boolean docValues() default false;

@@ -21,6 +21,7 @@ public @interface ElasticDateRangeField {
 
     String suffixName() default "dateRange";
 
+    @Deprecated
     float boost() default 1.0f;
 
     boolean docValues() default false;

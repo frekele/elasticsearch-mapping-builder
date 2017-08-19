@@ -25,6 +25,7 @@ public @interface ElasticTokenCountField {
 
     boolean enablePositionIncrements() default true;
 
+    @Deprecated
     float boost() default 1.0f;
 
     boolean docValues() default false;

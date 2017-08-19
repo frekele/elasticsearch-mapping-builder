@@ -22,6 +22,7 @@ public @interface ElasticBooleanField {
 
     String suffixName() default "boolean";
 
+    @Deprecated
     float boost() default 1.0f;
 
     boolean docValues() default false;
