@@ -1,6 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
-import org.frekele.elasticsearch.mapping.annotations.values.Bool;
+import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -28,18 +28,18 @@ public @interface ElasticDateField {
     @Deprecated
     float boost() default 1.0f;
 
-    Bool docValues() default @Bool(ignore = true);
+    BoolValue docValues() default @BoolValue(ignore = true);
 
     String format() default "";
 
     String locale() default "";
 
-    Bool ignoreMalformed() default @Bool(ignore = true);
+    BoolValue ignoreMalformed() default @BoolValue(ignore = true);
 
-    Bool index() default @Bool(ignore = true);
+    BoolValue index() default @BoolValue(ignore = true);
 
     String nullValue() default "";
 
-    Bool store() default @Bool(ignore = true);
+    BoolValue store() default @BoolValue(ignore = true);
 
 }

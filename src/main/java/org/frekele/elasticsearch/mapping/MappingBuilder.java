@@ -30,7 +30,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticScaledFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
-import org.frekele.elasticsearch.mapping.annotations.values.Bool;
+import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
@@ -215,11 +215,11 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    boolean isBoolValue(Bool boolValue) {
+    boolean isBoolValue(BoolValue boolValue) {
         return boolValue != null && !boolValue.ignore();
     }
 
-    void addField(String name, Bool value) throws IOException {
+    void addField(String name, BoolValue value) throws IOException {
         if (this.isBoolValue(value)) {
             this.mapping.field(name, value.value());
         }
@@ -244,11 +244,11 @@ public class MappingBuilder implements Serializable {
         this.mapping.field("nested", nested);
     }
 
-    void dynamic(Bool dynamic) throws IOException {
+    void dynamic(BoolValue dynamic) throws IOException {
         this.addField("dynamic", dynamic);
     }
 
-    void enabledJson(Bool enabledJson) throws IOException {
+    void enabledJson(BoolValue enabledJson) throws IOException {
         this.addField("enabled", enabledJson);
     }
 
@@ -269,7 +269,7 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void fielddata(Bool fielddata) throws IOException {
+    void fielddata(BoolValue fielddata) throws IOException {
         this.addField("fielddata", fielddata);
     }
 
@@ -284,7 +284,7 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void index(Bool index) throws IOException {
+    void index(BoolValue index) throws IOException {
         this.addField("index", index);
     }
 
@@ -294,7 +294,7 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void norms(Bool norms) throws IOException {
+    void norms(BoolValue norms) throws IOException {
         this.addField("norms", norms);
     }
 
@@ -305,7 +305,7 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void store(Bool store) throws IOException {
+    void store(BoolValue store) throws IOException {
         this.addField("store", store);
     }
 
@@ -343,7 +343,7 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void docValues(Bool docValues) throws IOException {
+    void docValues(BoolValue docValues) throws IOException {
         this.addField("doc_values", docValues);
     }
 
@@ -366,11 +366,11 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void coerce(Bool coerce) throws IOException {
+    void coerce(BoolValue coerce) throws IOException {
         this.addField("coerce", coerce);
     }
 
-    void ignoreMalformed(Bool ignoreMalformed) throws IOException {
+    void ignoreMalformed(BoolValue ignoreMalformed) throws IOException {
         this.addField("ignore_malformed", ignoreMalformed);
     }
 
@@ -429,15 +429,15 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void pointsOnly(Bool pointsOnly) throws IOException {
+    void pointsOnly(BoolValue pointsOnly) throws IOException {
         this.addField("points_only", pointsOnly);
     }
 
-    void preserveSeparators(Bool preserveSeparators) throws IOException {
+    void preserveSeparators(BoolValue preserveSeparators) throws IOException {
         this.addField("preserve_separators", preserveSeparators);
     }
 
-    void preservePositionIncrements(Bool preservePositionIncrements) throws IOException {
+    void preservePositionIncrements(BoolValue preservePositionIncrements) throws IOException {
         this.addField("preserve_position_increments", preservePositionIncrements);
     }
 
@@ -448,7 +448,7 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    void enablePositionIncrements(Bool enablePositionIncrements) throws IOException {
+    void enablePositionIncrements(BoolValue enablePositionIncrements) throws IOException {
         this.addField("enable_position_increments", enablePositionIncrements);
     }
 

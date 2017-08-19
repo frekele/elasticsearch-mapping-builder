@@ -1,6 +1,6 @@
 package org.frekele.elasticsearch.mapping.annotations;
 
-import org.frekele.elasticsearch.mapping.annotations.values.Bool;
+import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 import java.lang.annotation.ElementType;
@@ -20,5 +20,5 @@ public @interface ElasticNestedField {
 
     FieldType type = FieldType.NESTED;
 
-    Bool dynamic() default @Bool(ignore = true);
+    BoolValue dynamic() default @BoolValue(ignore = true);
 }

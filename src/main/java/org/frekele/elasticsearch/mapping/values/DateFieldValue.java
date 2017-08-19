@@ -1,6 +1,6 @@
 package org.frekele.elasticsearch.mapping.values;
 
-import org.frekele.elasticsearch.mapping.annotations.values.Bool;
+import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 
 /**
@@ -14,25 +14,25 @@ public class DateFieldValue {
 
     private float boost;
 
-    private Bool docValues;
+    private BoolValue docValues;
 
     private String format;
 
     private String locale;
 
-    private Bool ignoreMalformed;
+    private BoolValue ignoreMalformed;
 
-    private Bool index;
+    private BoolValue index;
 
     private String nullValue;
 
-    private Bool store;
+    private BoolValue store;
 
     public DateFieldValue() {
     }
 
-    public DateFieldValue(FieldType type, String suffixName, float boost, Bool docValues, String format, String locale,
-                          Bool ignoreMalformed, Bool index, String nullValue, Bool store) {
+    public DateFieldValue(FieldType type, String suffixName, float boost, BoolValue docValues, String format, String locale,
+                          BoolValue ignoreMalformed, BoolValue index, String nullValue, BoolValue store) {
         this.type = type;
         this.suffixName = suffixName;
         this.boost = boost;
@@ -69,11 +69,11 @@ public class DateFieldValue {
         this.boost = boost;
     }
 
-    public Bool getDocValues() {
+    public BoolValue getDocValues() {
         return docValues;
     }
 
-    public void setDocValues(Bool docValues) {
+    public void setDocValues(BoolValue docValues) {
         this.docValues = docValues;
     }
 
@@ -93,19 +93,19 @@ public class DateFieldValue {
         this.locale = locale;
     }
 
-    public Bool getIgnoreMalformed() {
+    public BoolValue getIgnoreMalformed() {
         return ignoreMalformed;
     }
 
-    public void setIgnoreMalformed(Bool ignoreMalformed) {
+    public void setIgnoreMalformed(BoolValue ignoreMalformed) {
         this.ignoreMalformed = ignoreMalformed;
     }
 
-    public Bool getIndex() {
+    public BoolValue getIndex() {
         return index;
     }
 
-    public void setIndex(Bool index) {
+    public void setIndex(BoolValue index) {
         this.index = index;
     }
 
@@ -117,11 +117,11 @@ public class DateFieldValue {
         this.nullValue = nullValue;
     }
 
-    public Bool getStore() {
+    public BoolValue getStore() {
         return store;
     }
 
-    public void setStore(Bool store) {
+    public void setStore(BoolValue store) {
         this.store = store;
     }
 }
