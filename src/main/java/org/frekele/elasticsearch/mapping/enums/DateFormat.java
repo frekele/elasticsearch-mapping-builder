@@ -2,6 +2,7 @@ package org.frekele.elasticsearch.mapping.enums;
 
 /**
  * @author frekele - Leandro Kersting de Freitas
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html#built-in-date-formats">mapping date format</a>
  */
 public enum DateFormat {
 
@@ -138,8 +139,8 @@ public enum DateFormat {
     year_month, strict_year_month,
 
     //A formatter for a four digit year, two digit month of year, and two digit day of month: yyyy-MM-dd.
-    year_month_day, strict_year_month_day,
+    year_month_day, strict_year_month_day;
 
     //Custom date formats, completely customizable date formats are supported. The syntax for these is explained in the Joda docs.
-    custom;
+    //custom;
 }
