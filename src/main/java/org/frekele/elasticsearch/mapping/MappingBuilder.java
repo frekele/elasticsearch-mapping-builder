@@ -237,6 +237,12 @@ public class MappingBuilder implements Serializable {
         }
     }
 
+    void addField(String name, String value) throws IOException {
+        if (this.isNotEmpty(value)) {
+            this.mapping.field(name, value);
+        }
+    }
+
     void startSuffixName(boolean subField, String suffixName) throws IOException {
         if (subField) {
             //Add suffixName to subField;
@@ -269,7 +275,7 @@ public class MappingBuilder implements Serializable {
     }
 
     void analyzer(String analyzer) throws IOException {
-        if (!analyzer.isEmpty()) {
+        if (this.isNotEmpty(analyzer)) {
             this.mapping.field("analyzer", analyzer);
         }
     }
@@ -312,7 +318,7 @@ public class MappingBuilder implements Serializable {
     }
 
     void indexOptions(String indexOptions) throws IOException {
-        if (!indexOptions.isEmpty()) {
+        if (this.isNotEmpty(indexOptions)) {
             this.mapping.field("index_options", indexOptions);
         }
     }
@@ -330,27 +336,19 @@ public class MappingBuilder implements Serializable {
     }
 
     void searchAnalyzer(String searchAnalyzer) throws IOException {
-        if (!searchAnalyzer.isEmpty()) {
-            this.mapping.field("search_analyzer", searchAnalyzer);
-        }
+        this.addField("search_analyzer", searchAnalyzer);
     }
 
     void searchQuoteAnalyzer(String searchQuoteAnalyzer) throws IOException {
-        if (!searchQuoteAnalyzer.isEmpty()) {
-            this.mapping.field("search_quote_analyzer", searchQuoteAnalyzer);
-        }
+        this.addField("search_quote_analyzer", searchQuoteAnalyzer);
     }
 
     void similarity(String similarity) throws IOException {
-        if (!similarity.isEmpty()) {
-            this.mapping.field("similarity", similarity);
-        }
+        this.addField("similarity", similarity);
     }
 
     void termVector(String termVector) throws IOException {
-        if (!termVector.isEmpty()) {
-            this.mapping.field("term_vector", termVector);
-        }
+        this.addField("term_vector", termVector);
     }
 
     void copyTo(String[] copyTo) throws IOException {
@@ -372,15 +370,11 @@ public class MappingBuilder implements Serializable {
     }
 
     void nullValue(String nullValue) throws IOException {
-        if (!nullValue.isEmpty()) {
-            this.mapping.field("null_value", nullValue);
-        }
+        this.addField("null_value", nullValue);
     }
 
     void normalizer(String normalizer) throws IOException {
-        if (!normalizer.isEmpty()) {
-            this.mapping.field("normalizer", normalizer);
-        }
+        this.addField("normalizer", normalizer);
     }
 
     void coerce(BoolValue coerce) throws IOException {
@@ -396,39 +390,27 @@ public class MappingBuilder implements Serializable {
     }
 
     void format(String format) throws IOException {
-        if (!format.isEmpty()) {
-            this.mapping.field("format", format);
-        }
+        this.addField("format", format);
     }
 
     void locale(String locale) throws IOException {
-        if (!locale.isEmpty()) {
-            this.mapping.field("locale", locale);
-        }
+        this.addField("locale", locale);
     }
 
     void tree(String tree) throws IOException {
-        if (!tree.isEmpty()) {
-            this.mapping.field("tree", tree);
-        }
+        this.addField("tree", tree);
     }
 
     void precision(String precision) throws IOException {
-        if (!precision.isEmpty()) {
-            this.mapping.field("precision", precision);
-        }
+        this.addField("precision", precision);
     }
 
     void treeLevels(String treeLevels) throws IOException {
-        if (!treeLevels.isEmpty()) {
-            this.mapping.field("tree_levels", treeLevels);
-        }
+        this.addField("tree_levels", treeLevels);
     }
 
     void strategy(String strategy) throws IOException {
-        if (!strategy.isEmpty()) {
-            this.mapping.field("strategy", strategy);
-        }
+        this.addField("strategy", strategy);
     }
 
     void distanceErrorPct(FloatValue distanceErrorPct) throws IOException {
@@ -436,9 +418,7 @@ public class MappingBuilder implements Serializable {
     }
 
     void orientation(String orientation) throws IOException {
-        if (!orientation.isEmpty()) {
-            this.mapping.field("orientation", orientation);
-        }
+        this.addField("orientation", orientation);
     }
 
     void pointsOnly(BoolValue pointsOnly) throws IOException {
