@@ -55,6 +55,8 @@ import java.util.List;
  */
 public class MappingBuilder implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private int MAX_RECURSIVE_LEVEL = 50;
 
     private List<Class> docsClass;
@@ -68,22 +70,6 @@ public class MappingBuilder implements Serializable {
             this.docsClass = new ArrayList<>(0);
         }
         this.validateElasticDocument();
-    }
-
-    public XContentBuilder source() throws IOException {
-        return build(false);
-    }
-
-    public XContentBuilder source(boolean pretty) throws IOException {
-        return build(pretty);
-    }
-
-    public String sourceAsString() throws IOException {
-        return this.source().string();
-    }
-
-    public String sourceAsString(boolean pretty) throws IOException {
-        return this.source(pretty).string();
     }
 
     static boolean isElasticDocument(Class documentClass) {
@@ -807,7 +793,7 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    XContentBuilder build(boolean pretty) throws IOException {
+    XContentBuilder innerBuild(boolean pretty) throws IOException {
         if (this.mapping == null) {
             this.mapping = XContentFactory.jsonBuilder();
             if (pretty) {
@@ -863,6 +849,15 @@ public class MappingBuilder implements Serializable {
             this.mapping.endObject();
         }
         return this.mapping;
+    }
+
+    public ObjectMapping build() throws IOException {
+        return this.build(false);
+    }
+
+    public ObjectMapping build(boolean pretty) throws IOException {
+        XContentBuilder xContentBuilder = this.innerBuild(pretty);
+        return new ObjectMapping(xContentBuilder);
     }
 
 }
