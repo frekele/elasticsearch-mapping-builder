@@ -309,6 +309,10 @@ public class MappingBuilder implements Serializable {
         }
     }
 
+    void includeInAll(BoolValue includeInAll) throws IOException {
+        this.addField("include_in_all", includeInAll);
+    }
+
     void index(BoolValue index) throws IOException {
         this.addField("index", index);
     }
@@ -470,6 +474,7 @@ public class MappingBuilder implements Serializable {
         this.boost(elasticField.boost());
         this.fielddata(elasticField.fielddata());
         this.fielddataFrequencyFilter(elasticField.fielddataFrequencyFilter());
+        this.includeInAll(elasticField.includeInAll());
         this.index(elasticField.index());
         this.indexOptions(elasticField.indexOptions());
         this.norms(elasticField.norms());
@@ -490,6 +495,7 @@ public class MappingBuilder implements Serializable {
         this.boost(elasticField.boost());
         this.docValues(elasticField.docValues());
         this.ignoreAbove(elasticField.ignoreAbove());
+        this.includeInAll(elasticField.includeInAll());
         this.index(elasticField.index());
         this.indexOptions(elasticField.indexOptions());
         this.norms(elasticField.norms());
@@ -572,7 +578,7 @@ public class MappingBuilder implements Serializable {
 
     void processElasticField(ElasticDateField elasticField, boolean subField) throws IOException {
         DateFieldValue vo = new DateFieldValue(elasticField.type, elasticField.suffixName(), elasticField.boost(),
-            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(),
+            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
             elasticField.index(), elasticField.nullValue(), elasticField.store());
         this.processElasticField(vo, subField);
     }
@@ -608,31 +614,31 @@ public class MappingBuilder implements Serializable {
 
     void processElasticField(ElasticIntegerRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticFloatRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticLongRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticDoubleRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
     void processElasticField(ElasticIpRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
@@ -651,7 +657,7 @@ public class MappingBuilder implements Serializable {
 
     void processElasticField(ElasticDateRangeField elasticField, boolean subField) throws IOException {
         DateFieldValue vo = new DateFieldValue(elasticField.type, elasticField.suffixName(), elasticField.boost(),
-            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(),
+            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
             elasticField.index(), elasticField.nullValue(), elasticField.store());
         this.processElasticField(vo, subField);
     }
@@ -681,6 +687,7 @@ public class MappingBuilder implements Serializable {
         this.type(elasticField.type);
         this.boost(elasticField.boost());
         this.docValues(elasticField.docValues());
+        this.includeInAll(elasticField.includeInAll());
         this.index(elasticField.index());
         this.nullValue(elasticField.nullValue());
         this.store(elasticField.store());
@@ -706,6 +713,7 @@ public class MappingBuilder implements Serializable {
         this.boost(elasticField.boost());
         this.docValues(elasticField.docValues());
         this.index(elasticField.index());
+        this.includeInAll(elasticField.includeInAll());
         this.nullValue(elasticField.nullValue());
         this.store(elasticField.store());
         this.closeSuffixName(subField);

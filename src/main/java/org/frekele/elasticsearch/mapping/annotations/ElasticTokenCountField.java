@@ -34,6 +34,8 @@ public @interface ElasticTokenCountField {
 
     BoolValue index() default @BoolValue(ignore = true);
 
+    BoolValue includeInAll() default @BoolValue(ignore = true);
+
     String nullValue() default "";
 
     BoolValue store() default @BoolValue(ignore = true);

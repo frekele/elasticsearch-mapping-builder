@@ -20,4 +20,6 @@ public @interface ElasticDocument {
     String value();
 
     BoolValue dynamic() default @BoolValue(ignore = true);
+
+    BoolValue includeInAll() default @BoolValue(ignore = true);
 }

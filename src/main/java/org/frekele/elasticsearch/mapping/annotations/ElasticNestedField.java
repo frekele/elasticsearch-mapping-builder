@@ -21,4 +21,6 @@ public @interface ElasticNestedField {
     FieldType type = FieldType.NESTED;
 
     BoolValue dynamic() default @BoolValue(ignore = true);
+
+    BoolValue includeInAll() default @BoolValue(ignore = true);
 }

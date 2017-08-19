@@ -28,6 +28,8 @@ public @interface ElasticDoubleRangeField {
     @Deprecated
     FloatValue boost() default @FloatValue(ignore = true);
 
+    BoolValue includeInAll() default @BoolValue(ignore = true);
+
     BoolValue index() default @BoolValue(ignore = true);
 
     BoolValue store() default @BoolValue(ignore = true);

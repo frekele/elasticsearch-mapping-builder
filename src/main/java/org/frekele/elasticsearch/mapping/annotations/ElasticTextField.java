@@ -34,6 +34,8 @@ public @interface ElasticTextField {
 
     FielddataFrequencyFilterValue fielddataFrequencyFilter() default @FielddataFrequencyFilterValue(ignore = true);
 
+    BoolValue includeInAll() default @BoolValue(ignore = true);
+
     BoolValue index() default @BoolValue(ignore = true);
 
     String indexOptions() default "";

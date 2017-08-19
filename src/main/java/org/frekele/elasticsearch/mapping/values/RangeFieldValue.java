@@ -17,6 +17,8 @@ public class RangeFieldValue {
 
     private FloatValue boost;
 
+    private BoolValue includeInAll;
+
     private BoolValue index;
 
     private BoolValue store;
@@ -24,11 +26,12 @@ public class RangeFieldValue {
     public RangeFieldValue() {
     }
 
-    public RangeFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost, BoolValue index, BoolValue store) {
+    public RangeFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost, BoolValue includeInAll, BoolValue index, BoolValue store) {
         this.type = type;
         this.suffixName = suffixName;
         this.coerce = coerce;
         this.boost = boost;
+        this.includeInAll = includeInAll;
         this.index = index;
         this.store = store;
     }
@@ -63,6 +66,14 @@ public class RangeFieldValue {
 
     public void setBoost(FloatValue boost) {
         this.boost = boost;
+    }
+
+    public BoolValue getIncludeInAll() {
+        return includeInAll;
+    }
+
+    public void setIncludeInAll(BoolValue includeInAll) {
+        this.includeInAll = includeInAll;
     }
 
     public BoolValue getIndex() {

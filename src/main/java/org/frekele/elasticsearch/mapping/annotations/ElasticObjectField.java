@@ -25,4 +25,6 @@ public @interface ElasticObjectField {
     //If false, just store the field without indexing it.
     BoolValue enabledJson() default @BoolValue(ignore = true);
 
+    BoolValue includeInAll() default @BoolValue(ignore = true);
+
 }
