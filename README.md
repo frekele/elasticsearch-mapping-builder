@@ -1,5 +1,7 @@
 # Elasticsearch Java Mapping Builder
 
+[![Build Status](https://travis-ci.org/frekele/elasticsearch-mapping-builder.svg?branch=master)](https://travis-ci.org/frekele/elasticsearch-mapping-builder)
+
 Example usage:
 
 ```
