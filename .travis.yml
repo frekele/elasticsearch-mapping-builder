@@ -23,7 +23,7 @@ before_install:
 install: true
 
 before_script:
-  - export MAVEN_SKIP_RC=true
+  #- export MAVEN_SKIP_RC=true
 
 #script: $M2_HOME/bin/mvn --show-version clean verify
 script: $M2_HOME/bin/mvn clean verify
