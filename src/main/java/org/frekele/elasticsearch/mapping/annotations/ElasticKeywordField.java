@@ -31,6 +31,8 @@ public @interface ElasticKeywordField {
 
     BoolValue docValues() default @BoolValue(ignore = true);
 
+    BoolValue eagerGlobalOrdinals() default @BoolValue(ignore = true);
+
     IntValue ignoreAbove() default @IntValue(ignore = true);
 
     BoolValue includeInAll() default @BoolValue(ignore = true);

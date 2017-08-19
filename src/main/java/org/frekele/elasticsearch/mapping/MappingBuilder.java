@@ -480,6 +480,7 @@ public class MappingBuilder implements Serializable {
         this.type(elasticField.type);
         this.analyzer(elasticField.analyzer());
         this.boost(elasticField.boost());
+        this.eagerGlobalOrdinals(elasticField.eagerGlobalOrdinals());
         this.fielddata(elasticField.fielddata());
         this.fielddataFrequencyFilter(elasticField.fielddataFrequencyFilter());
         this.includeInAll(elasticField.includeInAll());
@@ -502,6 +503,7 @@ public class MappingBuilder implements Serializable {
         this.analyzer(elasticField.analyzer());
         this.boost(elasticField.boost());
         this.docValues(elasticField.docValues());
+        this.eagerGlobalOrdinals(elasticField.eagerGlobalOrdinals());
         this.ignoreAbove(elasticField.ignoreAbove());
         this.includeInAll(elasticField.includeInAll());
         this.index(elasticField.index());

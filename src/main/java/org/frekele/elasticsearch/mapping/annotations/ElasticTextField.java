@@ -30,6 +30,8 @@ public @interface ElasticTextField {
     @Deprecated
     FloatValue boost() default @FloatValue(ignore = true);
 
+    BoolValue eagerGlobalOrdinals() default @BoolValue(ignore = true);
+
     BoolValue fielddata() default @BoolValue(ignore = true);
 
     FielddataFrequencyFilterValue fielddataFrequencyFilter() default @FielddataFrequencyFilterValue(ignore = true);
