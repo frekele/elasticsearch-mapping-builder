@@ -10,14 +10,14 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ElasticFielddataFrequencyFilter {
+public @interface FielddataFrequencyFilterValue {
 
-    boolean actived() default false;
+    boolean ignore() default false;
 
-    int min() default -1;
+    IntValue min() default @IntValue(ignore = true);
 
-    int max() default -1;
+    IntValue max() default @IntValue(ignore = true);
 
-    int minSegmentSize() default -1;
+    IntValue minSegmentSize() default @IntValue(ignore = true);
 
 }

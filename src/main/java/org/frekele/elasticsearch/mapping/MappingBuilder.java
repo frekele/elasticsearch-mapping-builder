@@ -31,7 +31,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
-import org.frekele.elasticsearch.mapping.annotations.values.ElasticFielddataFrequencyFilter;
+import org.frekele.elasticsearch.mapping.annotations.values.FielddataFrequencyFilterValue;
 import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.annotations.values.IntValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
@@ -217,32 +217,32 @@ public class MappingBuilder implements Serializable {
         }
     }
 
-    boolean valueEnabled(BoolValue boolValue) {
+    boolean isValueEnabled(BoolValue boolValue) {
         return boolValue != null && !boolValue.ignore();
     }
 
-    boolean valueEnabled(FloatValue floatValue) {
+    boolean isValueEnabled(FloatValue floatValue) {
         return floatValue != null && !floatValue.ignore();
     }
 
-    boolean valueEnabled(IntValue intValue) {
+    boolean isValueEnabled(IntValue intValue) {
         return intValue != null && !intValue.ignore();
     }
 
     void addField(String name, BoolValue value) throws IOException {
-        if (this.valueEnabled(value)) {
+        if (this.isValueEnabled(value)) {
             this.mapping.field(name, value.value());
         }
     }
 
     void addField(String name, FloatValue value) throws IOException {
-        if (this.valueEnabled(value)) {
+        if (this.isValueEnabled(value)) {
             this.mapping.field(name, value.value());
         }
     }
 
     void addField(String name, IntValue value) throws IOException {
-        if (this.valueEnabled(value)) {
+        if (this.isValueEnabled(value)) {
             this.mapping.field(name, value.value());
         }
     }
@@ -292,12 +292,18 @@ public class MappingBuilder implements Serializable {
         this.addField("fielddata", fielddata);
     }
 
-    void fielddataFrequencyFilter(ElasticFielddataFrequencyFilter fielddataFrequencyFilter) throws IOException {
-        if (fielddataFrequencyFilter.actived()) {
+    void fielddataFrequencyFilter(FielddataFrequencyFilterValue fielddataFrequencyFilter) throws IOException {
+        if (!fielddataFrequencyFilter.ignore()) {
             this.mapping.startObject("fielddata_frequency_filter");
-            this.mapping.field("min", fielddataFrequencyFilter.min());
-            this.mapping.field("max", fielddataFrequencyFilter.max());
-            this.mapping.field("min_segment_size", fielddataFrequencyFilter.minSegmentSize());
+            if (this.isValueEnabled(fielddataFrequencyFilter.min())) {
+                this.mapping.field("min", fielddataFrequencyFilter.min().value());
+            }
+            if (this.isValueEnabled(fielddataFrequencyFilter.max())) {
+                this.mapping.field("max", fielddataFrequencyFilter.max().value());
+            }
+            if (this.isValueEnabled(fielddataFrequencyFilter.minSegmentSize())) {
+                this.mapping.field("min_segment_size", fielddataFrequencyFilter.minSegmentSize().value());
+            }
             //fielddata_frequency_filter
             this.mapping.endObject();
         }
