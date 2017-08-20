@@ -27,7 +27,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>jar</packaging>
-    <url>http://elasticsearch-mapping-builder.frekele.org</url>
+    <url>https://github.com/frekele/elasticsearch-mapping-builder</url>
     <inceptionYear>2017</inceptionYear>
 
     <licenses>
@@ -36,6 +36,15 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <id>frekele</id>
+            <name>Leandro Kersting de Freitas</name>
+            <email>leandro@frekele.org</email>
+            <url>https://github.com/frekele</url>
+        </developer>
+    </developers>
 
     <scm>
         <url>https://github.com/frekele/elasticsearch-mapping-builder</url>
