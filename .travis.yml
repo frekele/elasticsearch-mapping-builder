@@ -12,7 +12,9 @@ cache:
     - $HOME/.m2
 
 before_install:
-  - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY} || gpg --keyserver keys.gnupg.net --recv-key ${FREKELE_GPGKEY}
+  - cat $HOME/.m2/settings.xml
+  - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY}
+  #- gpg --keyserver keys.gnupg.net --recv-key ${FREKELE_GPGKEY}
   - gpg --list-keys
   - export M2_HOME=/tmp/maven-${MAVEN}
   - mkdir $M2_HOME
