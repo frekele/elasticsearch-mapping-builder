@@ -11,18 +11,37 @@ cache:
   directories:
     - $HOME/.m2
 
+
 before_install:
-  - cat $HOME/.m2/settings.xml
   - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY}
-  #- gpg --keyserver keys.gnupg.net --recv-key ${FREKELE_GPGKEY}
-  - gpg --list-keys
   - export MVN_HOME=/tmp/maven-${MAVEN}
   - mkdir ${MVN_HOME}
-  - wget -qO- https://archive.apache.org/dist/maven/maven-3/${MAVEN}/binaries/apache-maven-${MAVEN}-bin.tar.gz | tar xz --strip 1 -C ${MVN_HOME}
   - export PATH=${MVN_HOME}/bin:$PATH
 
+
 install:
-  - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml install -Dgpg.skip -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -B -V
+  - wget -qO- https://archive.apache.org/dist/maven/maven-3/${MAVEN}/binaries/apache-maven-${MAVEN}-bin.tar.gz | tar xz --strip 1 -C ${MVN_HOME}
+
+
+before_script:
+
+
+script:
+  - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml install -Dgpg.skip -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -B -V
+
+
+before_cache:
+
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+
+after_failure:
+
+
+before_deploy:
+
 
 deploy:
   -
@@ -42,5 +61,8 @@ deploy:
       tags: true
       jdk: oraclejdk8
 
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  
+after_deploy:
+
+
+after_script:
