@@ -9,11 +9,11 @@ env:
   - MAVEN=3.3.3
   - MAVEN=3.3.9
   - MAVEN=3.5.0
-  
+
 cache:
     directories:
     - $HOME/.m2
-    
+
 before_install:
   - export M2_HOME=/tmp/maven-${MAVEN}
   - mkdir $M2_HOME
@@ -28,5 +28,5 @@ before_script:
 #script: $M2_HOME/bin/mvn --show-version clean verify
 script: $M2_HOME/bin/mvn clean verify
 
-#after_success:
-#  - bash <(curl -s https://codecov.io/bash)
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
