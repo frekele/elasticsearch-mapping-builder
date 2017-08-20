@@ -12,6 +12,162 @@
     </servers>
     <profiles>
         <profile>
+            <id>standard-with-extra-repos</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <name>Central Repository</name>
+                    <url>http://repo.maven.apache.org/maven2</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>sonatype</id>
+                    <name>OSS Sonatype repo (releases)</name>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://oss.sonatype.org/content/repositories/releases/</url>
+                </repository>
+                <repository>
+                    <id>sonatype-snapshots</id>
+                    <name>OSS Sonatype repo (snapshots)</name>
+                    <releases>
+                        <enabled>false</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                </repository>
+                <repository>
+                    <id>apache</id>
+                    <name>Apache repo (releases)</name>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://repository.apache.org/releases/</url>
+                </repository>
+                <repository>
+                    <id>apache-snapshots</id>
+                    <name>ASF repo (snapshots)</name>
+                    <releases>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://repository.apache.org/snapshots/</url>
+                </repository>
+                <repository>
+                    <id>jboss</id>
+                    <name>Jboss repo (releases)</name>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+                </repository>
+                <repository>
+                    <id>jboss-snapshots</id>
+                    <name>Jboss repo (snapshots)</name>
+                    <releases>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+                </repository>
+                <repository>
+                    <id>jboss</id>
+                    <name>Jboss repo (releases)</name>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+                </repository>
+                <repository>
+                    <id>sonatype-group</id>
+                    <name>OSS Sonatype repo (group)</name>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://oss.sonatype.org/content/groups/public/</url>
+                </repository>
+                <repository>
+                    <id>sonatype-staging-group</id>
+                    <name>OSS Sonatype repo staging (group)</name>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://oss.sonatype.org/content/groups/staging/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+
+        <profile>
             <id>ossrh</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -20,63 +176,6 @@
                 <gpg.executable>gpg</gpg.executable>
                 <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
             </properties>
-            <repositories>
-                <repository>
-                    <id>jboss-repository</id>
-                    <name>Jboss repository</name>
-                    <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                </repository>
-                <repository>
-                    <id>apache-repository</id>
-                    <name>Apache repository</name>
-                    <url>https://repository.apache.org/content/groups/public/</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                </repository>
-                <repository>
-                    <id>bintray-repository</id>
-                    <name>Bintray repository</name>
-                    <url>https://jcenter.bintray.com/</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                </repository>
-                <repository>
-                    <id>central-repository</id>
-                    <name>Central repository</name>
-                    <url>https://oss.sonatype.org/content/groups/public/</url>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                </repository>
-                <repository>
-                    <id>staging-central-repository</id>
-                    <name>Staging Central repository</name>
-                    <url>https://oss.sonatype.org/content/groups/staging/</url>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                </repository>
-            </repositories>
         </profile>
     </profiles>
 </settings>
