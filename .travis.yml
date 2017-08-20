@@ -46,7 +46,8 @@ before_deploy:
 deploy:
   -
     provider: script
-    script: .travis/deploy.sh
+    script:
+      - ${MVN_HOME}/bin/mvn clean deploy --settings .travis/settings.xml -DskipTests=true -B -U
     skip_cleanup: true
     on:
       repo: frekele/elasticsearch-mapping-builder
@@ -54,14 +55,16 @@ deploy:
       jdk: oraclejdk8
   -
     provider: script
-    script: .travis/deploy.sh
+    script:
+      - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml org.codehaus.mojo:versions-maven-plugin:2.4:set -DnewVersion=${TRAVIS_TAG}
+      - ${MVN_HOME}/bin/mvn clean deploy --settings .travis/settings.xml -B -U
     skip_cleanup: true
     on:
       repo: frekele/elasticsearch-mapping-builder
       tags: true
       jdk: oraclejdk8
 
-  
+
 after_deploy:
 
 
