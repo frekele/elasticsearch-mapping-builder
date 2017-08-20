@@ -119,21 +119,6 @@
                     <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
                 </repository>
                 <repository>
-                    <id>jboss</id>
-                    <name>Jboss repo (releases)</name>
-                    <releases>
-                        <enabled>true</enabled>
-                        <updatePolicy>always</updatePolicy>
-                        <checksumPolicy>warn</checksumPolicy>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                        <updatePolicy>never</updatePolicy>
-                        <checksumPolicy>fail</checksumPolicy>
-                    </snapshots>
-                    <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
-                </repository>
-                <repository>
                     <id>sonatype-group</id>
                     <name>OSS Sonatype repo (group)</name>
                     <releases>
