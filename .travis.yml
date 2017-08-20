@@ -4,13 +4,25 @@ jdk:
 #  - openjdk8
   - oraclejdk8
 
-install:
-  - mvn --settings .travis/settings.xml install -Dgpg.skip -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -B -V
+env:
+  - MAVEN=3.5.0
+
+cache:
+  directories:
+    - $HOME/.m2
 
 before_install:
+  - cat $HOME/.m2/settings.xml
+  - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY}
+  #- gpg --keyserver keys.gnupg.net --recv-key ${FREKELE_GPGKEY}
   - gpg --list-keys
-  - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY} | gpg --keyserver keys.gnupg.net --recv-key ${FREKELE_GPGKEY}
-  - gpg --list-keys
+  - export M2_HOME=/tmp/maven-${MAVEN}
+  - mkdir $M2_HOME
+  - wget -qO- https://archive.apache.org/dist/maven/maven-3/${MAVEN}/binaries/apache-maven-${MAVEN}-bin.tar.gz | tar xz --strip 1 -C $M2_HOME
+  - export PATH=$M2_HOME/bin:$PATH
+
+install:
+  - $M2_HOME/bin/mvn --settings .travis/settings.xml install -Dgpg.skip -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -B -V
 
 deploy:
   -
