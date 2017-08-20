@@ -5,7 +5,7 @@ jdk:
   - oraclejdk8
 
 install:
-  - mvn --settings .travis/settings.xml install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip -B -V
+  - mvn --settings .travis/settings.xml install -Dgpg.skip -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -B -V
 
 before_install:
   - gpg --list-keys
