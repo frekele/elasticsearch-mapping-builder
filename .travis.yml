@@ -16,13 +16,13 @@ before_install:
   - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY}
   #- gpg --keyserver keys.gnupg.net --recv-key ${FREKELE_GPGKEY}
   - gpg --list-keys
-  - export M2_HOME=/tmp/maven-${MAVEN}
-  - mkdir $M2_HOME
-  - wget -qO- https://archive.apache.org/dist/maven/maven-3/${MAVEN}/binaries/apache-maven-${MAVEN}-bin.tar.gz | tar xz --strip 1 -C $M2_HOME
-  - export PATH=$M2_HOME/bin:$PATH
+  - export MVN_HOME=/tmp/maven-${MAVEN}
+  - mkdir ${MVN_HOME}
+  - wget -qO- https://archive.apache.org/dist/maven/maven-3/${MAVEN}/binaries/apache-maven-${MAVEN}-bin.tar.gz | tar xz --strip 1 -C ${MVN_HOME}
+  - export PATH=${MVN_HOME}/bin:$PATH
 
 install:
-  - $M2_HOME/bin/mvn --settings .travis/settings.xml install -Dgpg.skip -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -B -V
+  - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml install -Dgpg.skip -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -B -V
 
 deploy:
   -
