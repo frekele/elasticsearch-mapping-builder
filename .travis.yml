@@ -4,6 +4,10 @@ jdk:
 #  - openjdk8
   - oraclejdk8
 
+cache:
+  directories:
+    - $HOME/.m2
+
 install:
   - mvn --settings .travis/settings.xml install -Dgpg.skip -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -B -V
 
