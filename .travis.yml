@@ -9,8 +9,8 @@ install:
 
 before_install:
   - gpg --list-keys
-  - if [ ! -z "${GPG_SECRET_KEYS}" ]; then echo ${GPG_SECRET_KEYS} | base64 --decode | ${GPG_EXECUTABLE} --import; fi
-  - if [ ! -z "${GPG_OWNERTRUST}" ]; then echo ${GPG_OWNERTRUST} | base64 --decode | ${GPG_EXECUTABLE} --import-ownertrust; fi
+  - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY} | gpg --keyserver keys.gnupg.net --recv-key ${FREKELE_GPGKEY}
+  - gpg --list-keys
 
 deploy:
   -
