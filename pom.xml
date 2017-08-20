@@ -132,16 +132,13 @@
                 <version>${jacoco.version}</version>
                 <executions>
                     <execution>
-                        <id>jacoco-initialize</id>
-                        <phase>initialize</phase>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>jacoco-report</id>
-                        <!--phase>prepare-package</phase-->
-                        <phase>verify</phase>
+                        <id>report</id>
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
