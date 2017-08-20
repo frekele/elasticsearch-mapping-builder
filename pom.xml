@@ -27,8 +27,10 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>jar</packaging>
-    <url>https://github.com/frekele/elasticsearch-mapping-builder</url>
     <inceptionYear>2017</inceptionYear>
+    <url>http://frekele.org</url>
+    <description>Elasticsearch Java Mapping Builder.</description>
+
 
     <licenses>
         <license>
@@ -64,10 +66,14 @@
     </ciManagement>
 
     <distributionManagement>
-        <site>
-            <id>github</id>
-            <url>gitsite:git@github.com/frekele/elasticsearch-mapping-builder.git</url>
-        </site>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 
     <properties>
