@@ -21,9 +21,9 @@ before_install:
   
   #- echo ${GPG_PUBLIC_KEYS} | ${HOME_CORE_UTILS}/bin/base64 --decode > /tmp/frekele-pubkey.asc
   - echo ${GPG_PRIVATE_KEYS} | ${HOME_CORE_UTILS}/bin/base64 --decode > /tmp/frekele-privkey.asc
-  #- cat /tmp/frekele-privkey.asc
+  - cat /tmp/frekele-privkey.asc
   - echo ${GPG_OWNERTRUST} | ${HOME_CORE_UTILS}/bin/base64 --decode > /tmp/frekele-ownertrust.asc
-  #- cat /tmp/frekele-ownertrust.asc
+  - cat /tmp/frekele-ownertrust.asc
   - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY}
   #- gpg --import /tmp/frekele-pubkey.asc
   - gpg --import /tmp/frekele-privkey.asc
