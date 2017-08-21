@@ -16,9 +16,9 @@ echo "CONFIGURE!"
                              --enable-no-install-program=kill,uptime
 
 echo "MAKE!"
-make -C /tmp/coreutils-${CORE_UTILS}
+make -C /tmp/coreutils-${CORE_UTILS}/
 
 echo "MAKE INSTALL!"
-make install -C /tmp/coreutils-${CORE_UTILS}
+make install -C /tmp/coreutils-${CORE_UTILS}/
 
 ${HOME}/coreutils/bin/base64 --version
