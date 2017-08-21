@@ -13,13 +13,15 @@ cache:
 
 
 before_install:
-  #- echo ${GPG_PUBLIC_KEYS} | base64 --decode | tee frekele-pubkey.asc
-  - echo ${GPG_SECRET_KEYS} | base64 --decode > frekele-privkey.asc
-  - echo ${GPG_OWNERTRUST} | base64 --decode > frekele-ownertrust.asc
+  #- echo ${GPG_PUBLIC_KEYS} | base64 --decode | tee /tmp/frekele-pubkey.asc
+  - echo ${GPG_SECRET_KEYS} | base64 --decode > /tmp/frekele-privkey.asc
+  - cat /tmp/frekele-privkey.asc
+  - echo ${GPG_OWNERTRUST} | base64 --decode > /tmp/frekele-ownertrust.asc
+  - cat /tmp/frekele-ownertrust.asc
   - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY}
-  #- gpg --import frekele-pubkey.asc
-  - gpg --import frekele-privkey.asc
-  - gpg --import-ownertrust frekele-ownertrust.asc
+  #- gpg --import /tmp/frekele-pubkey.asc
+  - gpg --import /tmp/frekele-privkey.asc
+  - gpg --import-ownertrust /tmp/frekele-ownertrust.asc
   - gpg --list-sigs
   - gpg --list-secret-keys
   - export MVN_HOME=/tmp/maven-${MAVEN}
