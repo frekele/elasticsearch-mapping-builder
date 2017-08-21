@@ -30,9 +30,6 @@ public class NumericFieldValue {
 
     private IntValue scalingFactor;
 
-    public NumericFieldValue() {
-    }
-
     public NumericFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost,
                              BoolValue docValues, BoolValue ignoreMalformed, BoolValue index,
                              String nullValue, BoolValue store, IntValue scalingFactor) {
@@ -52,79 +49,39 @@ public class NumericFieldValue {
         return type;
     }
 
-    public void setType(FieldType type) {
-        this.type = type;
-    }
-
     public String getSuffixName() {
         return suffixName;
-    }
-
-    public void setSuffixName(String suffixName) {
-        this.suffixName = suffixName;
     }
 
     public BoolValue getCoerce() {
         return coerce;
     }
 
-    public void setCoerce(BoolValue coerce) {
-        this.coerce = coerce;
-    }
-
     public FloatValue getBoost() {
         return boost;
-    }
-
-    public void setBoost(FloatValue boost) {
-        this.boost = boost;
     }
 
     public BoolValue getDocValues() {
         return docValues;
     }
 
-    public void setDocValues(BoolValue docValues) {
-        this.docValues = docValues;
-    }
-
     public BoolValue getIgnoreMalformed() {
         return ignoreMalformed;
-    }
-
-    public void setIgnoreMalformed(BoolValue ignoreMalformed) {
-        this.ignoreMalformed = ignoreMalformed;
     }
 
     public BoolValue getIndex() {
         return index;
     }
 
-    public void setIndex(BoolValue index) {
-        this.index = index;
-    }
-
     public String getNullValue() {
         return nullValue;
-    }
-
-    public void setNullValue(String nullValue) {
-        this.nullValue = nullValue;
     }
 
     public BoolValue getStore() {
         return store;
     }
 
-    public void setStore(BoolValue store) {
-        this.store = store;
-    }
-
     public IntValue getScalingFactor() {
         return scalingFactor;
-    }
-
-    public void setScalingFactor(IntValue scalingFactor) {
-        this.scalingFactor = scalingFactor;
     }
 }

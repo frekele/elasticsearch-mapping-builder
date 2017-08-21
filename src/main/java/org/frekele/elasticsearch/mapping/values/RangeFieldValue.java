@@ -23,10 +23,8 @@ public class RangeFieldValue {
 
     private BoolValue store;
 
-    public RangeFieldValue() {
-    }
-
-    public RangeFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost, BoolValue includeInAll, BoolValue index, BoolValue store) {
+    public RangeFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost,
+                           BoolValue includeInAll, BoolValue index, BoolValue store) {
         this.type = type;
         this.suffixName = suffixName;
         this.coerce = coerce;
@@ -40,55 +38,27 @@ public class RangeFieldValue {
         return type;
     }
 
-    public void setType(FieldType type) {
-        this.type = type;
-    }
-
     public String getSuffixName() {
         return suffixName;
-    }
-
-    public void setSuffixName(String suffixName) {
-        this.suffixName = suffixName;
     }
 
     public BoolValue getCoerce() {
         return coerce;
     }
 
-    public void setCoerce(BoolValue coerce) {
-        this.coerce = coerce;
-    }
-
     public FloatValue getBoost() {
         return boost;
-    }
-
-    public void setBoost(FloatValue boost) {
-        this.boost = boost;
     }
 
     public BoolValue getIncludeInAll() {
         return includeInAll;
     }
 
-    public void setIncludeInAll(BoolValue includeInAll) {
-        this.includeInAll = includeInAll;
-    }
-
     public BoolValue getIndex() {
         return index;
     }
 
-    public void setIndex(BoolValue index) {
-        this.index = index;
-    }
-
     public BoolValue getStore() {
         return store;
-    }
-
-    public void setStore(BoolValue store) {
-        this.store = store;
     }
 }

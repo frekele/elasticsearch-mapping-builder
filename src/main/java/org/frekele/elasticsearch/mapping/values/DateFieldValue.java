@@ -31,9 +31,6 @@ public class DateFieldValue {
 
     private BoolValue store;
 
-    public DateFieldValue() {
-    }
-
     public DateFieldValue(FieldType type, String suffixName, FloatValue boost, BoolValue docValues,
                           String format, String locale, BoolValue ignoreMalformed, BoolValue includeInAll,
                           BoolValue index, String nullValue, BoolValue store) {
@@ -54,87 +51,43 @@ public class DateFieldValue {
         return type;
     }
 
-    public void setType(FieldType type) {
-        this.type = type;
-    }
-
     public String getSuffixName() {
         return suffixName;
-    }
-
-    public void setSuffixName(String suffixName) {
-        this.suffixName = suffixName;
     }
 
     public FloatValue getBoost() {
         return boost;
     }
 
-    public void setBoost(FloatValue boost) {
-        this.boost = boost;
-    }
-
     public BoolValue getDocValues() {
         return docValues;
-    }
-
-    public void setDocValues(BoolValue docValues) {
-        this.docValues = docValues;
     }
 
     public String getFormat() {
         return format;
     }
 
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
     public String getLocale() {
         return locale;
-    }
-
-    public void setLocale(String locale) {
-        this.locale = locale;
     }
 
     public BoolValue getIgnoreMalformed() {
         return ignoreMalformed;
     }
 
-    public void setIgnoreMalformed(BoolValue ignoreMalformed) {
-        this.ignoreMalformed = ignoreMalformed;
-    }
-
     public BoolValue getIncludeInAll() {
         return includeInAll;
-    }
-
-    public void setIncludeInAll(BoolValue includeInAll) {
-        this.includeInAll = includeInAll;
     }
 
     public BoolValue getIndex() {
         return index;
     }
 
-    public void setIndex(BoolValue index) {
-        this.index = index;
-    }
-
     public String getNullValue() {
         return nullValue;
     }
 
-    public void setNullValue(String nullValue) {
-        this.nullValue = nullValue;
-    }
-
     public BoolValue getStore() {
         return store;
-    }
-
-    public void setStore(BoolValue store) {
-        this.store = store;
     }
 }
