@@ -74,12 +74,24 @@ public class MappingBuilder implements Serializable {
         this.validateElasticDocument();
     }
 
+    public List<Class> getDocsClass() {
+        return docsClass;
+    }
+
+    public XContentBuilder getMapping() {
+        return mapping;
+    }
+
+    public void setMapping(XContentBuilder mapping) {
+        this.mapping = mapping;
+    }
+
     static boolean isElasticDocument(Class documentClass) {
         return (documentClass.isAnnotationPresent(ElasticDocument.class));
     }
 
     void validateElasticDocument() {
-        for (Class clazz : this.docsClass) {
+        for (Class clazz : this.getDocsClass()) {
             if (!isElasticDocument(clazz)) {
                 throw new InvalidDocumentClassException("Document Class[" + clazz.getCanonicalName() + "] Invalid. @ElasticDocument must be present.");
             }
@@ -223,45 +235,45 @@ public class MappingBuilder implements Serializable {
 
     void addField(String name, BoolValue value) throws IOException {
         if (this.isValueEnabled(value)) {
-            this.mapping.field(name, value.value());
+            this.getMapping().field(name, value.value());
         }
     }
 
     void addField(String name, FloatValue value) throws IOException {
         if (this.isValueEnabled(value)) {
-            this.mapping.field(name, value.value());
+            this.getMapping().field(name, value.value());
         }
     }
 
     void addField(String name, IntValue value) throws IOException {
         if (this.isValueEnabled(value)) {
-            this.mapping.field(name, value.value());
+            this.getMapping().field(name, value.value());
         }
     }
 
     void addField(String name, String value) throws IOException {
         if (this.isNotEmpty(value)) {
-            this.mapping.field(name, value);
+            this.getMapping().field(name, value);
         }
     }
 
     void startSuffixName(boolean subField, String suffixName) throws IOException {
         if (subField) {
             //Add suffixName to subField;
-            this.mapping.startObject(suffixName);
+            this.getMapping().startObject(suffixName);
         }
     }
 
     void closeSuffixName(boolean subField) throws IOException {
         if (subField) {
             //Add suffixName to subField;
-            this.mapping.endObject();
+            this.getMapping().endObject();
         }
     }
 
     //Direct set.
     void nested(boolean nested) throws IOException {
-        this.mapping.field("nested", nested);
+        this.getMapping().field("nested", nested);
     }
 
     void dynamic(BoolValue dynamic) throws IOException {
@@ -273,12 +285,12 @@ public class MappingBuilder implements Serializable {
     }
 
     void type(FieldType type) throws IOException {
-        this.mapping.field("type", type.getName());
+        this.getMapping().field("type", type.getName());
     }
 
     void analyzer(String analyzer) throws IOException {
         if (this.isNotEmpty(analyzer)) {
-            this.mapping.field("analyzer", analyzer);
+            this.getMapping().field("analyzer", analyzer);
         }
     }
 
@@ -296,18 +308,18 @@ public class MappingBuilder implements Serializable {
 
     void fielddataFrequencyFilter(FielddataFrequencyFilterValue fielddataFrequencyFilter) throws IOException {
         if (!fielddataFrequencyFilter.ignore()) {
-            this.mapping.startObject("fielddata_frequency_filter");
+            this.getMapping().startObject("fielddata_frequency_filter");
             if (this.isValueEnabled(fielddataFrequencyFilter.min())) {
-                this.mapping.field("min", fielddataFrequencyFilter.min().value());
+                this.getMapping().field("min", fielddataFrequencyFilter.min().value());
             }
             if (this.isValueEnabled(fielddataFrequencyFilter.max())) {
-                this.mapping.field("max", fielddataFrequencyFilter.max().value());
+                this.getMapping().field("max", fielddataFrequencyFilter.max().value());
             }
             if (this.isValueEnabled(fielddataFrequencyFilter.minSegmentSize())) {
-                this.mapping.field("min_segment_size", fielddataFrequencyFilter.minSegmentSize().value());
+                this.getMapping().field("min_segment_size", fielddataFrequencyFilter.minSegmentSize().value());
             }
             //fielddata_frequency_filter
-            this.mapping.endObject();
+            this.getMapping().endObject();
         }
     }
 
@@ -321,7 +333,7 @@ public class MappingBuilder implements Serializable {
 
     void indexOptions(String indexOptions) throws IOException {
         if (this.isNotEmpty(indexOptions)) {
-            this.mapping.field("index_options", indexOptions);
+            this.getMapping().field("index_options", indexOptions);
         }
     }
 
@@ -356,9 +368,9 @@ public class MappingBuilder implements Serializable {
     void copyTo(String[] copyTo) throws IOException {
         if (copyTo != null && copyTo.length > 0) {
             if (copyTo.length == 1) {
-                this.mapping.field("copy_to", copyTo[0]);
+                this.getMapping().field("copy_to", copyTo[0]);
             } else {
-                this.mapping.array("copy_to", copyTo);
+                this.getMapping().array("copy_to", copyTo);
             }
         }
     }
@@ -723,10 +735,10 @@ public class MappingBuilder implements Serializable {
         }
         ++level;
         if (fields != null && fields.length > 0) {
-            this.mapping.startObject("properties");
+            this.getMapping().startObject("properties");
             for (Field field : fields) {
                 if (containElasticFieldAnnotation(field)) {
-                    this.mapping.startObject(field.getName());
+                    this.getMapping().startObject(field.getName());
                     //Object.
                     if (field.isAnnotationPresent(ElasticObjectField.class)) {
                         ElasticObjectField elasticDocument = field.getAnnotation(ElasticObjectField.class);
@@ -754,64 +766,64 @@ public class MappingBuilder implements Serializable {
 
                             //If contains more fields.
                             if (!annotationList.isEmpty()) {
-                                this.mapping.startObject("fields");
+                                this.getMapping().startObject("fields");
                                 for (Annotation otherAnnotation : annotationList) {
                                     this.processElasticAnnotationField(otherAnnotation, true);
                                 }
                                 //fields
-                                this.mapping.endObject();
+                                this.getMapping().endObject();
                             }
                         }
                     }
                     //field
-                    this.mapping.endObject();
+                    this.getMapping().endObject();
 
                 }
             }
             //properties
-            this.mapping.endObject();
+            this.getMapping().endObject();
         }
     }
 
     XContentBuilder innerBuild(boolean pretty) throws IOException {
-        if (this.mapping == null) {
-            this.mapping = XContentFactory.jsonBuilder();
+        if (this.getMapping() == null) {
+            this.setMapping(XContentFactory.jsonBuilder());
             if (pretty) {
-                this.mapping.prettyPrint();
+                this.getMapping().prettyPrint();
             }
             //BEGIN
-            this.mapping.startObject();
-            this.mapping.startObject("mappings");
+            this.getMapping().startObject();
+            this.getMapping().startObject("mappings");
 
-            for (Class clazz : this.docsClass) {
+            for (Class clazz : this.getDocsClass()) {
                 ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
-                this.mapping.startObject(elasticDocument.value());
+                this.getMapping().startObject(elasticDocument.value());
 
                 //_parent
                 if (isNotEmpty(elasticDocument.parent())) {
-                    this.mapping.startObject("_parent");
-                    this.mapping.field("type", elasticDocument.parent());
+                    this.getMapping().startObject("_parent");
+                    this.getMapping().field("type", elasticDocument.parent());
                     this.eagerGlobalOrdinals(elasticDocument.eagerGlobalOrdinalsParent());
-                    this.mapping.endObject();
+                    this.getMapping().endObject();
                 }
 
                 //_all
                 if (isValueEnabled(elasticDocument.enabledAll()) || isValueEnabled(elasticDocument.storeAll())) {
-                    this.mapping.startObject("_all");
+                    this.getMapping().startObject("_all");
                     if (isValueEnabled(elasticDocument.enabledAll())) {
-                        this.mapping.field("enabled", elasticDocument.enabledAll().value());
+                        this.getMapping().field("enabled", elasticDocument.enabledAll().value());
                     }
                     if (isValueEnabled(elasticDocument.enabledAll())) {
-                        this.mapping.field("store", elasticDocument.storeAll().value());
+                        this.getMapping().field("store", elasticDocument.storeAll().value());
                     }
-                    this.mapping.endObject();
+                    this.getMapping().endObject();
                 }
 
                 //_routing
                 if (isNotEmpty(elasticDocument.parent())) {
-                    this.mapping.startObject("_routing");
-                    this.mapping.field("required", elasticDocument.requiredRouting().value());
-                    this.mapping.endObject();
+                    this.getMapping().startObject("_routing");
+                    this.getMapping().field("required", elasticDocument.requiredRouting().value());
+                    this.getMapping().endObject();
                 }
 
                 this.dynamic(elasticDocument.dynamic());
@@ -821,14 +833,14 @@ public class MappingBuilder implements Serializable {
                 this.recursiveFields(fields, 0);
 
                 //ElasticDocument
-                this.mapping.endObject();
+                this.getMapping().endObject();
             }
             //mappings
-            this.mapping.endObject();
+            this.getMapping().endObject();
             //END
-            this.mapping.endObject();
+            this.getMapping().endObject();
         }
-        return this.mapping;
+        return this.getMapping();
     }
 
     public ObjectMapping build() {
