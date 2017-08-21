@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch.mapping.entities;
+package org.frekele.elasticsearch.mapping.entities.generic;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticCustomJsonField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;

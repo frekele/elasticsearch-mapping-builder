@@ -1,13 +1,11 @@
-package org.frekele.elasticsearch.mapping.entities;
+package org.frekele.elasticsearch.mapping.entities.generic;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticBinaryField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticByteField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticCompletionField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticCustomJsonField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticFloatField;
@@ -22,8 +20,6 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticIpRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticNestedField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticObjectField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticPercolatorField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticScaledFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
@@ -32,8 +28,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
 
 import java.util.Date;
 
-@ElasticDocument("full")
-public class FullDocumentEntity {
+public class InnerDocumentEntity {
 
     @ElasticBinaryField
     private String binaryValue;
@@ -110,15 +105,6 @@ public class FullDocumentEntity {
     @ElasticTokenCountField
     private String tokenCountValue;
 
-    @ElasticNestedField
-    private InnerDocumentEntity nestedValue;
-
-    @ElasticObjectField
-    private InnerDocumentEntity objectValue;
-
-    @ElasticCustomJsonField(path = "/custom/mapping/test-custom-field.json")
-    private String customValue;
-
-    public FullDocumentEntity() {
+    public InnerDocumentEntity() {
     }
 }

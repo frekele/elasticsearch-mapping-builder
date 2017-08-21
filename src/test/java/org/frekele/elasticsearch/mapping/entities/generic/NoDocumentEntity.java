@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch.mapping.entities;
+package org.frekele.elasticsearch.mapping.entities.generic;
 
 public class NoDocumentEntity {
 
