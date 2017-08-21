@@ -14,7 +14,7 @@ cache:
 
 
 before_install:
-  - ls -lah ${HOME}/
+  - env
   - chmod +x .travis/*
   - .travis/install-coreutils.sh
   #- echo ${GPG_PUBLIC_KEYS} | ${HOME}/coreutils/bin/base64 -di > /tmp/frekele-pubkey.asc
