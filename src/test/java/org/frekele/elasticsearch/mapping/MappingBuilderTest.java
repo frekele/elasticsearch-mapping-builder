@@ -1,6 +1,5 @@
 package org.frekele.elasticsearch.mapping;
 
-import org.frekele.elasticsearch.mapping.entities.model.Book;
 import org.frekele.elasticsearch.mapping.entities.generic.FullDocumentEntity;
 import org.frekele.elasticsearch.mapping.entities.generic.IncorrectCustomJsonFieldEntity;
 import org.frekele.elasticsearch.mapping.entities.generic.NoDocumentEntity;
@@ -38,7 +37,7 @@ public class MappingBuilderTest {
 
     @Test
     public void validateWithoutErrorTest() throws Exception {
-        MappingBuilder mappingBuilder = new MappingBuilder(Book.class);
+        MappingBuilder mappingBuilder = new MappingBuilder(FullDocumentEntity.class);
         mappingBuilder.validateElasticDocument();
     }
 
