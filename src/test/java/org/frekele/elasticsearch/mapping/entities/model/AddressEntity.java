@@ -5,7 +5,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 
-public class Address {
+public class AddressEntity {
 
     @ElasticKeywordField
     private String postalCode;
@@ -18,6 +18,6 @@ public class Address {
     @ElasticLongField
     private Long number;
 
-    public Address() {
+    public AddressEntity() {
     }
 }

@@ -5,16 +5,16 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticObjectField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 
 import java.time.OffsetDateTime;
 
 @ElasticDocument("book")
-public class Book {
+public class BookEntity {
 
-    @ElasticLongField
-    private Long id;
+    @ElasticKeywordField
+    private String isbn;
 
     @ElasticTextField
     @ElasticKeywordField
@@ -30,8 +30,11 @@ public class Book {
     private Boolean active;
 
     @ElasticBinaryField
-    private String blob;
+    private String imageBlob;
 
-    public Book() {
+    @ElasticObjectField
+    private AuthorEntity author;
+
+    public BookEntity() {
     }
 }
