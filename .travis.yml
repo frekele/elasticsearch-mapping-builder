@@ -21,8 +21,6 @@ before_install:
   - gpg --import /tmp/frekele-pubkey.asc
   - gpg --import /tmp/frekele-privkey.asc
   - gpg --import-ownertrust /tmp/frekele-ownertrust.asc
-  - gpg --list-sigs
-  - gpg --list-secret-keys
   - export MVN_HOME=/tmp/maven-${MAVEN}
   - mkdir ${MVN_HOME}
   - export PATH=${MVN_HOME}/bin:$PATH
