@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch.mapping.entities;
+package org.frekele.elasticsearch.mapping.entities.model;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticCompletionField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;

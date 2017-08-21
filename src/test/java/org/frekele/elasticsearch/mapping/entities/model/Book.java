@@ -1,4 +1,4 @@
-package org.frekele.elasticsearch.mapping.entities;
+package org.frekele.elasticsearch.mapping.entities.model;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticBinaryField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
