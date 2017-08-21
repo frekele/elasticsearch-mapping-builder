@@ -1,26 +1,26 @@
 #!/bin/bash
 
-export FORCE_UNSAFE_CONFIGURE=1
+# Only install if HOME_CORE_UTILS cache directory exist.
+if [ ! -d "${HOME_CORE_UTILS}/bin" ]; then
+   export FORCE_UNSAFE_CONFIGURE=1
+   mkdir -p ${HOME_CORE_UTILS}
+   
+   echo "DOWNLOAD coreutils-${CORE_UTILS}!"
+   wget -qO- https://ftp.gnu.org/gnu/coreutils/coreutils-${CORE_UTILS_VERSION}.tar.xz -O /tmp/coreutils-${CORE_UTILS_VERSION}.tar.xz
+   tar -xf /tmp/coreutils-${CORE_UTILS_VERSION}.tar.xz -C /tmp/
+   chmod 777 -R /tmp/coreutils-${CORE_UTILS_VERSION}
+   
+   cd /tmp/coreutils-${CORE_UTILS_VERSION}
+   echo "CONFIGURE!"
+   ./configure --prefix=${HOME_CORE_UTILS}/ \
+               --libexecdir=${HOME_CORE_UTILS}/lib \
+               --enable-no-install-program=kill,uptime
 
-CORE_UTILS=8.27
+   echo "MAKE!"
+   make
+   
+   echo "MAKE INSTALL!"
+   make install
+fi
 
-echo "DOWNLOAD coreutils-${CORE_UTILS}!"
-wget -qO- https://ftp.gnu.org/gnu/coreutils/coreutils-${CORE_UTILS}.tar.xz -O /tmp/coreutils-${CORE_UTILS}.tar.xz
-tar -xf /tmp/coreutils-${CORE_UTILS}.tar.xz -C /tmp/
-chmod 777 -R /tmp/coreutils-${CORE_UTILS}
-mkdir -p ${HOME}/coreutils
-
-cd /tmp/coreutils-${CORE_UTILS}
-
-echo "CONFIGURE!"
-./configure --prefix=${HOME}/coreutils \
-           --libexecdir=${HOME}/coreutils/lib \
-           --enable-no-install-program=kill,uptime
-
-echo "MAKE!"
-make
-
-echo "MAKE INSTALL!"
-make install
-
-${HOME}/coreutils/bin/base64 --version
+${HOME_CORE_UTILS}/bin/base64 --version
