@@ -14,8 +14,8 @@ cache:
 
 before_install:
   #- echo ${GPG_PUBLIC_KEYS} | base64 --decode | tee frekele-pubkey.asc
-  - echo ${GPG_SECRET_KEYS} | base64 --decode | tee frekele-privkey.asc
-  - echo ${GPG_OWNERTRUST} | base64 --decode | tee frekele-ownertrust.asc
+  - echo ${GPG_SECRET_KEYS} | base64 --decode > frekele-privkey.asc
+  - echo ${GPG_OWNERTRUST} | base64 --decode > frekele-ownertrust.asc
   - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY}
   #- gpg --import frekele-pubkey.asc
   - gpg --import frekele-privkey.asc
