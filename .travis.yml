@@ -1,4 +1,3 @@
-dist: xenial
 language: java
 
 jdk:
@@ -17,10 +16,10 @@ cache:
 before_install:
   - chmod +x .travis/*
   - .travis/install-coreutils.sh
-  #- echo ${GPG_PUBLIC_KEYS} | base64 -di > /tmp/frekele-pubkey.asc
-  - echo ${GPG_SECRET_KEYS} | base64 -di > /tmp/frekele-privkey.asc
+  #- echo ${GPG_PUBLIC_KEYS} | ${HOME}/coreutils/bin/base64 -di > /tmp/frekele-pubkey.asc
+  - echo ${GPG_SECRET_KEYS} | ${HOME}/coreutils/bin/base64 -di > /tmp/frekele-privkey.asc
   - cat /tmp/frekele-privkey.asc
-  - echo ${GPG_OWNERTRUST} | base64 -di > /tmp/frekele-ownertrust.asc
+  - echo ${GPG_OWNERTRUST} | ${HOME}/coreutils/bin/base64 -di > /tmp/frekele-ownertrust.asc
   - cat /tmp/frekele-ownertrust.asc
   - gpg --keyserver pgp.mit.edu --recv-key ${FREKELE_GPGKEY}
   #- gpg --import /tmp/frekele-pubkey.asc
