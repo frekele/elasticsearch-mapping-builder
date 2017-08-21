@@ -786,60 +786,59 @@ public class MappingBuilder implements Serializable {
     }
 
     XContentBuilder innerBuild(boolean pretty) throws IOException {
-        if (this.getMapping() == null) {
-            this.setMapping(XContentFactory.jsonBuilder());
-            if (pretty) {
-                this.getMapping().prettyPrint();
-            }
-            //BEGIN
-            this.getMapping().startObject();
-            this.getMapping().startObject("mappings");
+        this.setMapping(XContentFactory.jsonBuilder());
+        if (pretty) {
+            this.getMapping().prettyPrint();
+        }
+        //BEGIN
+        this.getMapping().startObject();
+        this.getMapping().startObject("mappings");
 
-            for (Class clazz : this.getDocsClass()) {
-                ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
-                this.getMapping().startObject(elasticDocument.value());
+        for (Class clazz : this.getDocsClass()) {
+            ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
+            this.getMapping().startObject(elasticDocument.value());
 
-                //_parent
-                if (isNotEmpty(elasticDocument.parent())) {
-                    this.getMapping().startObject("_parent");
-                    this.getMapping().field("type", elasticDocument.parent());
-                    this.eagerGlobalOrdinals(elasticDocument.eagerGlobalOrdinalsParent());
-                    this.getMapping().endObject();
-                }
-
-                //_all
-                if (isValueEnabled(elasticDocument.enabledAll()) || isValueEnabled(elasticDocument.storeAll())) {
-                    this.getMapping().startObject("_all");
-                    if (isValueEnabled(elasticDocument.enabledAll())) {
-                        this.getMapping().field("enabled", elasticDocument.enabledAll().value());
-                    }
-                    if (isValueEnabled(elasticDocument.enabledAll())) {
-                        this.getMapping().field("store", elasticDocument.storeAll().value());
-                    }
-                    this.getMapping().endObject();
-                }
-
-                //_routing
-                if (isNotEmpty(elasticDocument.parent())) {
-                    this.getMapping().startObject("_routing");
-                    this.getMapping().field("required", elasticDocument.requiredRouting().value());
-                    this.getMapping().endObject();
-                }
-
-                this.dynamic(elasticDocument.dynamic());
-                this.includeInAll(elasticDocument.includeInAll());
-
-                Field[] fields = clazz.getDeclaredFields();
-                this.recursiveFields(fields, 0);
-
-                //ElasticDocument
+            //_parent
+            if (isNotEmpty(elasticDocument.parent())) {
+                this.getMapping().startObject("_parent");
+                this.getMapping().field("type", elasticDocument.parent());
+                this.eagerGlobalOrdinals(elasticDocument.eagerGlobalOrdinalsParent());
                 this.getMapping().endObject();
             }
-            //mappings
-            this.getMapping().endObject();
-            //END
+
+            //_all
+            if (isValueEnabled(elasticDocument.enabledAll()) || isValueEnabled(elasticDocument.storeAll())) {
+                this.getMapping().startObject("_all");
+                if (isValueEnabled(elasticDocument.enabledAll())) {
+                    this.getMapping().field("enabled", elasticDocument.enabledAll().value());
+                }
+                if (isValueEnabled(elasticDocument.enabledAll())) {
+                    this.getMapping().field("store", elasticDocument.storeAll().value());
+                }
+                this.getMapping().endObject();
+            }
+
+            //_routing
+            if (isNotEmpty(elasticDocument.parent())) {
+                this.getMapping().startObject("_routing");
+                this.getMapping().field("required", elasticDocument.requiredRouting().value());
+                this.getMapping().endObject();
+            }
+
+            this.dynamic(elasticDocument.dynamic());
+            this.includeInAll(elasticDocument.includeInAll());
+
+            Field[] fields = clazz.getDeclaredFields();
+            this.recursiveFields(fields, 0);
+
+            //ElasticDocument
             this.getMapping().endObject();
         }
+        //mappings
+        this.getMapping().endObject();
+        //END
+        this.getMapping().endObject();
+
         return this.getMapping();
     }
 
