@@ -10,7 +10,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.elasticsearch:elasticsearch:5.6.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.elasticsearch:elasticsearch:5.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:6.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-analyzers-common:6.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-backward-codecs:6.6.0" level="project" />
@@ -38,7 +38,7 @@
     <orderEntry type="library" name="Maven: com.tdunning:t-digest:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.hdrhistogram:HdrHistogram:2.1.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.8.2" level="project" />
-    <orderEntry type="library" name="Maven: org.elasticsearch:jna:4.4.0-1" level="project" />
+    <orderEntry type="library" name="Maven: org.elasticsearch:jna:4.4.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testng:testng:6.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.beust:jcommander:1.64" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.mockito:mockito-core:2.8.47" level="project" />
