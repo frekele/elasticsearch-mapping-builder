@@ -1,5 +1,8 @@
 #!/bin/bash
 
+CORE_UTILS_VERSION=8.27
+HOME_CORE_UTILS=${HOME}/coreutils
+
 # Only install if HOME_CORE_UTILS cache directory exist.
 if [ ! -d "${HOME_CORE_UTILS}/bin" ]; then
    export FORCE_UNSAFE_CONFIGURE=1
