@@ -24,6 +24,8 @@ before_install:
   - export MVN_HOME=/tmp/maven-${MAVEN}
   - mkdir ${MVN_HOME}
   - export PATH=${MVN_HOME}/bin:$PATH
+  - sudo apt-get install -qq jq
+  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
 
 install:
   - wget -qO- https://archive.apache.org/dist/maven/maven-3/${MAVEN}/binaries/apache-maven-${MAVEN}-bin.tar.gz | tar xz --strip 1 -C ${MVN_HOME}
@@ -37,6 +39,7 @@ before_cache:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r target/site/jacoco/jacoco.xml
 
 after_failure:
 
