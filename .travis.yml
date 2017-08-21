@@ -18,7 +18,7 @@ before_install:
   - wget -qO- https://ftp.gnu.org/gnu/coreutils/coreutils-8.27.tar.xz -O /tmp/coreutils-8.27.tar.xz
   - mkdir /tmp/coreutils-8.27 && tar -xf /tmp/coreutils-8.27.tar.xz -C /tmp/coreutils-8.27/
   - export FORCE_UNSAFE_CONFIGURE=1
-  - /tmp/coreutils-8.27/coreutils-${CORE_UTILS}/configure --prefix=${HOME}/coreutils --libexecdir=${HOME}/coreutils/lib --enable-no-install-program=kill,uptime && make && make install
+  - /tmp/coreutils-8.27/coreutils-8.27/configure --prefix=${HOME}/coreutils --libexecdir=${HOME}/coreutils/lib --enable-no-install-program=kill,uptime && make && make install
   - ${HOME}/coreutils/bin/base64 --version
   
   #- echo ${GPG_PUBLIC_KEYS} | base64 -di > /tmp/frekele-pubkey.asc
