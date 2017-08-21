@@ -2,7 +2,9 @@ package org.frekele.elasticsearch.mapping;
 
 import org.frekele.elasticsearch.mapping.entities.Book;
 import org.frekele.elasticsearch.mapping.entities.FullDocumentEntity;
+import org.frekele.elasticsearch.mapping.entities.IncorrectCustomJsonFieldEntity;
 import org.frekele.elasticsearch.mapping.entities.NoDocumentEntity;
+import org.frekele.elasticsearch.mapping.exceptions.InvalidCustomJsonException;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
 import org.frekele.elasticsearch.mapping.exceptions.MappingBuilderException;
 import org.testng.annotations.AfterMethod;
@@ -61,6 +63,10 @@ public class MappingBuilderTest {
         System.out.println(result.sourceAsString());
     }
 
-
+    @Test(expectedExceptions = InvalidCustomJsonException.class)
+    public void buildWithErrorElasticCustomJsonFieldTest() throws Exception {
+        MappingBuilder mappingBuilder = new MappingBuilder(IncorrectCustomJsonFieldEntity.class);
+        mappingBuilder.build();
+    }
 
 }

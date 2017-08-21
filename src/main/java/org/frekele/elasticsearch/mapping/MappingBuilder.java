@@ -37,6 +37,7 @@ import org.frekele.elasticsearch.mapping.annotations.values.FielddataFrequencyFi
 import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.annotations.values.IntValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
+import org.frekele.elasticsearch.mapping.exceptions.InvalidCustomJsonException;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
 import org.frekele.elasticsearch.mapping.exceptions.MappingBuilderException;
 import org.frekele.elasticsearch.mapping.exceptions.MaxRecursiveLevelClassException;
@@ -722,8 +723,12 @@ public class MappingBuilder implements Serializable {
 
     void addCustomJsonField(Field field) throws IOException {
         ElasticCustomJsonField elasticField = field.getAnnotation(ElasticCustomJsonField.class);
-        InputStream inputStream = this.getCustomJson(elasticField);
-        this.getMapping().rawField(field.getName(), inputStream, XContentType.JSON);
+        try {
+            InputStream inputStream = this.getCustomJson(elasticField);
+            this.getMapping().rawField(field.getName(), inputStream, XContentType.JSON);
+        } catch (Exception e) {
+            throw new InvalidCustomJsonException("Path into ElasticCustomJsonField is incorrect!", e);
+        }
     }
 
     InputStream getCustomJson(ElasticCustomJsonField elasticField) {
