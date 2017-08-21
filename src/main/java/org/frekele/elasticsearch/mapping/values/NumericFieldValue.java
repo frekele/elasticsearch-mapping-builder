@@ -33,8 +33,9 @@ public class NumericFieldValue {
     public NumericFieldValue() {
     }
 
-    public NumericFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost, BoolValue docValues, BoolValue ignoreMalformed,
-                             BoolValue index, String nullValue, BoolValue store, IntValue scalingFactor) {
+    public NumericFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost,
+                             BoolValue docValues, BoolValue ignoreMalformed, BoolValue index,
+                             String nullValue, BoolValue store, IntValue scalingFactor) {
         this.type = type;
         this.suffixName = suffixName;
         this.coerce = coerce;

@@ -34,8 +34,9 @@ public class DateFieldValue {
     public DateFieldValue() {
     }
 
-    public DateFieldValue(FieldType type, String suffixName, FloatValue boost, BoolValue docValues, String format, String locale,
-                          BoolValue ignoreMalformed, BoolValue includeInAll, BoolValue index, String nullValue, BoolValue store) {
+    public DateFieldValue(FieldType type, String suffixName, FloatValue boost, BoolValue docValues,
+                          String format, String locale, BoolValue ignoreMalformed, BoolValue includeInAll,
+                          BoolValue index, String nullValue, BoolValue store) {
         this.type = type;
         this.suffixName = suffixName;
         this.boost = boost;
