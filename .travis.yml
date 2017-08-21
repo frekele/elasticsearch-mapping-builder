@@ -7,16 +7,21 @@ jdk:
 
 env:
   - MAVEN=3.5.0
+  - CORE_UTILS=8.27
 
 cache:
   directories:
-    - $HOME/.m2
+    - ${HOME}/.m2
+    #- ${HOME}/coreutils
 
 
 before_install:
-  #- sudo apt-get update -qq
-  #- sudo apt-get upgrade -qq
-  - base64 --version
+  - wget -qO- https://ftp.gnu.org/gnu/coreutils/coreutils-${CORE_UTILS}.tar.xz -O /tmp/coreutils-${CORE_UTILS}.tar.xz
+  - tar -xf /tmp/coreutils-${CORE_UTILS}.tar.xz -C /tmp/
+  - export FORCE_UNSAFE_CONFIGURE=1
+  - /tmp/coreutils-${CORE_UTILS}/configure --prefix=${HOME}/coreutils --libexecdir=${HOME}/coreutils/lib --enable-no-install-program=kill,uptime && make && make install
+  - ${HOME}/coreutils/bin/base64 --version
+  
   #- echo ${GPG_PUBLIC_KEYS} | base64 -di > /tmp/frekele-pubkey.asc
   - echo ${GPG_SECRET_KEYS} | base64 -di > /tmp/frekele-privkey.asc
   - cat /tmp/frekele-privkey.asc
