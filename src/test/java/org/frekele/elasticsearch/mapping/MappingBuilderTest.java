@@ -1,9 +1,10 @@
 package org.frekele.elasticsearch.mapping;
 
 import org.frekele.elasticsearch.mapping.entities.Book;
-import org.frekele.elasticsearch.mapping.entities.NoBook;
-import org.frekele.elasticsearch.mapping.entities.Person;
+import org.frekele.elasticsearch.mapping.entities.FullDocumentEntity;
+import org.frekele.elasticsearch.mapping.entities.NoDocumentEntity;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
+import org.frekele.elasticsearch.mapping.exceptions.MappingBuilderException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,65 +27,37 @@ public class MappingBuilderTest {
 
     @Test
     public void isElasticDocumentTest() throws Exception {
-        boolean result = MappingBuilder.isElasticDocument(Book.class);
+        boolean result = MappingBuilder.isElasticDocument(FullDocumentEntity.class);
         assertEquals(result, true);
 
-        result = MappingBuilder.isElasticDocument(NoBook.class);
+        result = MappingBuilder.isElasticDocument(NoDocumentEntity.class);
         assertEquals(result, false);
     }
 
     @Test
-    public void validateElasticDocumentTestWithoutError() throws Exception {
+    public void validateWithoutErrorTest() throws Exception {
         MappingBuilder mappingBuilder = new MappingBuilder(Book.class);
         mappingBuilder.validateElasticDocument();
     }
 
     @Test(expectedExceptions = InvalidDocumentClassException.class)
-    public void validateElasticDocumentTestWithError() throws Exception {
-        MappingBuilder mappingBuilder = new MappingBuilder(NoBook.class);
+    public void validateWithErrorTest() throws Exception {
+        MappingBuilder mappingBuilder = new MappingBuilder(NoDocumentEntity.class);
+        mappingBuilder.validateElasticDocument();
+    }
+
+    @Test(expectedExceptions = MappingBuilderException.class)
+    public void validateWithErrorTest2() throws Exception {
+        MappingBuilder mappingBuilder = new MappingBuilder();
         mappingBuilder.validateElasticDocument();
     }
 
     @Test
-    public void sourceAsStringTestBook() throws Exception {
-        String expected = "{\"mappings\":{\"book\":{\"properties\":{\"id\":{\"type\":\"long\"},\"name\":{\"type\":\"text\"}}}}}";
-        MappingBuilder mappingBuilder = new MappingBuilder(Book.class);
-        String result = mappingBuilder.build(true).sourceAsString();
-        // assertEquals(result, expected);
-        //System.out.println(result);
-    }
-
-    @Test
-    public void sourceAsStringTestPerson() throws Exception {
-        MappingBuilder mappingBuilder = new MappingBuilder(Person.class);
-        String result = mappingBuilder.build(true).sourceAsString();
+    public void buildTest() throws Exception {
+        String expected = "{\"mappings\":{\"full\":{\"properties\":{\"binaryValue\":{\"type\":\"binary\"},\"booleanValue\":{\"type\":\"boolean\"},\"byteValue\":{\"type\":\"byte\"},\"completionValue\":{\"type\":\"completion\"},\"dateValue\":{\"type\":\"date\"},\"dateRangeValue\":{\"type\":\"date_range\"},\"doubleValue\":{\"type\":\"double\"},\"doubleRangeValue\":{\"type\":\"double_range\"},\"floatValue\":{\"type\":\"float\"},\"floatRangeValue\":{\"type\":\"float_range\"},\"geoPointValue\":{\"type\":\"geo_point\"},\"geoShapeValue\":{\"type\":\"geo_shape\"},\"halfFloatValue\":{\"type\":\"half_float\"},\"integerValue\":{\"type\":\"integer\"},\"integerRangeValue\":{\"type\":\"integer_range\"},\"ipValue\":{\"type\":\"ip\"},\"ipRangeValue\":{\"type\":\"ip_range\"},\"keywordValue\":{\"type\":\"keyword\"},\"longValue\":{\"type\":\"long\"},\"longRangeValue\":{\"type\":\"long_range\"},\"percolatorValue\":{\"type\":\"percolator\"},\"scaledFloatValue\":{\"type\":\"scaled_float\"},\"shortValue\":{\"type\":\"short\"},\"textValue\":{\"type\":\"text\"},\"tokenCountValue\":{\"type\":\"token_count\"},\"nestedValue\":{\"nested\":true,\"properties\":{\"binaryValue\":{\"type\":\"binary\"},\"booleanValue\":{\"type\":\"boolean\"},\"byteValue\":{\"type\":\"byte\"},\"completionValue\":{\"type\":\"completion\"},\"dateValue\":{\"type\":\"date\"},\"dateRangeValue\":{\"type\":\"date_range\"},\"doubleValue\":{\"type\":\"double\"},\"doubleRangeValue\":{\"type\":\"double_range\"},\"floatValue\":{\"type\":\"float\"},\"floatRangeValue\":{\"type\":\"float_range\"},\"geoPointValue\":{\"type\":\"geo_point\"},\"geoShapeValue\":{\"type\":\"geo_shape\"},\"halfFloatValue\":{\"type\":\"half_float\"},\"integerValue\":{\"type\":\"integer\"},\"integerRangeValue\":{\"type\":\"integer_range\"},\"ipValue\":{\"type\":\"ip\"},\"ipRangeValue\":{\"type\":\"ip_range\"},\"keywordValue\":{\"type\":\"keyword\"},\"longValue\":{\"type\":\"long\"},\"longRangeValue\":{\"type\":\"long_range\"},\"percolatorValue\":{\"type\":\"percolator\"},\"scaledFloatValue\":{\"type\":\"scaled_float\"},\"shortValue\":{\"type\":\"short\"},\"textValue\":{\"type\":\"text\"},\"tokenCountValue\":{\"type\":\"token_count\"}}},\"objectValue\":{\"properties\":{\"binaryValue\":{\"type\":\"binary\"},\"booleanValue\":{\"type\":\"boolean\"},\"byteValue\":{\"type\":\"byte\"},\"completionValue\":{\"type\":\"completion\"},\"dateValue\":{\"type\":\"date\"},\"dateRangeValue\":{\"type\":\"date_range\"},\"doubleValue\":{\"type\":\"double\"},\"doubleRangeValue\":{\"type\":\"double_range\"},\"floatValue\":{\"type\":\"float\"},\"floatRangeValue\":{\"type\":\"float_range\"},\"geoPointValue\":{\"type\":\"geo_point\"},\"geoShapeValue\":{\"type\":\"geo_shape\"},\"halfFloatValue\":{\"type\":\"half_float\"},\"integerValue\":{\"type\":\"integer\"},\"integerRangeValue\":{\"type\":\"integer_range\"},\"ipValue\":{\"type\":\"ip\"},\"ipRangeValue\":{\"type\":\"ip_range\"},\"keywordValue\":{\"type\":\"keyword\"},\"longValue\":{\"type\":\"long\"},\"longRangeValue\":{\"type\":\"long_range\"},\"percolatorValue\":{\"type\":\"percolator\"},\"scaledFloatValue\":{\"type\":\"scaled_float\"},\"shortValue\":{\"type\":\"short\"},\"textValue\":{\"type\":\"text\"},\"tokenCountValue\":{\"type\":\"token_count\"}}}}}}}";
+        MappingBuilder mappingBuilder = new MappingBuilder(FullDocumentEntity.class);
+        ObjectMapping result = mappingBuilder.build();
+         assertEquals(result.sourceAsString(), expected);
         System.out.println(result);
     }
-
-//    @Test
-//    public void getAnnotationTest() throws Exception {
-//        //Book book = new Book();
-//
-//        System.out.println("------Class Processing Begin---------");
-//
-//        System.out.println("Class: " + Book.class.getName());
-//        if (Book.class.isAnnotationPresent(ElasticDocument.class)) {
-//            ElasticDocument elasticDocument = Book.class.getAnnotation(ElasticDocument.class);
-//            System.out.println("ElasticDocument.value: " + elasticDocument.value());
-//
-//            System.out.println("------Field Processing---------");
-//            Field[] fields = Book.class.getDeclaredFields();
-//            for (Field field : fields) {
-//                if (field.isAnnotationPresent(ElasticField.class)) {
-//                    ElasticField elasticField = field.getAnnotation(ElasticField.class);
-//                    System.out.println("Field: " + field.getName());
-//                    System.out.println("elasticField.type:" + elasticField.type());
-//                }
-//            }
-//        }
-//        System.out.println("------Class Processing End---------");
-//
-//        assertEquals(0, 0);
-//    }
-
 }

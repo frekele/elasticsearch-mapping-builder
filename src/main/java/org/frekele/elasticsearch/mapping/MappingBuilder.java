@@ -66,10 +66,10 @@ public class MappingBuilder implements Serializable {
     private XContentBuilder mapping;
 
     public MappingBuilder(Class... documentClass) {
-        if (documentClass != null && documentClass.length > 0) {
-            this.docsClass = Arrays.asList(documentClass);
+        if (documentClass == null || documentClass.length == 0) {
+            throw new MappingBuilderException("A Document Class is required.");
         } else {
-            this.docsClass = new ArrayList<>(0);
+            this.docsClass = Arrays.asList(documentClass);
         }
         this.validateElasticDocument();
     }

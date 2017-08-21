@@ -1,6 +1,6 @@
 package org.frekele.elasticsearch.mapping.entities;
 
-public class NoBook {
+public class NoDocumentEntity {
 
     private Long id;
 
@@ -8,7 +8,7 @@ public class NoBook {
 
     private String description;
 
-    public NoBook() {
+    public NoDocumentEntity() {
     }
 
 }
