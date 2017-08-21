@@ -10,7 +10,7 @@ import static org.testng.Assert.*;
 /**
  * @author frekele - Leandro Kersting de Freitas
  */
-public class BookMappingBuilderTest {
+public class BookTest {
 
     @BeforeMethod
     public void setUp() throws Exception {
