@@ -4,6 +4,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticBinaryField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticByteField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticCompletionField;
+import org.frekele.elasticsearch.mapping.annotations.ElasticCustomJsonField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
@@ -114,6 +115,9 @@ public class FullDocumentEntity {
 
     @ElasticObjectField
     private InnerDocumentEntity objectValue;
+
+    @ElasticCustomJsonField(path = "/custom/mapping/test-custom-field.json")
+    private String customValue;
 
     public FullDocumentEntity() {
     }

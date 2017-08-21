@@ -26,13 +26,13 @@ public class BookMappingBuilderTest {
         MappingBuilder mappingBuilder = new MappingBuilder(Book.class);
         String result = mappingBuilder.build(true).sourceAsString();
         // assertEquals(result, expected);
-        //System.out.println(result);
+        System.out.println(result);
     }
 
     @Test
     public void sourceAsStringTestPerson() throws Exception {
         MappingBuilder mappingBuilder = new MappingBuilder(Person.class);
         String result = mappingBuilder.build(true).sourceAsString();
-        System.out.println(result);
+        //System.out.println(result);
     }
 }
