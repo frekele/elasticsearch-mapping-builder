@@ -36,6 +36,7 @@ import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
 import org.frekele.elasticsearch.mapping.annotations.values.IntValue;
 import org.frekele.elasticsearch.mapping.enums.FieldType;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
+import org.frekele.elasticsearch.mapping.exceptions.MappingBuilderException;
 import org.frekele.elasticsearch.mapping.exceptions.MaxRecursiveLevelClassException;
 import org.frekele.elasticsearch.mapping.values.DateFieldValue;
 import org.frekele.elasticsearch.mapping.values.NumericFieldValue;
@@ -709,7 +710,6 @@ public class MappingBuilder implements Serializable {
             try {
                 return Class.forName(((Class) type).getCanonicalName()).getDeclaredFields();
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
                 throw new InvalidDocumentClassException(e.getCause());
             }
         } else {
@@ -831,12 +831,17 @@ public class MappingBuilder implements Serializable {
         return this.mapping;
     }
 
-    public ObjectMapping build() throws IOException {
+    public ObjectMapping build() {
         return this.build(false);
     }
 
-    public ObjectMapping build(boolean pretty) throws IOException {
-        XContentBuilder xContentBuilder = this.innerBuild(pretty);
+    public ObjectMapping build(boolean pretty) {
+        XContentBuilder xContentBuilder;
+        try {
+            xContentBuilder = this.innerBuild(pretty);
+        } catch (IOException e) {
+            throw new MappingBuilderException(e);
+        }
         return new ObjectMapping(xContentBuilder);
     }
 
