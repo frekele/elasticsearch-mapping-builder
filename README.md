@@ -9,10 +9,10 @@ Example usage:
 
 ```
 @ElasticDocument("book")
-public class Book {
+public class BookEntity {
 
-    @ElasticLongField
-    private Long id;
+    @ElasticKeywordField
+    private String isbn;
 
     @ElasticTextField
     @ElasticKeywordField
@@ -28,10 +28,42 @@ public class Book {
     private Boolean active;
 
     @ElasticBinaryField
-    private String blob;
+    private String imageBlob;
 
-   .........
+    @ElasticObjectField
+    private AuthorEntity author;
+    
+    .........
 }
 ```
 
-TODO
+
+```
+@ElasticDocument(value = "author")
+public class AuthorEntity {
+
+    @ElasticLongField
+    private Long id;
+
+    @ElasticTextField
+    private String name;
+
+    @ElasticTextField
+    @ElasticKeywordField
+    private String artisticName;
+    
+    .........
+}
+```
+
+#### Build
+
+```
+MappingBuilder mappingBuilder = new MappingBuilder(BookEntity.class, AuthorEntity.class);
+ObjectMapping mapping = mappingBuilder.build();
+
+String jsonMapping = mapping.sourceAsString();
+//or
+XContentBuilder contentBuilder = mapping.source();
+
+```
