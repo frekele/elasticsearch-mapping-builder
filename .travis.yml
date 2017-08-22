@@ -1,7 +1,7 @@
 language: java
 
 jdk:
-  - openjdk8
+#  - openjdk8
   - oraclejdk8
 
 env:
@@ -49,7 +49,7 @@ deploy:
   -
     provider: script
     script:
-      - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml clean deploy -DskipTests=true -B -U
+      - .travis/deploy.sh
     skip_cleanup: true
     on:
       repo: frekele/elasticsearch-mapping-builder
@@ -58,9 +58,7 @@ deploy:
   -
     provider: script
     script:
-       - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml install -DskipTests=true -B -U
-      #- ${MVN_HOME}/bin/mvn --settings .travis/settings.xml versions:set -DnewVersion=$TRAVIS_TAG
-      #- ${MVN_HOME}/bin/mvn --settings .travis/settings.xml clean deploy -DskipTests=true -B -U
+      - .travis/deploy.sh
     skip_cleanup: true
     on:
       repo: frekele/elasticsearch-mapping-builder
