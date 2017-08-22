@@ -40,7 +40,6 @@ before_cache:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - java -cp ~/codacy-coverage-reporter-assembly-latest.jar com.codacy.CodacyCoverageReporter -l Java -r target/site/jacoco/jacoco.xml
-  - env
 
 after_failure:
 
@@ -59,9 +58,9 @@ deploy:
   -
     provider: script
     script:
-      - env
-      - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml versions:set -DnewVersion=${TRAVIS_TAG}
-      - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml clean deploy -DskipTests=true -B -U
+      - echo "teste"
+      - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml versions:set -DnewVersion=$TRAVIS_TAG
+      #- ${MVN_HOME}/bin/mvn --settings .travis/settings.xml clean deploy -DskipTests=true -B -U
     skip_cleanup: true
     on:
       repo: frekele/elasticsearch-mapping-builder
