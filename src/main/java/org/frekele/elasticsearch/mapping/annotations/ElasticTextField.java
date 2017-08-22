@@ -34,7 +34,12 @@ public @interface ElasticTextField {
 
     BoolValue fielddata() default @BoolValue(ignore = true);
 
-    FielddataFrequencyFilterValue fielddataFrequencyFilter() default @FielddataFrequencyFilterValue(ignore = true);
+    FielddataFrequencyFilterValue fielddataFrequencyFilter() default @FielddataFrequencyFilterValue(
+        ignore = true,
+        min = @FloatValue(ignore = true),
+        max = @FloatValue(ignore = true),
+        minSegmentSize = @IntValue(ignore = true)
+    );
 
     BoolValue includeInAll() default @BoolValue(ignore = true);
 

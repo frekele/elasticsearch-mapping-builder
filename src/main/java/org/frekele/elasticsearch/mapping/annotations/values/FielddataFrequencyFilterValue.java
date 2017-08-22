@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author frekele - Leandro Kersting de Freitas
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/fielddata.html#field-data-filtering">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -14,10 +15,10 @@ public @interface FielddataFrequencyFilterValue {
 
     boolean ignore() default false;
 
-    IntValue min() default @IntValue(ignore = true);
+    FloatValue min();
 
-    IntValue max() default @IntValue(ignore = true);
+    FloatValue max();
 
-    IntValue minSegmentSize() default @IntValue(ignore = true);
+    IntValue minSegmentSize();
 
 }
