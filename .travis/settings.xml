@@ -148,6 +148,21 @@
                     </snapshots>
                     <url>https://oss.sonatype.org/content/groups/staging/</url>
                 </repository>
+                <repository>
+                    <id>bintray</id>
+                    <name>Bintray repo (releases)</name>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                        <checksumPolicy>warn</checksumPolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                        <checksumPolicy>fail</checksumPolicy>
+                    </snapshots>
+                    <url>https://jcenter.bintray.com/</url>
+                </repository>
             </repositories>
         </profile>
 
