@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * A field of type token_count is really an integer field which accepts string values, analyzes them, then indexes the number of tokens in the string.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/token-count.html">elasticsearch token count field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/token-count.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

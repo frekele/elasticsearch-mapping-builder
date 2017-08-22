@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * A range of signed 64-bit integers with a minimum value of -263 and maximum of 263-1.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/range.html">elasticsearch long range field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/range.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

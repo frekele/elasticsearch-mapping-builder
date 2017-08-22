@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * A range of single-precision 32-bit IEEE 754 floating point values.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/range.html">elasticsearch float range field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/range.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

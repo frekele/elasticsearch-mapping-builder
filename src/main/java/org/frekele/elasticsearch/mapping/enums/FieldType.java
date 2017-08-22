@@ -1,7 +1,10 @@
 package org.frekele.elasticsearch.mapping.enums;
 
 /**
+ * Elasticsearch supports a number of different datatypes for the fields in a document.
+ *
  * @author frekele - Leandro Kersting de Freitas
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html">Site Elasticsearch Reference Guide.</a>
  */
 public enum FieldType {
 

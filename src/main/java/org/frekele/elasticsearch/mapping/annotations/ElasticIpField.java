@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * An ip field can index/store either IPv4 or IPv6 addresses.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ip.html">elasticsearch ip field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ip.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * A signed 16-bit integer with a minimum value of -32,768 and a maximum value of 32,767.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">elasticsearch short number field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/number.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  * A field to index full-text values, such as the body of an email or the description of a product.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/text.html">elasticsearch text field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/text.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

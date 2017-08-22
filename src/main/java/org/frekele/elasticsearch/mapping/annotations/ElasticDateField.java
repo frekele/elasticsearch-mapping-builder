@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  * - an integer representing seconds-since-the-epoch.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html">elasticsearch date field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/date.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

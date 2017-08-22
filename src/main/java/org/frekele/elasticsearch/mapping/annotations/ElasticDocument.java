@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Document Type.
+ * Elasticsearch Document Type.
  *
  * @author frekele - Leandro Kersting de Freitas
  */

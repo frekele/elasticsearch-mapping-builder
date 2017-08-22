@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  * - to sort documents by distance.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html">elasticsearch geo point field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

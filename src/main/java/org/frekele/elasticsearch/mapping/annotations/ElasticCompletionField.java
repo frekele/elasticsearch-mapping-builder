@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  * It is not meant for spell correction or did-you-mean functionality like the term or phrase suggesters.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html">elasticsearch completion field</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-completion.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
