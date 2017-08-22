@@ -13,7 +13,7 @@ cache:
 
 
 before_install:
-  - chmod +x .travis/* 
+  - chmod +x .travis/*
   - echo ${GPG_PUBLIC_KEYS}  | base64 --decode > /tmp/frekele-pubkey.asc
   - echo ${GPG_PRIVATE_KEYS} | base64 --decode > /tmp/frekele-privkey.asc
   - echo ${GPG_OWNERTRUST}   | base64 --decode > /tmp/frekele-ownertrust.asc
@@ -58,8 +58,8 @@ deploy:
   -
     provider: script
     script:
-      - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml org.codehaus.mojo:versions-maven-plugin:2.4:set -DnewVersion=${TRAVIS_TAG}
-      - ${MVN_HOME}/bin/mvn clean deploy --settings .travis/settings.xml -B -U
+      - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml versions:set -DnewVersion=${TRAVIS_TAG}
+      - ${MVN_HOME}/bin/mvn clean deploy --settings .travis/settings.xml -DskipTests=true -B -U
     skip_cleanup: true
     on:
       repo: frekele/elasticsearch-mapping-builder
