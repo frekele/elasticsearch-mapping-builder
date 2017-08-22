@@ -25,8 +25,9 @@ public class BookTest {
     public void buildBookTest() throws Exception {
         String expected = "{\"mappings\":{\"book\":{\"properties\":{\"isbn\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"description\":{\"type\":\"text\"},\"releaseDate\":{\"type\":\"date\"},\"active\":{\"type\":\"boolean\"},\"imageBlob\":{\"type\":\"binary\"},\"author\":{\"properties\":{\"id\":{\"type\":\"long\"},\"name\":{\"type\":\"text\"},\"artisticName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"address\":{\"nested\":true,\"properties\":{\"postalCode\":{\"type\":\"keyword\"},\"street\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"},\"completion\":{\"type\":\"completion\"}}},\"number\":{\"type\":\"long\"}}}}}}}}}";
         MappingBuilder mappingBuilder = new MappingBuilder(BookEntity.class);
-        String result = mappingBuilder.build().sourceAsString();
-        assertEquals(result, expected);
-        System.out.println(result);
+        ObjectMapping result = mappingBuilder.build();
+        assertEquals(result.sourceAsString(), expected);
+        //System.out.println(result.sourceAsString());
+        System.out.println(mappingBuilder.build(true).sourceAsString());
     }
 }

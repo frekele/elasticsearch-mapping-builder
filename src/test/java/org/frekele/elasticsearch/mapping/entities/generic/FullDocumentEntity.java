@@ -119,6 +119,11 @@ public class FullDocumentEntity {
     @ElasticCustomJsonField(path = "/custom/mapping/test-custom-field.json")
     private String customValue;
 
+    @ElasticTextField
+    @ElasticKeywordField
+    @ElasticCompletionField
+    private String multiFieldValue;
+
     public FullDocumentEntity() {
     }
 }

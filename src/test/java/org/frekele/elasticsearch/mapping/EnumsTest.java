@@ -32,7 +32,7 @@ public class EnumsTest {
     public void DateFormatTest() throws Exception {
         DateFormat[] dateFormats = DateFormat.values();
         for (DateFormat dateFormat : dateFormats) {
-            System.out.println(dateFormat);
+            System.out.println(dateFormat.getName());
         }
     }
 }

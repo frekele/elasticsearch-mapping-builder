@@ -25,8 +25,9 @@ public class ProductTest {
     public void buildProductTest() throws Exception {
         String expected = "{\"mappings\":{\"product\":{\"properties\":{\"id\":{\"type\":\"long\"},\"size\":{\"type\":\"integer\"},\"height\":{\"type\":\"float\"},\"width\":{\"type\":\"float\"},\"depth\":{\"type\":\"float\"},\"price\":{\"type\":\"double\"}}}}}";
         MappingBuilder mappingBuilder = new MappingBuilder(ProductEntity.class);
-        String result = mappingBuilder.build().sourceAsString();
-        assertEquals(result, expected);
-        System.out.println(result);
+        ObjectMapping result = mappingBuilder.build();
+        assertEquals(result.sourceAsString(), expected);
+        //System.out.println(result.sourceAsString());
+        System.out.println(mappingBuilder.build(true).sourceAsString());
     }
 }
