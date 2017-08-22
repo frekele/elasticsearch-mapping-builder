@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  * It should be used when either the data being indexed or the queries being executed contain shapes other than just points.
  *
  * @author frekele - Leandro Kersting de Freitas
- * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html">Site Elasticsearch Reference Guide.</a>
+ * @see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-shape.html">Site Elasticsearch Reference Guide.</a>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
