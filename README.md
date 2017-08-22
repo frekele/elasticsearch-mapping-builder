@@ -11,12 +11,12 @@ Maven:
 <dependency>
     <groupId>org.frekele.elasticsearch</groupId>
     <artifactId>elasticsearch-mapping-builder</artifactId>
-    <version>1.0.0.Alpha1</version>
+    <version>1.0.0.Beta1</version>
 </dependency>
 ```
 Gradle:
 ```
-compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.0.Alpha1'
+compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.0.Beta1'
 ```
 
 
