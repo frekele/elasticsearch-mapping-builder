@@ -12,6 +12,16 @@
     </servers>
     <profiles>
         <profile>
+            <id>ossrh</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+            </properties>
+        </profile>
+        <profile>
             <id>standard-with-extra-repos</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -164,18 +174,6 @@
                     <url>https://jcenter.bintray.com/</url>
                 </repository>
             </repositories>
-        </profile>
-
-
-        <profile>
-            <id>ossrh</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <gpg.executable>gpg</gpg.executable>
-                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
-            </properties>
         </profile>
     </profiles>
 </settings>
