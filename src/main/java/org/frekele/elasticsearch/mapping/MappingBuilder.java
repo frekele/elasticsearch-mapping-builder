@@ -732,7 +732,8 @@ public class MappingBuilder implements Serializable {
     }
 
     InputStream getCustomJson(ElasticCustomJsonField elasticField) {
-        return ClassLoader.class.getResourceAsStream(elasticField.path());
+        Class classLoader = elasticField.classLoader();
+        return classLoader.getResourceAsStream(elasticField.path());
     }
 
     Field[] getInnerFields(Field field) {

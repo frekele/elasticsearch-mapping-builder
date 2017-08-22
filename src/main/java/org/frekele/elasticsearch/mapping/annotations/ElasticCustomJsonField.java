@@ -16,4 +16,5 @@ public @interface ElasticCustomJsonField {
 
     String path();
 
+    Class classLoader() default ClassLoader.class;
 }
