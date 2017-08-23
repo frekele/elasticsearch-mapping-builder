@@ -59,6 +59,7 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(0.2f),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
+        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -109,6 +110,7 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
+        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -131,6 +133,7 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
+        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -171,6 +174,7 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
+        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -183,6 +187,7 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
+        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -244,6 +249,7 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
+        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -271,6 +277,7 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
+        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true),
@@ -284,6 +291,7 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
+        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)

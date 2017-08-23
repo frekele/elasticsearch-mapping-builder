@@ -19,10 +19,14 @@ public class PersonEntity {
     @ElasticKeywordField
     private String name;
 
-    @ElasticTextField(copyTo = {"name"})
+    @ElasticTextField
+    @ElasticKeywordField
+    private String fullName;
+
+    @ElasticTextField(copyTo = {"name", "fullName"})
     private String fistName;
 
-    @ElasticTextField(copyTo = {"name"})
+    @ElasticTextField(copyTo = {"fullName"})
     private String lastName;
 
     @ElasticObjectField
