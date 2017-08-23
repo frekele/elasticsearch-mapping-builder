@@ -27,8 +27,8 @@ public class EmployeeTest {
         String expected = "{\"mappings\":{\"person\":{\"properties\":{\"id\":{\"type\":\"long\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"fullName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"fistName\":{\"type\":\"text\",\"copy_to\":[\"name\",\"fullName\"]},\"lastName\":{\"type\":\"text\",\"copy_to\":\"fullName\"},\"multipleAddress\":{\"properties\":{\"postalCode\":{\"type\":\"keyword\"},\"street\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"},\"completion\":{\"type\":\"completion\"}}},\"number\":{\"type\":\"long\"}}}}},\"employee\":{\"_parent\":{\"type\":\"person\"},\"properties\":{\"id\":{\"type\":\"long\"},\"documentNumber\":{\"type\":\"keyword\"},\"registerNumber\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}}}}}}";
         MappingBuilderImpl mappingBuilder = new MappingBuilderImpl();
         ObjectMapping result = mappingBuilder.build(PersonEntity.class, EmployeeEntity.class);
-        assertEquals(result.sourceAsString(), expected);
+        assertEquals(result.getContentAsString(), expected);
         //System.out.println(result.sourceAsString());
-        System.out.println(mappingBuilder.build(true, PersonEntity.class, EmployeeEntity.class).sourceAsString());
+        System.out.println(mappingBuilder.build(true, PersonEntity.class, EmployeeEntity.class).getContentAsString());
     }
 }

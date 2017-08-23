@@ -20,12 +20,12 @@ public class ObjectMapping implements Serializable {
         this.mapping = mapping;
     }
 
-    public XContentBuilder source() throws IOException {
+    public XContentBuilder getContent() throws IOException {
         return this.mapping;
     }
 
-    public String sourceAsString() throws IOException {
-        return this.source().string();
+    public String getContentAsString() throws IOException {
+        return this.getContent().string();
     }
 
 }

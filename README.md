@@ -30,9 +30,10 @@ MappingBuilder mappingBuilder = new MappingBuilderImpl();
 
 ObjectMapping mapping = mappingBuilder.build(BookEntity.class, AuthorEntity.class);
 
-String jsonMapping = mapping.sourceAsString();
+String jsonMapping = mapping.getContentAsString();
 //or
-XContentBuilder contentBuilder = mapping.source();
+XContentBuilder contentBuilder = mapping.getContent();
+String jsonMapping =contentBuilder.string();
 ```
 
 #### Example usage:

@@ -78,9 +78,9 @@ public class MappingBuilderTest {
             ",\"multiFieldValue\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"},\"completion\":{\"type\":\"completion\"}}}}}}}";
         MappingBuilder mappingBuilder = new MappingBuilderImpl();
         ObjectMapping result = mappingBuilder.build(FullDocumentEntity.class);
-        assertEquals(result.sourceAsString(), expected);
+        assertEquals(result.getContentAsString(), expected);
         //System.out.println(result.sourceAsString());
-        System.out.println(mappingBuilder.build(true, FullDocumentEntity.class).sourceAsString());
+        System.out.println(mappingBuilder.build(true, FullDocumentEntity.class).getContentAsString());
     }
 
     @Test
@@ -89,9 +89,9 @@ public class MappingBuilderTest {
             ",\"multiFieldValue\":{\"type\":\"text\",\"analyzer\":\"myAnalyzer\",\"boost\":1.0,\"eager_global_ordinals\":true,\"fielddata\":true,\"fielddata_frequency_filter\":{\"min\":0.001,\"max\":0.1,\"min_segment_size\":500},\"include_in_all\":true,\"index\":true,\"norms\":true,\"position_increment_gap\":100,\"store\":true,\"search_analyzer\":\"mySearchAnalyzer\",\"search_quote_analyzer\":\"my_analyzer\",\"similarity\":\"BM25\",\"term_vector\":\"no\",\"copy_to\":\"anotherField\",\"fields\":{\"keyword\":{\"type\":\"keyword\",\"analyzer\":\"myAnalyzer\",\"boost\":1.0,\"doc_values\":true,\"eager_global_ordinals\":true,\"ignore_above\":350,\"include_in_all\":true,\"index\":true,\"index_options\":\"docs\",\"norms\":true,\"null_value\":\"NULL\",\"store\":true,\"similarity\":\"BM25\",\"normalizer\":\"my_normalizer\"},\"completion\":{\"type\":\"completion\",\"analyzer\":\"myAnalyzer\",\"search_analyzer\":\"mySearchAnalyzer\",\"preserve_separators\":true,\"preserve_position_increments\":true,\"max_input_length\":50}}}}}}}";
         MappingBuilder mappingBuilder = new MappingBuilderImpl();
         ObjectMapping result = mappingBuilder.build(FullDocumentTwoEntity.class);
-        assertEquals(result.sourceAsString(), expected);
+        assertEquals(result.getContentAsString(), expected);
         //System.out.println(result.sourceAsString());
-        System.out.println(mappingBuilder.build(true, FullDocumentTwoEntity.class).sourceAsString());
+        System.out.println(mappingBuilder.build(true, FullDocumentTwoEntity.class).getContentAsString());
     }
 
     @Test
@@ -99,9 +99,9 @@ public class MappingBuilderTest {
         String expected = "{\"mappings\":{\"my_doc_type\":{\"_parent\":{\"type\":\"my_parent_doc_type\",\"eager_global_ordinals\":true},\"_all\":{\"enabled\":true,\"store\":true},\"_routing\":{\"required\":true},\"dynamic\":true,\"include_in_all\":true,\"properties\":{\"id\":{\"type\":\"long\"}}}}}";
         MappingBuilder mappingBuilder = new MappingBuilderImpl();
         ObjectMapping result = mappingBuilder.build(ParentDocumentEntity.class);
-        assertEquals(result.sourceAsString(), expected);
+        assertEquals(result.getContentAsString(), expected);
         //System.out.println(result.sourceAsString());
-        System.out.println(mappingBuilder.build(true, ParentDocumentEntity.class).sourceAsString());
+        System.out.println(mappingBuilder.build(true, ParentDocumentEntity.class).getContentAsString());
     }
 
 }
