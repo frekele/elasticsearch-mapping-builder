@@ -6,6 +6,15 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/778eee87938f43ca92a94b7b613a0891)](https://www.codacy.com/app/frekele/elasticsearch-mapping-builder?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=frekele/elasticsearch-mapping-builder&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/778eee87938f43ca92a94b7b613a0891)](https://www.codacy.com/app/frekele/elasticsearch-mapping-builder?utm_source=github.com&utm_medium=referral&utm_content=frekele/elasticsearch-mapping-builder&utm_campaign=Badge_Coverage)
 
+Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html](https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html)
+
+#### Compatibility:
+
+| Elasticsearch Mapping Builder | Elasticsearch |
+| ------------------------------| ------------- |
+| Version: 1.1.0                | 5.x.x         |
+
+
 #### Maven dependency:
 ```
 <dependency>
