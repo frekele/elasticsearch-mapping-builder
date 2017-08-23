@@ -59,7 +59,7 @@ import java.util.List;
 /**
  * @author frekele - Leandro Kersting de Freitas
  */
-public class MappingBuilder implements Serializable {
+public class MappingBuilderImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -69,7 +69,7 @@ public class MappingBuilder implements Serializable {
 
     private XContentBuilder mapping;
 
-    public MappingBuilder(Class... documentClass) {
+    public MappingBuilderImpl(Class... documentClass) {
         if (documentClass == null || documentClass.length == 0) {
             throw new MappingBuilderException("A Document Class is required.");
         } else {
