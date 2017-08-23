@@ -858,7 +858,7 @@ public class MappingBuilderImpl implements MappingBuilder {
             }
 
             //_routing
-            if (isNotEmpty(elasticDocument.parent())) {
+            if (isValueEnabled(elasticDocument.requiredRouting())) {
                 this.getMapping().startObject("_routing");
                 this.getMapping().field("required", elasticDocument.requiredRouting().value());
                 this.getMapping().endObject();
