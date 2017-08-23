@@ -74,7 +74,7 @@ public class AuthorEntity {
 #### Build
 
 ```
-MappingBuilder mappingBuilder = new MappingBuilder(BookEntity.class, AuthorEntity.class);
+MappingBuilder mappingBuilder = new MappingBuilderImpl(BookEntity.class, AuthorEntity.class);
 ObjectMapping mapping = mappingBuilder.build();
 
 String jsonMapping = mapping.sourceAsString();
