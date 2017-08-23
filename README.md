@@ -12,7 +12,7 @@ Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch
 
 | Elasticsearch Mapping Builder | Elasticsearch          |
 | ------------------------------| ---------------------- |
-| Version: 1.1.0                | Version: 5.x.x         |
+| Version: 1.0.0                | Version: 5.x.x         |
 
 
 #### Maven dependency:
