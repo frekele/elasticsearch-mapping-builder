@@ -1,6 +1,7 @@
 package org.frekele.elasticsearch.mapping.entities.model;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
+import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticObjectField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
@@ -15,7 +16,14 @@ public class PersonEntity {
     private Long id;
 
     @ElasticTextField
+    @ElasticKeywordField
     private String name;
+
+    @ElasticTextField(copyTo = {"name"})
+    private String fistName;
+
+    @ElasticTextField(copyTo = {"name"})
+    private String lastName;
 
     @ElasticObjectField
     private List<AddressEntity> multipleAddress;
