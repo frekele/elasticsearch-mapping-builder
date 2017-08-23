@@ -5,6 +5,11 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Elastic Mapping Builder, XContentBuilder.
+ *
+ * @author frekele - Leandro Kersting de Freitas
+ */
 public class ObjectMapping implements Serializable {
 
     private static final long serialVersionUID = 1L;

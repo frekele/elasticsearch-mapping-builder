@@ -56,6 +56,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Elastic Mapping Builder, Build Entity to Json Object.
+ *
  * @author frekele - Leandro Kersting de Freitas
  */
 public class MappingBuilderImpl implements MappingBuilder {
