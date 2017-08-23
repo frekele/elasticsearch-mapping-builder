@@ -857,7 +857,7 @@ public class MappingBuilderImpl implements MappingBuilder {
                 if (isValueEnabled(elasticDocument.enabledAll())) {
                     this.getMapping().field("enabled", elasticDocument.enabledAll().value());
                 }
-                if (isValueEnabled(elasticDocument.enabledAll())) {
+                if (isValueEnabled(elasticDocument.storeAll())) {
                     this.getMapping().field("store", elasticDocument.storeAll().value());
                 }
                 this.getMapping().endObject();
