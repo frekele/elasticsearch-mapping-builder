@@ -1,15 +1,12 @@
-package org.frekele.elasticsearch.mapping.entities.model;
+package org.frekele.elasticsearch.mapping.entities.generic;
 
 import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticObjectField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 
-import java.util.List;
-
-@ElasticDocument(value = "person")
-
-public class PersonEntity {
+@ElasticDocument("recursive_doc")
+public class RecursiveErrorDocumentEntity {
 
     @ElasticLongField
     private Long id;
@@ -17,9 +14,11 @@ public class PersonEntity {
     @ElasticTextField
     private String name;
 
+    //Validate the loop with exception.
     @ElasticObjectField
-    private List<AddressEntity> multipleAddress;
+    private RecursiveErrorDocumentEntity recursiveDocument;
 
-    public PersonEntity() {
+    public RecursiveErrorDocumentEntity() {
     }
+
 }
