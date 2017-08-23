@@ -38,6 +38,7 @@ String jsonMapping =contentBuilder.string();
 
 #### Example usage:
 
+**Book:**
 ```
 @Inject
 MappingBuilder mappingBuilder;
@@ -94,6 +95,7 @@ public class AuthorEntity {
 }
 ```
 
+**Person parent and Employee:**
 ```
 @Inject
 MappingBuilder mappingBuilder;
