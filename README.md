@@ -10,9 +10,9 @@ Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch
 
 #### Compatibility:
 
-| Elasticsearch Mapping Builder | Elasticsearch |
-| ------------------------------| ------------- |
-| Version: 1.1.0                | 5.x.x         |
+| Elasticsearch Mapping Builder | Elasticsearch          |
+| ------------------------------| ---------------------- |
+| Version: 1.1.0                | Version: 5.x.x         |
 
 
 #### Maven dependency:
