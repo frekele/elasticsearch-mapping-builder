@@ -6,7 +6,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/778eee87938f43ca92a94b7b613a0891)](https://www.codacy.com/app/frekele/elasticsearch-mapping-builder?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=frekele/elasticsearch-mapping-builder&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/778eee87938f43ca92a94b7b613a0891)](https://www.codacy.com/app/frekele/elasticsearch-mapping-builder?utm_source=github.com&utm_medium=referral&utm_content=frekele/elasticsearch-mapping-builder&utm_campaign=Badge_Coverage)
 
-Maven:
+#### Maven dependency:
 ```
 <dependency>
     <groupId>org.frekele.elasticsearch</groupId>
@@ -14,7 +14,8 @@ Maven:
     <version>1.0.0.Beta1</version>
 </dependency>
 ```
-Gradle:
+
+#### Gradle dependency:
 ```
 compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.0.Beta1'
 ```
@@ -552,7 +553,7 @@ private String multiFieldValue;
 
 ## License
 ```
-   Copyright © 2017 {frekele Leandro Kersting de Freitas}
+   Copyright © 2017 - @frekele<Leandro Kersting de Freitas>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
