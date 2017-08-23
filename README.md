@@ -594,7 +594,7 @@ private InnerDocumentEntity objectValue;
 private String customValue;
 ```
 
-###### Multiple Field
+###### Multiple Field (The first annotation is the main field!)
 ```
 @ElasticTextField(
         suffixName = "text",
