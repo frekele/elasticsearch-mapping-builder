@@ -594,7 +594,7 @@ private InnerDocumentEntity objectValue;
 private String customValue;
 ```
 
-###### ElasticTextField
+###### Multiple Field
 ```
 @ElasticTextField(
         suffixName = "text",
