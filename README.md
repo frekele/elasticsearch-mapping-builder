@@ -28,7 +28,7 @@ MappingBuilder mappingBuilder;
 //or
 MappingBuilder mappingBuilder = new MappingBuilderImpl();
 
-ObjectMapping mapping = mappingBuilder.build(BookEntity.class, AuthorEntity.class);
+ObjectMapping mapping = mappingBuilder.build(MyEntity1.class, MyEntity2.class, MyEntity3.class);
 
 String jsonMapping = mapping.getContentAsString();
 //or
@@ -37,6 +37,15 @@ String jsonMapping =contentBuilder.string();
 ```
 
 #### Example usage:
+
+```
+@Inject
+MappingBuilder mappingBuilder;
+
+public String getMapping() {
+    return mappingBuilder.build(BookEntity.class, AuthorEntity.class).getContentAsString();
+}
+```
 
 ```
 @ElasticDocument("book")
