@@ -45,6 +45,7 @@ public class BookEntity {
 
     @ElasticTextField
     @ElasticKeywordField
+    @ElasticCompletionField
     private String name;
 
     @ElasticTextField
@@ -83,6 +84,8 @@ public class AuthorEntity {
     .........
 }
 ```
+
+#### Annotations parameters:
 
 ###### ElasticDocument
 ```
