@@ -43,7 +43,7 @@ String jsonMapping =contentBuilder.string();
 MappingBuilder mappingBuilder;
 
 public String getMapping() {
-    return mappingBuilder.build(BookEntity.class, AuthorEntity.class).getContentAsString();
+    return mappingBuilder.build(BookEntity.class).getContentAsString();
 }
 ```
 
@@ -76,9 +76,7 @@ public class BookEntity {
     
     .........
 }
-```
 
-```
 @ElasticDocument(value = "author")
 public class AuthorEntity {
 
@@ -92,6 +90,74 @@ public class AuthorEntity {
     @ElasticKeywordField
     private String artisticName;
     
+    .........
+}
+```
+
+```
+@Inject
+MappingBuilder mappingBuilder;
+
+public String getMapping() {
+    return mappingBuilder.build(PersonEntity.class, EmployeeEntity.class).getContentAsString();
+}
+```
+
+```
+public class AddressEntity {
+
+    @ElasticKeywordField
+    private String postalCode;
+
+    @ElasticTextField
+    @ElasticKeywordField
+    @ElasticCompletionField
+    private String street;
+
+    @ElasticLongField
+    private Long number;
+
+    .........
+}
+
+public class PersonEntity {
+
+    @ElasticLongField
+    private Long id;
+
+    @ElasticTextField
+    @ElasticKeywordField
+    private String name;
+
+    @ElasticTextField
+    @ElasticKeywordField
+    private String fullName;
+
+    @ElasticTextField(copyTo = {"name", "fullName"})
+    private String fistName;
+
+    @ElasticTextField(copyTo = {"fullName"})
+    private String lastName;
+
+    @ElasticObjectField
+    private List<AddressEntity> multipleAddress;
+
+    .........
+}
+
+@ElasticDocument(value = "employee", parent = "person")
+public class EmployeeEntity {
+
+    @ElasticLongField
+    private Long id;
+
+    @ElasticKeywordField
+    private String documentNumber;
+
+    @ElasticTextField
+    @ElasticKeywordField
+    private String registerNumber;
+
     .........
 }
 ```
