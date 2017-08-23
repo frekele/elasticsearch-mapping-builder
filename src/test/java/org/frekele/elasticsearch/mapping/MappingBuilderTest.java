@@ -4,6 +4,7 @@ import org.frekele.elasticsearch.mapping.entities.generic.FullDocumentEntity;
 import org.frekele.elasticsearch.mapping.entities.generic.FullDocumentTwoEntity;
 import org.frekele.elasticsearch.mapping.entities.generic.IncorrectCustomJsonFieldEntity;
 import org.frekele.elasticsearch.mapping.entities.generic.NoDocumentEntity;
+import org.frekele.elasticsearch.mapping.entities.generic.ParentDocumentEntity;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidCustomJsonException;
 import org.frekele.elasticsearch.mapping.exceptions.InvalidDocumentClassException;
 import org.frekele.elasticsearch.mapping.exceptions.MappingBuilderException;
@@ -83,6 +84,16 @@ public class MappingBuilderTest {
         assertEquals(result.sourceAsString(), expected);
         //System.out.println(result.sourceAsString());
         System.out.println(mappingBuilder.build(true, FullDocumentTwoEntity.class).sourceAsString());
+    }
+
+    @Test
+    public void buildTest3() throws Exception {
+        String expected = "{\"mappings\":{\"my_doc_type\":{\"_parent\":{\"type\":\"my_parent_doc_type\",\"eager_global_ordinals\":true},\"_all\":{\"enabled\":true,\"store\":true},\"_routing\":{\"required\":true},\"dynamic\":true,\"include_in_all\":true,\"properties\":{\"id\":{\"type\":\"long\"}}}}}";
+        MappingBuilderImpl mappingBuilder = new MappingBuilderImpl();
+        ObjectMapping result = mappingBuilder.build(ParentDocumentEntity.class);
+        assertEquals(result.sourceAsString(), expected);
+        //System.out.println(result.sourceAsString());
+        System.out.println(mappingBuilder.build(true, ParentDocumentEntity.class).sourceAsString());
     }
 
 }
