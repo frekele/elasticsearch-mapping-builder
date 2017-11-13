@@ -16,7 +16,7 @@ Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch
 
 
 #### Maven dependency:
-```
+```xml
 <dependency>
     <groupId>org.frekele.elasticsearch</groupId>
     <artifactId>elasticsearch-mapping-builder</artifactId>
@@ -25,13 +25,13 @@ Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch
 ```
 
 #### Gradle dependency:
-```
+```gradle
 compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.0'
 ```
 
 #### Build
 
-```
+```java
 @Inject
 MappingBuilder mappingBuilder;
 //or
@@ -48,7 +48,7 @@ String jsonMapping =contentBuilder.string();
 #### Example usage:
 
 **Book:**
-```
+```java
 @Inject
 MappingBuilder mappingBuilder;
 
@@ -57,7 +57,7 @@ public String getMapping() {
 }
 ```
 
-```
+```java
 @ElasticDocument("book")
 public class BookEntity {
 
@@ -105,7 +105,7 @@ public class AuthorEntity {
 ```
 
 **Person parent and Employee:**
-```
+```java
 @Inject
 MappingBuilder mappingBuilder;
 
@@ -114,7 +114,7 @@ public String getMapping() {
 }
 ```
 
-```
+```java
 public class AddressEntity {
 
     @ElasticKeywordField
@@ -176,7 +176,7 @@ public class EmployeeEntity {
 #### Annotations parameters:
 
 ###### ElasticDocument
-```
+```java
 @ElasticDocument(
     value = "my_doc_type",
     dynamic = @BoolValue(true),
@@ -196,7 +196,7 @@ public class MyDocumentEntity {
 
 
 ###### ElasticBinaryField
-```
+```java
 @ElasticBinaryField(
         suffixName = "binary",
         docValues = @BoolValue(true),
@@ -205,7 +205,7 @@ private String binaryValue;
 ```
 
 ###### ElasticBooleanField
-```
+```java
 @ElasticBooleanField(
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
@@ -216,7 +216,7 @@ private Boolean booleanValue;
 ```
 
 ###### ElasticByteField
-```
+```java
 @ElasticByteField(
         suffixName = "byte",
         coerce = @BoolValue(true),
@@ -232,7 +232,7 @@ private Byte byteValue;
 ```
 
 ###### ElasticCompletionField
-```
+```java
 @ElasticCompletionField(
         suffixName = "completion",
         analyzer = "myAnalyzer",
@@ -245,7 +245,7 @@ private String completionValue;
 ```
 
 ###### ElasticDateField
-```
+```java
 @ElasticDateField(
         suffixName = "date",
         boost = @FloatValue(1),
@@ -262,7 +262,7 @@ private Date dateValue;
 ```
 
 ###### ElasticDateRangeField
-```
+```java
 @ElasticDateRangeField(
         suffixName = "dateRange",
         boost = @FloatValue(1),
@@ -279,7 +279,7 @@ private Date dateRangeValue;
 ```
 
 ###### ElasticDoubleField
-```
+```java
 @ElasticDoubleField(
         suffixName = "double",
         coerce = @BoolValue(true),
@@ -295,7 +295,7 @@ private Double doubleValue;
 ```
 
 ###### ElasticDoubleRangeField
-```
+```java
 @ElasticDoubleRangeField(
         suffixName = "doubleRange",
         coerce = @BoolValue(true),
@@ -308,7 +308,7 @@ private Double doubleRangeValue;
 ```
 
 ###### ElasticFloatField
-```
+```java
 @ElasticFloatField(
         suffixName = "float",
         coerce = @BoolValue(true),
@@ -324,7 +324,7 @@ private Float floatValue;
 ```
 
 ###### ElasticFloatRangeField
-```
+```java
 @ElasticFloatRangeField(
         suffixName = "floatRange",
         coerce = @BoolValue(true),
@@ -337,7 +337,7 @@ private Float floatRangeValue;
 ```
 
 ###### ElasticGeoPointField
-```
+```java
 @ElasticGeoPointField(
         suffixName = "geoPoint",
         ignoreMalformed = @BoolValue(true)
@@ -346,7 +346,7 @@ private String geoPointValue;
 ```
 
 ###### ElasticGeoShapeField
-```
+```java
 @ElasticGeoShapeField(
         suffixName = "geoShape",
         tree = "geohash",
@@ -361,7 +361,7 @@ private String geoShapeValue;
 ```
 
 ###### ElasticHalfFloatField
-```
+```java
 @ElasticHalfFloatField(
         suffixName = "halfFloat",
         coerce = @BoolValue(true),
@@ -377,7 +377,7 @@ private Float halfFloatValue;
 ```
 
 ###### ElasticIntegerField
-```
+```java
 @ElasticIntegerField(
         suffixName = "integer",
         coerce = @BoolValue(true),
@@ -393,7 +393,7 @@ private Integer integerValue;
 ```
 
 ###### ElasticIntegerRangeField
-```
+```java
 @ElasticIntegerRangeField(
         suffixName = "integerRange",
         coerce = @BoolValue(true),
@@ -406,7 +406,7 @@ private Integer integerRangeValue;
 ```
 
 ###### ElasticIpField
-```
+```java
 @ElasticIpField(
         suffixName = "ip",
         boost = @FloatValue(1),
@@ -420,7 +420,7 @@ private String ipValue;
 ```
 
 ###### ElasticIpRangeField
-```
+```java
 @ElasticIpRangeField(
         suffixName = "ipRange",
         coerce = @BoolValue(true),
@@ -433,7 +433,7 @@ private String ipRangeValue;
 ```
 
 ###### ElasticKeywordField
-```
+```java
 @ElasticKeywordField(
         suffixName = "keyword",
         analyzer = "myAnalyzer",
@@ -454,7 +454,7 @@ private String keywordValue;
 ```
 
 ###### ElasticLongField
-```
+```java
 @ElasticLongField(
         suffixName = "long",
         coerce = @BoolValue(true),
@@ -470,7 +470,7 @@ private Long longValue;
 ```
 
 ###### ElasticLongRangeField
-```
+```java
 @ElasticLongRangeField(
         suffixName = "longRange",
         coerce = @BoolValue(true),
@@ -483,7 +483,7 @@ private Long longRangeValue;
 ```
 
 ###### ElasticPercolatorField
-```
+```java
 @ElasticPercolatorField(
         suffixName = "percolator"
     )
@@ -491,7 +491,7 @@ private String percolatorValue;
 ```
 
 ###### ElasticScaledFloatField
-```
+```java
 @ElasticScaledFloatField(
         suffixName = "scaledFloat",
         coerce = @BoolValue(true),
@@ -508,7 +508,7 @@ private Float scaledFloatValue;
 ```
 
 ###### ElasticShortField
-```
+```java
 @ElasticShortField(
         suffixName = "short",
         coerce = @BoolValue(true),
@@ -524,7 +524,7 @@ private Short shortValue;
 ```
 
 ###### ElasticTextField
-```
+```java
 @ElasticTextField(
         suffixName = "text",
         analyzer = "myAnalyzer",
@@ -552,7 +552,7 @@ private String textValue;
 ```
 
 ###### ElasticTokenCountField
-```
+```java
 @ElasticTokenCountField(
         suffixName = "tokenCount",
         analyzer = "myAnalyzer",
@@ -568,7 +568,7 @@ private String tokenCountValue;
 ```
 
 ###### ElasticNestedField
-```
+```java
 @ElasticNestedField(
         dynamic = @BoolValue(true),
         includeInAll = @BoolValue(true)
@@ -577,7 +577,7 @@ private InnerDocumentEntity nestedValue;
 ```
 
 ###### ElasticObjectField
-```
+```java
 @ElasticObjectField(
         dynamic = @BoolValue(true),
         enabledJson = @BoolValue(true),
@@ -587,7 +587,7 @@ private InnerDocumentEntity objectValue;
 ```
 
 ###### ElasticCustomJsonField
-```
+```java
 @ElasticCustomJsonField(
         path = "/custom/mapping/test-custom-field.json",
         classLoader = ClassLoader.class)
@@ -595,7 +595,7 @@ private String customValue;
 ```
 
 ###### Multiple Field (The first annotation is the main field!)
-```
+```java
 @ElasticTextField(
         suffixName = "text",
         analyzer = "myAnalyzer",
