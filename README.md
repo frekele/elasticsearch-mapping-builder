@@ -12,7 +12,7 @@ Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch
 
 | Elasticsearch Mapping Builder | Elasticsearch          |
 | ------------------------------| ---------------------- |
-| Version: 1.0.0                | Version: 5.x.x         |
+| Version: 1.0.1                | Version: 5.x.x         |
 
 
 #### Maven dependency:
@@ -20,13 +20,13 @@ Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch
 <dependency>
     <groupId>org.frekele.elasticsearch</groupId>
     <artifactId>elasticsearch-mapping-builder</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
 #### Gradle dependency:
 ```gradle
-compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.0'
+compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.1'
 ```
 
 #### Build
