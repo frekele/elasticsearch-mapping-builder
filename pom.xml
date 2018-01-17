@@ -90,7 +90,7 @@
         <elasticsearch.version>5.6.4</elasticsearch.version>
         <testng.version>6.13.1</testng.version>
         <mockito-core.version>2.13.0</mockito-core.version>
-        <jacoco.version>0.7.9</jacoco.version>
+        <jacoco.version>0.8.0</jacoco.version>
 
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
