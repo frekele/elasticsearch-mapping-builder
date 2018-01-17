@@ -87,7 +87,7 @@
 
         <project.scm.id>github</project.scm.id>
 
-        <elasticsearch.version>5.6.4</elasticsearch.version>
+        <elasticsearch.version>5.6.6</elasticsearch.version>
         <testng.version>6.13.1</testng.version>
         <mockito-core.version>2.13.0</mockito-core.version>
         <jacoco.version>0.8.0</jacoco.version>
