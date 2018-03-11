@@ -650,7 +650,7 @@ private String multiFieldValue;
 
 ## License
 ```
-   Copyright © 2017 - @frekele<Leandro Kersting de Freitas>
+   Copyright © 2017-2018 - @frekele<Leandro Kersting de Freitas>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
