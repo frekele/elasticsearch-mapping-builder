@@ -14,7 +14,7 @@
 
 | Elasticsearch Mapping Builder | Elasticsearch          |
 | ------------------------------| ---------------------- |
-| Version: 1.0.3                | Version: 5.x.x         |
+| Version: 1.0.4                | Version: 5.x.x         |
 
 
 #### Maven dependency:
@@ -22,13 +22,13 @@
 <dependency>
     <groupId>org.frekele.elasticsearch</groupId>
     <artifactId>elasticsearch-mapping-builder</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 </dependency>
 ```
 
 #### Gradle dependency:
 ```gradle
-compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.3'
+compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.4'
 ```
 
 #### Build
