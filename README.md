@@ -22,13 +22,13 @@
 <dependency>
     <groupId>org.frekele.elasticsearch</groupId>
     <artifactId>elasticsearch-mapping-builder</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 
 #### Gradle dependency:
 ```gradle
-compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.5'
+compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.6'
 ```
 
 #### Build
