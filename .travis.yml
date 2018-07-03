@@ -5,7 +5,7 @@ jdk:
   - oraclejdk8
 
 env:
-  - MAVEN=3.5.3
+  - MAVEN=3.5.4
 
 cache:
   directories:
