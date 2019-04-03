@@ -14,7 +14,7 @@
 
 | Elasticsearch Mapping Builder | Elasticsearch          |
 | ------------------------------| ---------------------- |
-| Version: 1.0.5                | Version: 5.x.x         |
+| Version: 1.0.6                | Version: 5.x.x         |
 
 
 #### Maven dependency:
@@ -650,7 +650,7 @@ private String multiFieldValue;
 
 ## License
 ```
-   Copyright © 2017-2018 - @frekele<Leandro Kersting de Freitas>
+   Copyright © 2017-2019 - @frekele<Leandro Kersting de Freitas>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
