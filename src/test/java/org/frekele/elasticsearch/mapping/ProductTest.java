@@ -26,7 +26,7 @@ public class ProductTest {
         String expected = "{\"mappings\":{\"product\":{\"properties\":{\"id\":{\"type\":\"long\"},\"size\":{\"type\":\"integer\"},\"height\":{\"type\":\"float\"},\"width\":{\"type\":\"float\"},\"depth\":{\"type\":\"float\"},\"price\":{\"type\":\"double\"}}}}}";
         MappingBuilder mappingBuilder = new MappingBuilderImpl();
         ObjectMapping result = mappingBuilder.build(ProductEntity.class);
-        assertEquals(result.getContentAsString(), expected);
+        assertEquals(result.getContentAsString().replaceAll("\\r|\\n", ""), expected);
         //System.out.println(result.sourceAsString());
         System.out.println(mappingBuilder.build(true, ProductEntity.class).getContentAsString());
     }
