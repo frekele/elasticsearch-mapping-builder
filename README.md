@@ -28,7 +28,7 @@
 
 #### Gradle dependency:
 ```gradle
-compile 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.7'
+implementation 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.7'
 ```
 
 #### Build
