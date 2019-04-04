@@ -13,6 +13,7 @@ cache:
 
 
 before_install:
+  - ulimit -a && free -m
   - chmod +x .travis/*
   - echo ${GPG_PUBLIC_KEYS}  | base64 --decode > /tmp/frekele-pubkey.asc
   - echo ${GPG_PRIVATE_KEYS} | base64 --decode > /tmp/frekele-privkey.asc
@@ -21,8 +22,10 @@ before_install:
   - gpg --import /tmp/frekele-pubkey.asc
   - gpg --import /tmp/frekele-privkey.asc
   - gpg --import-ownertrust /tmp/frekele-ownertrust.asc
-  - export MVN_HOME=/tmp/maven-${MAVEN}
+  - sudo rm -f /etc/mavenrc && sudo rm -f ${HOME}/.mavenrc
+  - export MVN_HOME=/tmp/maven-${MAVEN} && export M2_HOME=${MVN_HOME}
   - mkdir ${MVN_HOME}
+  - export MAVEN_OPTS="-Dmaven.repo.local=${HOME}/.m2/repository -Xms1024m -Xmx4096m -XX:PermSize=512m"
   - export PATH=${MVN_HOME}/bin:$PATH
   - sudo apt-get install -qq jq
   - wget -O ~/codacy-coverage-reporter-assembly-latest.jar "https://github.com/codacy/codacy-coverage-reporter/releases/download/6.0.0/codacy-coverage-reporter-6.0.0-assembly.jar"
@@ -36,6 +39,7 @@ before_script:
 
 script:
   - ${MVN_HOME}/bin/mvn --settings .travis/settings.xml install -Dgpg.skip -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -B -V
+  - ulimit -a && free -m
 
 before_cache:
 
@@ -44,6 +48,9 @@ after_success:
   - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/site/jacoco/jacoco.xml
 
 after_failure:
+  - echo "FAILURE"
+  - ulimit -a
+  - free -m
 
 before_deploy:
 
