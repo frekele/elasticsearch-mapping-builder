@@ -6,6 +6,7 @@
 /.idea/
 /.tmp/
 /dist/
+/.settings/
 ######################
 
 
@@ -13,6 +14,8 @@
 #       Files        #
 ######################
 elasticsearch-mapping-builder.iml
+.classpath
+.project
 ######################
 
 
