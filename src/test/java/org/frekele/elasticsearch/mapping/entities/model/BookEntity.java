@@ -1,5 +1,7 @@
 package org.frekele.elasticsearch.mapping.entities.model;
 
+import java.time.OffsetDateTime;
+
 import org.frekele.elasticsearch.mapping.annotations.ElasticBinaryField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
@@ -7,8 +9,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticObjectField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
-
-import java.time.OffsetDateTime;
+import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 
 @ElasticDocument("book")
 public class BookEntity {
@@ -32,7 +33,7 @@ public class BookEntity {
     @ElasticBinaryField
     private String imageBlob;
 
-    @ElasticObjectField
+    @ElasticObjectField(enabledJson = @BoolValue(false))
     private AuthorEntity author;
 
     public BookEntity() {

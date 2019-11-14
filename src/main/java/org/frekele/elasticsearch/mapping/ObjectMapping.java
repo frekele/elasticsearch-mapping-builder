@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping;
 
+import org.elasticsearch.common.Strings;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 
 import java.io.IOException;
@@ -25,7 +26,9 @@ public class ObjectMapping implements Serializable {
     }
 
     public String getContentAsString() throws IOException {
-        return this.getContent().string();
+        //return this.getContent().
+    	String json = Strings.toString(mapping);
+    	return json;
     }
 
 }
