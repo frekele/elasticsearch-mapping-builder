@@ -24,15 +24,13 @@ public class NumericFieldValue {
 
     private BoolValue index;
 
-    private String nullValue;
-
     private BoolValue store;
 
     private IntValue scalingFactor;
 
     public NumericFieldValue(FieldType type, String suffixName, BoolValue coerce, FloatValue boost,
                              BoolValue docValues, BoolValue ignoreMalformed,
-                             BoolValue index, String nullValue, BoolValue store, IntValue scalingFactor) {
+                             BoolValue index, BoolValue store, IntValue scalingFactor) {
         this.type = type;
         this.suffixName = suffixName;
         this.coerce = coerce;
@@ -40,7 +38,6 @@ public class NumericFieldValue {
         this.docValues = docValues;
         this.ignoreMalformed = ignoreMalformed;
         this.index = index;
-        this.nullValue = nullValue;
         this.store = store;
         this.scalingFactor = scalingFactor;
     }
@@ -71,10 +68,6 @@ public class NumericFieldValue {
 
     public BoolValue getIndex() {
         return index;
-    }
-
-    public String getNullValue() {
-        return nullValue;
     }
 
     public BoolValue getStore() {

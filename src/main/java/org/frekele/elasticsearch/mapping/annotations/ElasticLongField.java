@@ -34,8 +34,6 @@ public @interface ElasticLongField {
 
     BoolValue index() default @BoolValue(ignore = true);
 
-    String nullValue() default "";
-
     BoolValue store() default @BoolValue(ignore = true);
 
 }

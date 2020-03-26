@@ -49,7 +49,6 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true))
     private Boolean booleanValue;
 
@@ -60,7 +59,6 @@ public class FullDocumentTwoEntity {
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private Byte byteValue;
@@ -108,7 +106,6 @@ public class FullDocumentTwoEntity {
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private Double doubleValue;
@@ -129,7 +126,6 @@ public class FullDocumentTwoEntity {
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private Float floatValue;
@@ -168,7 +164,6 @@ public class FullDocumentTwoEntity {
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private Float halfFloatValue;
@@ -180,7 +175,6 @@ public class FullDocumentTwoEntity {
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private Integer integerValue;
@@ -237,7 +231,6 @@ public class FullDocumentTwoEntity {
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private Long longValue;
@@ -263,7 +256,6 @@ public class FullDocumentTwoEntity {
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true),
         scalingFactor = @IntValue(100)
     )
@@ -276,7 +268,6 @@ public class FullDocumentTwoEntity {
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private Short shortValue;
@@ -318,15 +309,13 @@ public class FullDocumentTwoEntity {
     private String tokenCountValue;
 
     @ElasticNestedField(
-        dynamic = @BoolValue(true),
-        includeInAll = @BoolValue(true)
+        dynamic = @BoolValue(true)
     )
     private InnerDocumentEntity nestedValue;
 
     @ElasticObjectField(
         dynamic = @BoolValue(true),
-        enabledJson = @BoolValue(true),
-        includeInAll = @BoolValue(true)
+        enabledJson = @BoolValue(true)
     )
     private InnerDocumentEntity objectValue;
 
