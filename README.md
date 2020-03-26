@@ -8,13 +8,14 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/778eee87938f43ca92a94b7b613a0891)](https://www.codacy.com/app/frekele/elasticsearch-mapping-builder?utm_source=github.com&utm_medium=referral&utm_content=frekele/elasticsearch-mapping-builder&utm_campaign=Badge_Coverage)
 
 
- Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html)
+ Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html)
 
 #### Compatibility:
 
-| Elasticsearch Mapping Builder | Elasticsearch          |
-| ------------------------------| ---------------------- |
-| Version: 1.1.0                | Version: 7.x.x         |
+| Elasticsearch Mapping Builder | Elasticsearch                                                                            |
+| ------------------------------| ---------------------------------------------------------------------------------------- |
+| Version: 1.0.7                | Version: [5.x](https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html) |
+| Version: 1.1.0                | Version: [7.x](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html) |
 
 
 #### Maven dependency:
