@@ -41,8 +41,6 @@ public @interface ElasticTextField {
         minSegmentSize = @IntValue(ignore = true)
     );
 
-    BoolValue includeInAll() default @BoolValue(ignore = true);
-
     BoolValue index() default @BoolValue(ignore = true);
 
     String indexOptions() default "";

@@ -339,10 +339,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         }
     }
 
-    public void includeInAll(BoolValue includeInAll) throws IOException {
-        this.addField("include_in_all", includeInAll);
-    }
-
     public void index(BoolValue index) throws IOException {
         this.addField("index", index);
     }
@@ -479,7 +475,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         this.eagerGlobalOrdinals(elasticField.eagerGlobalOrdinals());
         this.fielddata(elasticField.fielddata());
         this.fielddataFrequencyFilter(elasticField.fielddataFrequencyFilter());
-        this.includeInAll(elasticField.includeInAll());
         this.index(elasticField.index());
         this.indexOptions(elasticField.indexOptions());
         this.norms(elasticField.norms());
@@ -501,7 +496,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         this.docValues(elasticField.docValues());
         this.eagerGlobalOrdinals(elasticField.eagerGlobalOrdinals());
         this.ignoreAbove(elasticField.ignoreAbove());
-        this.includeInAll(elasticField.includeInAll());
         this.index(elasticField.index());
         this.indexOptions(elasticField.indexOptions());
         this.norms(elasticField.norms());
@@ -519,7 +513,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         this.boost(vo.getBoost());
         this.docValues(vo.getDocValues());
         this.ignoreMalformed(vo.getIgnoreMalformed());
-        this.includeInAll(vo.getIncludeInAll());
         this.index(vo.getIndex());
         this.nullValue(vo.getNullValue());
         this.store(vo.getStore());
@@ -529,63 +522,63 @@ public class MappingBuilderImpl implements MappingBuilder {
 
     public void processElasticField(ElasticLongField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticIntegerField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticShortField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticByteField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticDoubleField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticFloatField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticHalfFloatField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store(), null);
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticScaledFloatField elasticField, boolean subField) throws IOException {
         NumericFieldValue vo = new NumericFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.boost(), elasticField.docValues(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store(), elasticField.scalingFactor());
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticDateField elasticField, boolean subField) throws IOException {
         DateFieldValue vo = new DateFieldValue(elasticField.type, elasticField.suffixName(), elasticField.boost(),
-            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store());
         this.processElasticField(vo, subField);
     }
@@ -614,7 +607,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         this.type(vo.getType());
         this.coerce(vo.getCoerce());
         this.boost(vo.getBoost());
-        this.includeInAll(vo.getIncludeInAll());
         this.index(vo.getIndex());
         this.store(vo.getStore());
         this.closeSuffixName(subField);
@@ -622,31 +614,31 @@ public class MappingBuilderImpl implements MappingBuilder {
 
     public void processElasticField(ElasticIntegerRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticFloatRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticLongRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticDoubleRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
     public void processElasticField(ElasticIpRangeField elasticField, boolean subField) throws IOException {
         RangeFieldValue vo = new RangeFieldValue(elasticField.type, elasticField.suffixName(), elasticField.coerce(),
-            elasticField.boost(), elasticField.includeInAll(), elasticField.index(), elasticField.store());
+            elasticField.boost(), elasticField.index(), elasticField.store());
         this.processElasticField(vo, subField);
     }
 
@@ -658,7 +650,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         this.format(vo.getFormat());
         this.locale(vo.getLocale());
         this.ignoreMalformed(vo.getIgnoreMalformed());
-        this.includeInAll(vo.getIncludeInAll());
         this.index(vo.getIndex());
         this.nullValue(vo.getNullValue());
         this.store(vo.getStore());
@@ -667,7 +658,7 @@ public class MappingBuilderImpl implements MappingBuilder {
 
     public void processElasticField(ElasticDateRangeField elasticField, boolean subField) throws IOException {
         DateFieldValue vo = new DateFieldValue(elasticField.type, elasticField.suffixName(), elasticField.boost(),
-            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(), elasticField.includeInAll(),
+            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(),
             elasticField.index(), elasticField.nullValue(), elasticField.store());
         this.processElasticField(vo, subField);
     }
@@ -697,7 +688,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         this.type(elasticField.type);
         this.boost(elasticField.boost());
         this.docValues(elasticField.docValues());
-        this.includeInAll(elasticField.includeInAll());
         this.index(elasticField.index());
         this.nullValue(elasticField.nullValue());
         this.store(elasticField.store());
@@ -723,7 +713,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         this.boost(elasticField.boost());
         this.docValues(elasticField.docValues());
         this.index(elasticField.index());
-        this.includeInAll(elasticField.includeInAll());
         this.nullValue(elasticField.nullValue());
         this.store(elasticField.store());
         this.closeSuffixName(subField);
@@ -783,7 +772,6 @@ public class MappingBuilderImpl implements MappingBuilder {
                             ElasticObjectField elasticDocument = field.getAnnotation(ElasticObjectField.class);
                             this.dynamic(elasticDocument.dynamic());
                             this.enabledJson(elasticDocument.enabledJson());
-                            this.includeInAll(elasticDocument.includeInAll());
                             this.recursiveFields(this.getInnerFields(field), level);
                         }
                         //Nested.
@@ -791,7 +779,6 @@ public class MappingBuilderImpl implements MappingBuilder {
                             ElasticNestedField elasticDocument = field.getAnnotation(ElasticNestedField.class);
                             this.type(FieldType.NESTED);
                             this.dynamic(elasticDocument.dynamic());
-                            this.includeInAll(elasticDocument.includeInAll());
                             this.recursiveFields(this.getInnerFields(field), level);
                         }
                         //Fields.
@@ -835,18 +822,6 @@ public class MappingBuilderImpl implements MappingBuilder {
 
         ElasticDocument elasticDocument = (ElasticDocument)  this.getDocClass().getAnnotation(ElasticDocument.class);
 
-        //_all
-        if (isValueEnabled(elasticDocument.enabledAll()) || isValueEnabled(elasticDocument.storeAll())) {
-            this.getMapping().startObject("_all");
-            if (isValueEnabled(elasticDocument.enabledAll())) {
-                this.getMapping().field("enabled", elasticDocument.enabledAll().value());
-            }
-            if (isValueEnabled(elasticDocument.storeAll())) {
-                this.getMapping().field("store", elasticDocument.storeAll().value());
-            }
-            this.getMapping().endObject();
-        }
-
         //_routing
         if (isValueEnabled(elasticDocument.requiredRouting())) {
             this.getMapping().startObject("_routing");
@@ -855,7 +830,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         }
 
         this.dynamic(elasticDocument.dynamic());
-        this.includeInAll(elasticDocument.includeInAll());
 
         Field[] fields =  this.getDocClass().getDeclaredFields();
         this.recursiveFields(fields, 0);

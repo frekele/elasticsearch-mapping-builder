@@ -21,15 +21,8 @@ public @interface ElasticDocument {
 
     BoolValue dynamic() default @BoolValue(ignore = true);
 
-    BoolValue includeInAll() default @BoolValue(ignore = true);
-
     //add eager_global_ordinals into _parent
     BoolValue eagerGlobalOrdinalsParent() default @BoolValue(ignore = true);
-
-    BoolValue enabledAll() default @BoolValue(ignore = true);
-
-    //add store into _all
-    BoolValue storeAll() default @BoolValue(ignore = true);
 
     //add required into _routing
     BoolValue requiredRouting() default @BoolValue(ignore = true);

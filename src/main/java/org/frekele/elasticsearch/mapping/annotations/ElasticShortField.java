@@ -32,8 +32,6 @@ public @interface ElasticShortField {
 
     BoolValue ignoreMalformed() default @BoolValue(ignore = true);
 
-    BoolValue includeInAll() default @BoolValue(ignore = true);
-
     BoolValue index() default @BoolValue(ignore = true);
 
     String nullValue() default "";
