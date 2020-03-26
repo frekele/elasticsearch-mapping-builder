@@ -24,7 +24,7 @@ public class EmployeeTest {
 
     @Test
     public void buildEmployeeTest() throws Exception {
-        String expected = "{\"mappings\":{\"_parent\":{\"type\":\"person\"},\"properties\":{\"id\":{\"type\":\"long\"},\"documentNumber\":{\"type\":\"keyword\"},\"registerNumber\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}}}}}";
+        String expected = "{\"mappings\":{\"properties\":{\"id\":{\"type\":\"long\"},\"documentNumber\":{\"type\":\"keyword\"},\"registerNumber\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}}}}}";
         MappingBuilderImpl mappingBuilder = new MappingBuilderImpl();
         ObjectMapping result = mappingBuilder.build(EmployeeEntity.class);
         assertEquals(result.getContentAsString().replaceAll("[\\r\\n]", ""), expected);
