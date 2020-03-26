@@ -208,7 +208,6 @@ private String binaryValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true))
 private Boolean booleanValue;
 ```
@@ -222,7 +221,6 @@ private Boolean booleanValue;
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Byte byteValue;
@@ -282,7 +280,6 @@ private Date dateRangeValue;
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Double doubleValue;
@@ -309,7 +306,6 @@ private Double doubleRangeValue;
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Float floatValue;
@@ -360,7 +356,6 @@ private String geoShapeValue;
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Float halfFloatValue;
@@ -375,7 +370,6 @@ private Float halfFloatValue;
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Integer integerValue;
@@ -447,7 +441,6 @@ private String keywordValue;
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Long longValue;
@@ -482,7 +475,6 @@ private String percolatorValue;
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true),
         scalingFactor = @IntValue(100)
     )
@@ -498,7 +490,6 @@ private Float scaledFloatValue;
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Short shortValue;
