@@ -8,13 +8,13 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/778eee87938f43ca92a94b7b613a0891)](https://www.codacy.com/app/frekele/elasticsearch-mapping-builder?utm_source=github.com&utm_medium=referral&utm_content=frekele/elasticsearch-mapping-builder&utm_campaign=Badge_Coverage)
 
 
- Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html](https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html)
+ Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html)
 
 #### Compatibility:
 
 | Elasticsearch Mapping Builder | Elasticsearch          |
 | ------------------------------| ---------------------- |
-| Version: 1.0.7                | Version: 7.x.x         |
+| Version: 1.1.0                | Version: 7.x.x         |
 
 
 #### Maven dependency:
@@ -22,13 +22,13 @@
 <dependency>
     <groupId>org.frekele.elasticsearch</groupId>
     <artifactId>elasticsearch-mapping-builder</artifactId>
-    <version>1.0.7</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
 #### Gradle dependency:
 ```gradle
-implementation 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.7'
+implementation 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.1.0'
 ```
 
 #### Build
