@@ -41,6 +41,6 @@ public @interface ElasticScaledFloatField {
 
     BoolValue store() default @BoolValue(ignore = true);
 
-    IntValue scalingFactor() default @IntValue(ignore = true);
+    IntValue scalingFactor();
 
 }

@@ -23,7 +23,7 @@ public @interface ElasticTokenCountField {
 
     String suffixName() default "tokenCount";
 
-    String analyzer() default "";
+    String analyzer() default "standard";
 
     BoolValue enablePositionIncrements() default @BoolValue(ignore = true);
 

@@ -29,6 +29,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticScaledFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
+import org.frekele.elasticsearch.mapping.annotations.values.IntValue;
 
 import java.util.Date;
 
@@ -98,7 +99,7 @@ public class FullDocumentEntity {
     @ElasticPercolatorField
     private String percolatorValue;
 
-    @ElasticScaledFloatField
+    @ElasticScaledFloatField(scalingFactor = @IntValue(100))
     private Float scaledFloatValue;
 
     @ElasticShortField
