@@ -182,7 +182,6 @@ public class EmployeeEntity {
 @ElasticDocument(
     value = "my_doc_type",
     dynamic = @BoolValue(true),
-    includeInAll = @BoolValue(true),
     parent = "my_parent_doc_type",
     //add eager_global_ordinals into _parent
     eagerGlobalOrdinalsParent = @BoolValue(true),
@@ -222,7 +221,6 @@ private Boolean booleanValue;
         boost = @FloatValue(0.2f),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -252,7 +250,6 @@ private String completionValue;
         format = "basic_date_time",
         locale = "en-US",
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -269,7 +266,6 @@ private Date dateValue;
         format = "basic_date_time",
         locale = "en-US",
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -285,7 +281,6 @@ private Date dateRangeValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -299,7 +294,6 @@ private Double doubleValue;
         suffixName = "doubleRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -314,7 +308,6 @@ private Double doubleRangeValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -328,7 +321,6 @@ private Float floatValue;
         suffixName = "floatRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -367,7 +359,6 @@ private String geoShapeValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -383,7 +374,6 @@ private Float halfFloatValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -397,7 +387,6 @@ private Integer integerValue;
         suffixName = "integerRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -410,7 +399,6 @@ private Integer integerRangeValue;
         suffixName = "ip",
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -424,7 +412,6 @@ private String ipValue;
         suffixName = "ipRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -440,7 +427,6 @@ private String ipRangeValue;
         docValues = @BoolValue(true),
         eagerGlobalOrdinals = @BoolValue(true),
         ignoreAbove = @IntValue(350),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         indexOptions = "docs",
         norms = @BoolValue(true),
@@ -460,7 +446,6 @@ private String keywordValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -474,7 +459,6 @@ private Long longValue;
         suffixName = "longRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -497,7 +481,6 @@ private String percolatorValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true),
@@ -514,7 +497,6 @@ private Float scaledFloatValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -535,7 +517,6 @@ private Short shortValue;
             max = @FloatValue(0.1f),
             minSegmentSize = @IntValue(500)
         ),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         indexOptions = "",
         norms = @BoolValue(true),
@@ -559,7 +540,6 @@ private String textValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         index = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
     )
@@ -606,7 +586,6 @@ private String customValue;
             max = @FloatValue(0.1f),
             minSegmentSize = @IntValue(500)
         ),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         indexOptions = "",
         norms = @BoolValue(true),
@@ -625,7 +604,6 @@ private String customValue;
         docValues = @BoolValue(true),
         eagerGlobalOrdinals = @BoolValue(true),
         ignoreAbove = @IntValue(350),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         indexOptions = "docs",
         norms = @BoolValue(true),
