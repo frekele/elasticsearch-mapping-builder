@@ -24,11 +24,11 @@ public class EmployeeTest {
 
     @Test
     public void buildEmployeeTest() throws Exception {
-        String expected = "{\"mappings\":{\"person\":{\"properties\":{\"id\":{\"type\":\"long\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"fullName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"fistName\":{\"type\":\"text\",\"copy_to\":[\"name\",\"fullName\"]},\"lastName\":{\"type\":\"text\",\"copy_to\":\"fullName\"},\"multipleAddress\":{\"properties\":{\"postalCode\":{\"type\":\"keyword\"},\"street\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"},\"completion\":{\"type\":\"completion\"}}},\"number\":{\"type\":\"long\"}}}}},\"employee\":{\"_parent\":{\"type\":\"person\"},\"properties\":{\"id\":{\"type\":\"long\"},\"documentNumber\":{\"type\":\"keyword\"},\"registerNumber\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}}}}}}";
+        String expected = "{\"mappings\":{\"_parent\":{\"type\":\"person\"},\"properties\":{\"id\":{\"type\":\"long\"},\"documentNumber\":{\"type\":\"keyword\"},\"registerNumber\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}}}}}";
         MappingBuilderImpl mappingBuilder = new MappingBuilderImpl();
-        ObjectMapping result = mappingBuilder.build(PersonEntity.class, EmployeeEntity.class);
-        assertEquals(result.getContentAsString().replaceAll("\\r|\\n", ""), expected);
+        ObjectMapping result = mappingBuilder.build(EmployeeEntity.class);
+        assertEquals(result.getContentAsString().replaceAll("[\\r\\n]", ""), expected);
         //System.out.println(result.sourceAsString());
-        System.out.println(mappingBuilder.build(true, PersonEntity.class, EmployeeEntity.class).getContentAsString());
+        System.out.println(mappingBuilder.build(true, EmployeeEntity.class).getContentAsString());
     }
 }

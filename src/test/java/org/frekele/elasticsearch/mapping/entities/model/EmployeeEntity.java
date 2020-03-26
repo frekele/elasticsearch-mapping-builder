@@ -5,7 +5,7 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 
-@ElasticDocument(value = "employee", parent = "person")
+@ElasticDocument(value = "employee")
 public class EmployeeEntity {
 
     @ElasticLongField

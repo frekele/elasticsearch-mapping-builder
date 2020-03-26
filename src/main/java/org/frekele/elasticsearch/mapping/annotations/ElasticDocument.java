@@ -23,8 +23,6 @@ public @interface ElasticDocument {
 
     BoolValue includeInAll() default @BoolValue(ignore = true);
 
-    String parent() default "";
-
     //add eager_global_ordinals into _parent
     BoolValue eagerGlobalOrdinalsParent() default @BoolValue(ignore = true);
 

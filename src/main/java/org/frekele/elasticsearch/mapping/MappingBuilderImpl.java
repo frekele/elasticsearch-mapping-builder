@@ -52,7 +52,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -66,7 +65,7 @@ public class MappingBuilderImpl implements MappingBuilder {
 
     private int MAX_RECURSIVE_LEVEL = 50;
 
-    private List<Class> docsClass;
+    private Class docsClass;
 
     private XContentBuilder mapping;
 
@@ -74,16 +73,16 @@ public class MappingBuilderImpl implements MappingBuilder {
     }
 
     @Override
-    public ObjectMapping build(Class... documentClass) {
+    public ObjectMapping build(Class documentClass) {
         return this.build(false, documentClass);
     }
 
     @Override
-    public ObjectMapping build(boolean pretty, Class... documentClass) {
-        if (documentClass == null || documentClass.length == 0) {
+    public ObjectMapping build(boolean pretty, Class documentClass) {
+        if (documentClass == null) {
             throw new MappingBuilderException("A Document Class is required.");
         } else {
-            this.docsClass = Arrays.asList(documentClass);
+            this.docsClass = documentClass;
         }
         this.validateElasticDocument();
         try {
@@ -94,7 +93,7 @@ public class MappingBuilderImpl implements MappingBuilder {
         }
     }
 
-    public List<Class> getDocsClass() {
+    public Class getDocClass() {
         return docsClass;
     }
 
@@ -111,10 +110,8 @@ public class MappingBuilderImpl implements MappingBuilder {
     }
 
     public void validateElasticDocument() {
-        for (Class clazz : this.getDocsClass()) {
-            if (!isElasticDocument(clazz)) {
-                throw new InvalidDocumentClassException("Document Class[" + clazz.getCanonicalName() + "] Invalid. @ElasticDocument must be present.");
-            }
+        if (!isElasticDocument(this.getDocClass())) {
+            throw new InvalidDocumentClassException("Document Class[" + this.getDocClass().getCanonicalName() + "] Invalid. @ElasticDocument must be present.");
         }
     }
 
@@ -294,9 +291,6 @@ public class MappingBuilderImpl implements MappingBuilder {
     }
 
     //Direct set.
-    public void nested(boolean nested) throws IOException {
-        this.getMapping().field("nested", nested);
-    }
 
     public void dynamic(BoolValue dynamic) throws IOException {
         this.addField("dynamic", dynamic);
@@ -795,7 +789,7 @@ public class MappingBuilderImpl implements MappingBuilder {
                         //Nested.
                         else if (field.isAnnotationPresent(ElasticNestedField.class)) {
                             ElasticNestedField elasticDocument = field.getAnnotation(ElasticNestedField.class);
-                            this.nested(true);
+                            this.type(FieldType.NESTED);
                             this.dynamic(elasticDocument.dynamic());
                             this.includeInAll(elasticDocument.includeInAll());
                             this.recursiveFields(this.getInnerFields(field), level);
@@ -803,7 +797,7 @@ public class MappingBuilderImpl implements MappingBuilder {
                         //Fields.
                         else {
                             List<Annotation> annotationList = getElasticFieldAnnotations(field);
-                            if (!annotationList.isEmpty()) {
+                            if (annotationList != null && !annotationList.isEmpty()) {
                                 //Get main Field (The First)
                                 Annotation mainAnnotation = annotationList.get(0);
                                 this.processElasticAnnotationField(mainAnnotation, false);
@@ -839,46 +833,33 @@ public class MappingBuilderImpl implements MappingBuilder {
         this.getMapping().startObject();
         this.getMapping().startObject("mappings");
 
-        for (Class clazz : this.getDocsClass()) {
-            ElasticDocument elasticDocument = (ElasticDocument) clazz.getAnnotation(ElasticDocument.class);
-            this.getMapping().startObject(elasticDocument.value());
+        ElasticDocument elasticDocument = (ElasticDocument)  this.getDocClass().getAnnotation(ElasticDocument.class);
 
-            //_parent
-            if (isNotEmpty(elasticDocument.parent())) {
-                this.getMapping().startObject("_parent");
-                this.getMapping().field("type", elasticDocument.parent());
-                this.eagerGlobalOrdinals(elasticDocument.eagerGlobalOrdinalsParent());
-                this.getMapping().endObject();
+        //_all
+        if (isValueEnabled(elasticDocument.enabledAll()) || isValueEnabled(elasticDocument.storeAll())) {
+            this.getMapping().startObject("_all");
+            if (isValueEnabled(elasticDocument.enabledAll())) {
+                this.getMapping().field("enabled", elasticDocument.enabledAll().value());
             }
-
-            //_all
-            if (isValueEnabled(elasticDocument.enabledAll()) || isValueEnabled(elasticDocument.storeAll())) {
-                this.getMapping().startObject("_all");
-                if (isValueEnabled(elasticDocument.enabledAll())) {
-                    this.getMapping().field("enabled", elasticDocument.enabledAll().value());
-                }
-                if (isValueEnabled(elasticDocument.storeAll())) {
-                    this.getMapping().field("store", elasticDocument.storeAll().value());
-                }
-                this.getMapping().endObject();
+            if (isValueEnabled(elasticDocument.storeAll())) {
+                this.getMapping().field("store", elasticDocument.storeAll().value());
             }
-
-            //_routing
-            if (isValueEnabled(elasticDocument.requiredRouting())) {
-                this.getMapping().startObject("_routing");
-                this.getMapping().field("required", elasticDocument.requiredRouting().value());
-                this.getMapping().endObject();
-            }
-
-            this.dynamic(elasticDocument.dynamic());
-            this.includeInAll(elasticDocument.includeInAll());
-
-            Field[] fields = clazz.getDeclaredFields();
-            this.recursiveFields(fields, 0);
-
-            //ElasticDocument
             this.getMapping().endObject();
         }
+
+        //_routing
+        if (isValueEnabled(elasticDocument.requiredRouting())) {
+            this.getMapping().startObject("_routing");
+            this.getMapping().field("required", elasticDocument.requiredRouting().value());
+            this.getMapping().endObject();
+        }
+
+        this.dynamic(elasticDocument.dynamic());
+        this.includeInAll(elasticDocument.includeInAll());
+
+        Field[] fields =  this.getDocClass().getDeclaredFields();
+        this.recursiveFields(fields, 0);
+
         //mappings
         this.getMapping().endObject();
         //END

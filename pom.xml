@@ -87,10 +87,10 @@
 
         <project.scm.id>github</project.scm.id>
 
-        <elasticsearch.version>7.3.1</elasticsearch.version>
-        <testng.version>6.14.3</testng.version>
-        <mockito-core.version>2.25.1</mockito-core.version>
-        <jacoco.version>0.8.3</jacoco.version>
+        <elasticsearch.version>7.6.1</elasticsearch.version>
+        <testng.version>7.1.1</testng.version>
+        <mockito-core.version>3.3.3</mockito-core.version>
+        <jacoco.version>0.8.5</jacoco.version>
 
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>

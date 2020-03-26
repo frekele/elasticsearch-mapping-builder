@@ -14,7 +14,7 @@
 
 | Elasticsearch Mapping Builder | Elasticsearch          |
 | ------------------------------| ---------------------- |
-| Version: 1.0.7                | Version: 5.x.x         |
+| Version: 1.0.7                | Version: 7.x.x         |
 
 
 #### Maven dependency:
