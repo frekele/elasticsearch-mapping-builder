@@ -56,7 +56,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         } else {
             this.docsClass = documentClass;
         }
-        this.validateElasticDocument();
         try {
             XContentBuilder xContentBuilder = this.innerBuild(pretty);
             return new ObjectMapping(xContentBuilder);
@@ -75,16 +74,6 @@ public class MappingBuilderImpl implements MappingBuilder {
 
     private void setMapping(XContentBuilder mapping) {
         this.mapping = mapping;
-    }
-
-    public static boolean isElasticDocument(Class documentClass) {
-        return (documentClass.isAnnotationPresent(ElasticDocument.class));
-    }
-
-    public void validateElasticDocument() {
-        if (!isElasticDocument(this.getDocClass())) {
-            throw new InvalidDocumentClassException("Document Class[" + this.getDocClass().getCanonicalName() + "] Invalid. @ElasticDocument must be present.");
-        }
     }
 
     public static List<Annotation> getElasticFieldAnnotations(Field field) {
@@ -789,17 +778,6 @@ public class MappingBuilderImpl implements MappingBuilder {
         //BEGIN
         this.getMapping().startObject();
         this.getMapping().startObject("mappings");
-
-        ElasticDocument elasticDocument = (ElasticDocument)  this.getDocClass().getAnnotation(ElasticDocument.class);
-
-        //_routing
-        if (isValueEnabled(elasticDocument.requiredRouting())) {
-            this.getMapping().startObject("_routing");
-            this.getMapping().field("required", elasticDocument.requiredRouting().value());
-            this.getMapping().endObject();
-        }
-
-        this.dynamic(elasticDocument.dynamic());
 
         Field[] fields =  this.getDocClass().getDeclaredFields();
         this.recursiveFields(fields, 0);

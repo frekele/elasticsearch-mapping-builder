@@ -7,7 +7,6 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticCompletionField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticCustomJsonField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticFloatField;
@@ -36,7 +35,6 @@ import org.frekele.elasticsearch.mapping.annotations.values.IntValue;
 
 import java.util.Date;
 
-@ElasticDocument("full_two")
 public class FullDocumentTwoEntity {
 
     @ElasticBinaryField(

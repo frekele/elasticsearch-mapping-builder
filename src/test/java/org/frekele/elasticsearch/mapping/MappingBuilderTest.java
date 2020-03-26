@@ -25,36 +25,6 @@ public class MappingBuilderTest {
     public void tearDown() throws Exception {
     }
 
-    @Test
-    public void isElasticDocumentTest() throws Exception {
-        boolean result = MappingBuilderImpl.isElasticDocument(FullDocumentEntity.class);
-        assertEquals(result, true);
-
-        result = MappingBuilderImpl.isElasticDocument(NoDocumentEntity.class);
-        assertEquals(result, false);
-    }
-
-    @Test
-    public void validateWithoutErrorTest() throws Exception {
-        MappingBuilderImpl mappingBuilder = new MappingBuilderImpl();
-        mappingBuilder.build(FullDocumentEntity.class);
-        mappingBuilder.validateElasticDocument();
-    }
-
-    @Test(expectedExceptions = InvalidDocumentClassException.class)
-    public void validateWithErrorTest() throws Exception {
-        MappingBuilderImpl mappingBuilder = new MappingBuilderImpl();
-        mappingBuilder.build(NoDocumentEntity.class);
-        mappingBuilder.validateElasticDocument();
-    }
-
-    @Test(expectedExceptions = MappingBuilderException.class)
-    public void validateWithErrorTest2() throws Exception {
-        MappingBuilderImpl mappingBuilder = new MappingBuilderImpl();
-        mappingBuilder.build(null);
-        mappingBuilder.validateElasticDocument();
-    }
-
     @Test(expectedExceptions = InvalidCustomJsonException.class)
     public void buildWithErrorElasticCustomJsonFieldTest() throws Exception {
         MappingBuilder mappingBuilder = new MappingBuilderImpl();
