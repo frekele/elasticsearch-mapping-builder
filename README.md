@@ -61,7 +61,6 @@ public String getMapping() {
 ```
 
 ```java
-@ElasticDocument("book")
 public class BookEntity {
 
     @ElasticKeywordField
@@ -90,7 +89,6 @@ public class BookEntity {
     .........
 }
 
-@ElasticDocument(value = "author")
 public class AuthorEntity {
 
     @ElasticLongField
@@ -107,13 +105,13 @@ public class AuthorEntity {
 }
 ```
 
-**Person parent and Employee:**
+**Employee:**
 ```java
 @Inject
 MappingBuilder mappingBuilder;
 
 public String getMapping() {
-    return mappingBuilder.build(PersonEntity.class, EmployeeEntity.class).getContentAsString();
+    return mappingBuilder.build(EmployeeEntity.class).getContentAsString();
 }
 ```
 
@@ -134,32 +132,6 @@ public class AddressEntity {
     .........
 }
 
-public class PersonEntity {
-
-    @ElasticLongField
-    private Long id;
-
-    @ElasticTextField
-    @ElasticKeywordField
-    private String name;
-
-    @ElasticTextField
-    @ElasticKeywordField
-    private String fullName;
-
-    @ElasticTextField(copyTo = {"name", "fullName"})
-    private String fistName;
-
-    @ElasticTextField(copyTo = {"fullName"})
-    private String lastName;
-
-    @ElasticObjectField
-    private List<AddressEntity> multipleAddress;
-
-    .........
-}
-
-@ElasticDocument(value = "employee", parent = "person")
 public class EmployeeEntity {
 
     @ElasticLongField
@@ -177,22 +149,6 @@ public class EmployeeEntity {
 ```
 
 #### Annotations parameters:
-
-###### ElasticDocument
-```java
-@ElasticDocument(
-    value = "my_doc_type",
-    dynamic = @BoolValue(true),
-    parent = "my_parent_doc_type",
-    //add eager_global_ordinals into _parent
-    eagerGlobalOrdinalsParent = @BoolValue(true),
-    //add required into _routing
-    requiredRouting = @BoolValue(true)
-)
-public class MyDocumentEntity {
-    .........
-```
-
 
 ###### ElasticBinaryField
 ```java
@@ -613,6 +569,58 @@ private String customValue;
         maxInputLength = @IntValue(50)
     )
 private String multiFieldValue;
+```
+
+#### Example usage with Scala:
+```scala
+import java.time.OffsetDateTime
+
+import org.frekele.elasticsearch.mapping.MappingBuilderImpl
+import org.frekele.elasticsearch.mapping.annotations._
+import org.frekele.elasticsearch.mapping.annotations.values.IntValue
+
+import scala.annotation.meta.field
+
+case class BookEntity(
+                       @(ElasticKeywordField@field)
+                       isbn: String,
+
+                       @(ElasticTextField@field)
+                       @(ElasticKeywordField@field)(ignoreAbove = new IntValue(256))
+                       @(ElasticCompletionField@field)
+                       name: String,
+
+                       @(ElasticTextField@field)
+                       description: String,
+
+                       @(ElasticDateField@field)
+                       releaseDate: OffsetDateTime,
+
+                       @(ElasticBooleanField@field)
+                       active: Boolean,
+
+                       @(ElasticBinaryField@field)
+                       imageBlob: String,
+
+                       @(ElasticObjectField@field)
+                       author: AuthorEntity
+                     )
+
+case class AuthorEntity(
+                         @(ElasticLongField@field)
+                         id: Long,
+
+                         @(ElasticTextField@field)
+                         name: String,
+
+                         @(ElasticTextField@field)
+                         @(ElasticKeywordField@field)
+                         artisticName: String
+                       )
+
+object Main extends App {
+  println(new MappingBuilderImpl().build(true, classOf[BookEntity]).getContentAsString)
+}
 ```
 
 ## License
