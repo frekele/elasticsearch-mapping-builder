@@ -3,35 +3,7 @@ package org.frekele.elasticsearch.mapping;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.frekele.elasticsearch.mapping.annotations.ElasticBinaryField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticBooleanField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticByteField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticCompletionField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticCustomJsonField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticDateRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
-import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticFloatField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticFloatRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticGeoPointField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticGeoShapeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticHalfFloatField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticIntegerField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticIntegerRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticIpField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticIpRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticKeywordField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticLongRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticNestedField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticObjectField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticPercolatorField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticScaledFloatField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
+import org.frekele.elasticsearch.mapping.annotations.*;
 import org.frekele.elasticsearch.mapping.annotations.values.BoolValue;
 import org.frekele.elasticsearch.mapping.annotations.values.FielddataFrequencyFilterValue;
 import org.frekele.elasticsearch.mapping.annotations.values.FloatValue;
@@ -656,8 +628,8 @@ public class MappingBuilderImpl implements MappingBuilder {
 
     public void processElasticField(ElasticDateRangeField elasticField, boolean subField) throws IOException {
         DateFieldValue vo = new DateFieldValue(elasticField.type, elasticField.suffixName(), elasticField.boost(),
-            elasticField.docValues(), elasticField.format(), elasticField.locale(), elasticField.ignoreMalformed(),
-            elasticField.index(), elasticField.nullValue(), elasticField.store());
+            null, elasticField.format(), elasticField.locale(), null,
+            elasticField.index(), null, elasticField.store());
         this.processElasticField(vo, subField);
     }
 

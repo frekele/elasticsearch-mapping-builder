@@ -65,8 +65,8 @@ public class FullDocumentTwoEntity {
 
     @ElasticCompletionField(
         suffixName = "completion",
-        analyzer = "myAnalyzer",
-        searchAnalyzer = "mySearchAnalyzer",
+        analyzer = "standard",
+        searchAnalyzer = "standard",
         preserveSeparators = @BoolValue(true),
         preservePositionIncrements = @BoolValue(true),
         maxInputLength = @IntValue(50)
@@ -89,12 +89,9 @@ public class FullDocumentTwoEntity {
     @ElasticDateRangeField(
         suffixName = "dateRange",
         boost = @FloatValue(1),
-        docValues = @BoolValue(true),
         format = "basic_date_time",
         locale = "en-US",
-        ignoreMalformed = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private Date dateRangeValue;
@@ -148,8 +145,8 @@ public class FullDocumentTwoEntity {
     @ElasticGeoShapeField(
         suffixName = "geoShape",
         tree = "geohash",
-        precision = "kilometers",
-        treeLevels = "50m",
+        precision = "1m",
+        treeLevels = "12",
         strategy = "recursive",
         distanceErrorPct = @FloatValue(0.025f),
         orientation = "ccw",
@@ -193,7 +190,6 @@ public class FullDocumentTwoEntity {
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private String ipValue;
@@ -209,7 +205,6 @@ public class FullDocumentTwoEntity {
 
     @ElasticKeywordField(
         suffixName = "keyword",
-        analyzer = "myAnalyzer",
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         eagerGlobalOrdinals = @BoolValue(true),
@@ -219,8 +214,7 @@ public class FullDocumentTwoEntity {
         norms = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true),
-        similarity = "BM25",
-        normalizer = "my_normalizer"
+        similarity = "BM25"
     )
     private String keywordValue;
 
@@ -274,7 +268,7 @@ public class FullDocumentTwoEntity {
 
     @ElasticTextField(
         suffixName = "text",
-        analyzer = "myAnalyzer",
+        analyzer = "standard",
         boost = @FloatValue(1),
         eagerGlobalOrdinals = @BoolValue(true),
         fielddata = @BoolValue(true),
@@ -288,8 +282,8 @@ public class FullDocumentTwoEntity {
         norms = @BoolValue(true),
         positionIncrementGap = @IntValue(100),
         store = @BoolValue(true),
-        searchAnalyzer = "mySearchAnalyzer",
-        searchQuoteAnalyzer = "my_analyzer",
+        searchAnalyzer = "standard",
+        searchQuoteAnalyzer = "standard",
         similarity = "BM25",
         termVector = "no",
         copyTo = {"anotherField"}
@@ -298,12 +292,11 @@ public class FullDocumentTwoEntity {
 
     @ElasticTokenCountField(
         suffixName = "tokenCount",
-        analyzer = "myAnalyzer",
+        analyzer = "standard",
         enablePositionIncrements = @BoolValue(true),
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
     private String tokenCountValue;
@@ -326,7 +319,7 @@ public class FullDocumentTwoEntity {
 
     @ElasticTextField(
         suffixName = "text",
-        analyzer = "myAnalyzer",
+        analyzer = "standard",
         boost = @FloatValue(1),
         eagerGlobalOrdinals = @BoolValue(true),
         fielddata = @BoolValue(true),
@@ -340,15 +333,14 @@ public class FullDocumentTwoEntity {
         norms = @BoolValue(true),
         positionIncrementGap = @IntValue(100),
         store = @BoolValue(true),
-        searchAnalyzer = "mySearchAnalyzer",
-        searchQuoteAnalyzer = "my_analyzer",
+        searchAnalyzer = "standard",
+        searchQuoteAnalyzer = "standard",
         similarity = "BM25",
         termVector = "no",
         copyTo = {"anotherField"}
     )
     @ElasticKeywordField(
         suffixName = "keyword",
-        analyzer = "myAnalyzer",
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         eagerGlobalOrdinals = @BoolValue(true),
@@ -358,13 +350,12 @@ public class FullDocumentTwoEntity {
         norms = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true),
-        similarity = "BM25",
-        normalizer = "my_normalizer"
+        similarity = "BM25"
     )
     @ElasticCompletionField(
         suffixName = "completion",
-        analyzer = "myAnalyzer",
-        searchAnalyzer = "mySearchAnalyzer",
+        analyzer = "standard",
+        searchAnalyzer = "standard",
         preserveSeparators = @BoolValue(true),
         preservePositionIncrements = @BoolValue(true),
         maxInputLength = @IntValue(50)

@@ -26,17 +26,11 @@ public @interface ElasticDateRangeField {
     @Deprecated
     FloatValue boost() default @FloatValue(ignore = true);
 
-    BoolValue docValues() default @BoolValue(ignore = true);
-
     String format() default "";
 
     String locale() default "";
 
-    BoolValue ignoreMalformed() default @BoolValue(ignore = true);
-
     BoolValue index() default @BoolValue(ignore = true);
-
-    String nullValue() default "";
 
     BoolValue store() default @BoolValue(ignore = true);
 
