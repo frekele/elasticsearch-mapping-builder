@@ -25,7 +25,8 @@ public class ObjectMapping implements Serializable {
     }
 
     public String getContentAsString() throws IOException {
-        return this.getContent().string();
+        mapping.close();
+        return mapping.getOutputStream().toString();
     }
 
 }

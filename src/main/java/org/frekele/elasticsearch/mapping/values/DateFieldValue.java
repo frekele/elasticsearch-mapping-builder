@@ -23,8 +23,6 @@ public class DateFieldValue {
 
     private BoolValue ignoreMalformed;
 
-    private BoolValue includeInAll;
-
     private BoolValue index;
 
     private String nullValue;
@@ -32,7 +30,7 @@ public class DateFieldValue {
     private BoolValue store;
 
     public DateFieldValue(FieldType type, String suffixName, FloatValue boost, BoolValue docValues,
-                          String format, String locale, BoolValue ignoreMalformed, BoolValue includeInAll,
+                          String format, String locale, BoolValue ignoreMalformed,
                           BoolValue index, String nullValue, BoolValue store) {
         this.type = type;
         this.suffixName = suffixName;
@@ -41,7 +39,6 @@ public class DateFieldValue {
         this.format = format;
         this.locale = locale;
         this.ignoreMalformed = ignoreMalformed;
-        this.includeInAll = includeInAll;
         this.index = index;
         this.nullValue = nullValue;
         this.store = store;
@@ -73,10 +70,6 @@ public class DateFieldValue {
 
     public BoolValue getIgnoreMalformed() {
         return ignoreMalformed;
-    }
-
-    public BoolValue getIncludeInAll() {
-        return includeInAll;
     }
 
     public BoolValue getIndex() {

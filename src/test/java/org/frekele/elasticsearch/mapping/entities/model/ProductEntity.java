@@ -1,6 +1,5 @@
 package org.frekele.elasticsearch.mapping.entities.model;
 
-import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticIntegerField;
@@ -8,7 +7,6 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticLongField;
 
 import java.util.List;
 
-@ElasticDocument("product")
 public class ProductEntity {
 
     @ElasticLongField

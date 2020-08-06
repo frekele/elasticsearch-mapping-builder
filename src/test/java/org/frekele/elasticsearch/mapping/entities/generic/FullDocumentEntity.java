@@ -7,7 +7,6 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticCompletionField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticCustomJsonField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDateRangeField;
-import org.frekele.elasticsearch.mapping.annotations.ElasticDocument;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticDoubleRangeField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticFloatField;
@@ -29,10 +28,10 @@ import org.frekele.elasticsearch.mapping.annotations.ElasticScaledFloatField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticShortField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTextField;
 import org.frekele.elasticsearch.mapping.annotations.ElasticTokenCountField;
+import org.frekele.elasticsearch.mapping.annotations.values.IntValue;
 
 import java.util.Date;
 
-@ElasticDocument("full")
 public class FullDocumentEntity {
 
     @ElasticBinaryField
@@ -98,7 +97,7 @@ public class FullDocumentEntity {
     @ElasticPercolatorField
     private String percolatorValue;
 
-    @ElasticScaledFloatField
+    @ElasticScaledFloatField(scalingFactor = @IntValue(100))
     private Float scaledFloatValue;
 
     @ElasticShortField

@@ -1,5 +1,6 @@
 package org.frekele.elasticsearch.mapping;
 
+import org.frekele.elasticsearch.mapping.entities.model.AuthorEntity;
 import org.frekele.elasticsearch.mapping.entities.model.BookEntity;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -23,10 +24,10 @@ public class BookTest {
 
     @Test
     public void buildBookTest() throws Exception {
-        String expected = "{\"mappings\":{\"book\":{\"properties\":{\"isbn\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"description\":{\"type\":\"text\"},\"releaseDate\":{\"type\":\"date\"},\"active\":{\"type\":\"boolean\"},\"imageBlob\":{\"type\":\"binary\"},\"author\":{\"properties\":{\"id\":{\"type\":\"long\"},\"name\":{\"type\":\"text\"},\"artisticName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"address\":{\"nested\":true,\"properties\":{\"postalCode\":{\"type\":\"keyword\"},\"street\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"},\"completion\":{\"type\":\"completion\"}}},\"number\":{\"type\":\"long\"}}}}}}}}}";
+        String expected = "{\"mappings\":{\"properties\":{\"isbn\":{\"type\":\"keyword\"},\"name\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"description\":{\"type\":\"text\"},\"releaseDate\":{\"type\":\"date\"},\"active\":{\"type\":\"boolean\"},\"imageBlob\":{\"type\":\"binary\"},\"author\":{\"enabled\":false,\"properties\":{\"id\":{\"type\":\"long\"},\"name\":{\"type\":\"text\"},\"artisticName\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"}}},\"address\":{\"type\":\"nested\",\"properties\":{\"postalCode\":{\"type\":\"keyword\"},\"street\":{\"type\":\"text\",\"fields\":{\"keyword\":{\"type\":\"keyword\"},\"completion\":{\"type\":\"completion\"}}},\"number\":{\"type\":\"long\"}}}}}}}}";
         MappingBuilder mappingBuilder = new MappingBuilderImpl();
         ObjectMapping result = mappingBuilder.build(BookEntity.class);
-        assertEquals(result.getContentAsString().replaceAll("\\r|\\n", ""), expected);
+        assertEquals(result.getContentAsString().replaceAll("[\\r\\n]", ""), expected);
         //System.out.println(result.sourceAsString());
         System.out.println(mappingBuilder.build(true, BookEntity.class).getContentAsString());
     }
