@@ -33,14 +33,10 @@ public @interface ElasticScaledFloatField {
 
     BoolValue ignoreMalformed() default @BoolValue(ignore = true);
 
-    BoolValue includeInAll() default @BoolValue(ignore = true);
-
     BoolValue index() default @BoolValue(ignore = true);
-
-    String nullValue() default "";
 
     BoolValue store() default @BoolValue(ignore = true);
 
-    IntValue scalingFactor() default @IntValue(ignore = true);
+    IntValue scalingFactor();
 
 }

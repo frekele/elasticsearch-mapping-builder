@@ -24,7 +24,7 @@
 
     <groupId>org.frekele.elasticsearch</groupId>
     <artifactId>elasticsearch-mapping-builder</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.1.0</version>
 
     <packaging>jar</packaging>
     <inceptionYear>2017</inceptionYear>
@@ -87,10 +87,10 @@
 
         <project.scm.id>github</project.scm.id>
 
-        <elasticsearch.version>5.6.16</elasticsearch.version>
-        <testng.version>6.14.3</testng.version>
-        <mockito-core.version>2.25.1</mockito-core.version>
-        <jacoco.version>0.8.3</jacoco.version>
+        <elasticsearch.version>7.6.2</elasticsearch.version>
+        <testng.version>7.1.1</testng.version>
+        <mockito-core.version>3.3.3</mockito-core.version>
+        <jacoco.version>0.8.5</jacoco.version>
 
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -106,7 +106,7 @@
     <dependencies>
         <dependency>
             <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
+            <artifactId>elasticsearch-x-content</artifactId>
             <version>${elasticsearch.version}</version>
         </dependency>
 
@@ -268,21 +268,6 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>${maven-gpg-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>

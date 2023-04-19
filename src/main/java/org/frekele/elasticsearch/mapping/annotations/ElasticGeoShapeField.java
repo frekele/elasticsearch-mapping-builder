@@ -24,18 +24,24 @@ public @interface ElasticGeoShapeField {
 
     String suffixName() default "geoShape";
 
+    @Deprecated
     String tree() default "";
 
+    @Deprecated
     String precision() default "";
 
+    @Deprecated
     String treeLevels() default "";
 
+    @Deprecated
     String strategy() default "";
 
+    @Deprecated
     FloatValue distanceErrorPct() default @FloatValue(ignore = true);
 
     String orientation() default "";
 
+    @Deprecated
     BoolValue pointsOnly() default @BoolValue(ignore = true);
 
 }

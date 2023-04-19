@@ -8,13 +8,14 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/778eee87938f43ca92a94b7b613a0891)](https://www.codacy.com/app/frekele/elasticsearch-mapping-builder?utm_source=github.com&utm_medium=referral&utm_content=frekele/elasticsearch-mapping-builder&utm_campaign=Badge_Coverage)
 
 
- Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html](https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html)
+ Built-based on the documentation: [https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html)
 
 #### Compatibility:
 
-| Elasticsearch Mapping Builder | Elasticsearch          |
-| ------------------------------| ---------------------- |
-| Version: 1.0.7                | Version: 5.x.x         |
+| Elasticsearch Mapping Builder | Elasticsearch                                                                            |
+| ------------------------------| ---------------------------------------------------------------------------------------- |
+| Version: 1.0.7                | Version: [5.x](https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html) |
+| Version: 1.1.0                | Version: [7.x](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html) |
 
 
 #### Maven dependency:
@@ -22,13 +23,13 @@
 <dependency>
     <groupId>org.frekele.elasticsearch</groupId>
     <artifactId>elasticsearch-mapping-builder</artifactId>
-    <version>1.0.7</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
 #### Gradle dependency:
 ```gradle
-implementation 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.0.7'
+implementation 'org.frekele.elasticsearch:elasticsearch-mapping-builder:1.1.0'
 ```
 
 #### Build
@@ -60,7 +61,6 @@ public String getMapping() {
 ```
 
 ```java
-@ElasticDocument("book")
 public class BookEntity {
 
     @ElasticKeywordField
@@ -89,7 +89,6 @@ public class BookEntity {
     .........
 }
 
-@ElasticDocument(value = "author")
 public class AuthorEntity {
 
     @ElasticLongField
@@ -106,13 +105,13 @@ public class AuthorEntity {
 }
 ```
 
-**Person parent and Employee:**
+**Employee:**
 ```java
 @Inject
 MappingBuilder mappingBuilder;
 
 public String getMapping() {
-    return mappingBuilder.build(PersonEntity.class, EmployeeEntity.class).getContentAsString();
+    return mappingBuilder.build(EmployeeEntity.class).getContentAsString();
 }
 ```
 
@@ -133,32 +132,6 @@ public class AddressEntity {
     .........
 }
 
-public class PersonEntity {
-
-    @ElasticLongField
-    private Long id;
-
-    @ElasticTextField
-    @ElasticKeywordField
-    private String name;
-
-    @ElasticTextField
-    @ElasticKeywordField
-    private String fullName;
-
-    @ElasticTextField(copyTo = {"name", "fullName"})
-    private String fistName;
-
-    @ElasticTextField(copyTo = {"fullName"})
-    private String lastName;
-
-    @ElasticObjectField
-    private List<AddressEntity> multipleAddress;
-
-    .........
-}
-
-@ElasticDocument(value = "employee", parent = "person")
 public class EmployeeEntity {
 
     @ElasticLongField
@@ -177,26 +150,6 @@ public class EmployeeEntity {
 
 #### Annotations parameters:
 
-###### ElasticDocument
-```java
-@ElasticDocument(
-    value = "my_doc_type",
-    dynamic = @BoolValue(true),
-    includeInAll = @BoolValue(true),
-    parent = "my_parent_doc_type",
-    //add eager_global_ordinals into _parent
-    eagerGlobalOrdinalsParent = @BoolValue(true),
-    enabledAll = @BoolValue(true),
-    //add store into _all
-    storeAll = @BoolValue(true),
-    //add required into _routing
-    requiredRouting = @BoolValue(true)
-)
-public class MyDocumentEntity {
-    .........
-```
-
-
 ###### ElasticBinaryField
 ```java
 @ElasticBinaryField(
@@ -212,7 +165,6 @@ private String binaryValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true))
 private Boolean booleanValue;
 ```
@@ -225,9 +177,7 @@ private Boolean booleanValue;
         boost = @FloatValue(0.2f),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Byte byteValue;
@@ -255,7 +205,6 @@ private String completionValue;
         format = "basic_date_time",
         locale = "en-US",
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -272,7 +221,6 @@ private Date dateValue;
         format = "basic_date_time",
         locale = "en-US",
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -288,9 +236,7 @@ private Date dateRangeValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Double doubleValue;
@@ -302,7 +248,6 @@ private Double doubleValue;
         suffixName = "doubleRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -317,9 +262,7 @@ private Double doubleRangeValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Float floatValue;
@@ -331,7 +274,6 @@ private Float floatValue;
         suffixName = "floatRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -370,9 +312,7 @@ private String geoShapeValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Float halfFloatValue;
@@ -386,9 +326,7 @@ private Float halfFloatValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Integer integerValue;
@@ -400,7 +338,6 @@ private Integer integerValue;
         suffixName = "integerRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -413,7 +350,6 @@ private Integer integerRangeValue;
         suffixName = "ip",
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
@@ -427,7 +363,6 @@ private String ipValue;
         suffixName = "ipRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -443,7 +378,6 @@ private String ipRangeValue;
         docValues = @BoolValue(true),
         eagerGlobalOrdinals = @BoolValue(true),
         ignoreAbove = @IntValue(350),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         indexOptions = "docs",
         norms = @BoolValue(true),
@@ -463,9 +397,7 @@ private String keywordValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Long longValue;
@@ -477,7 +409,6 @@ private Long longValue;
         suffixName = "longRange",
         coerce = @BoolValue(true),
         boost = @FloatValue(1),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         store = @BoolValue(true)
     )
@@ -500,9 +431,7 @@ private String percolatorValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true),
         scalingFactor = @IntValue(100)
     )
@@ -517,9 +446,7 @@ private Float scaledFloatValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         ignoreMalformed = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
-        nullValue = "NULL",
         store = @BoolValue(true)
     )
 private Short shortValue;
@@ -538,7 +465,6 @@ private Short shortValue;
             max = @FloatValue(0.1f),
             minSegmentSize = @IntValue(500)
         ),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         indexOptions = "",
         norms = @BoolValue(true),
@@ -562,7 +488,6 @@ private String textValue;
         boost = @FloatValue(1),
         docValues = @BoolValue(true),
         index = @BoolValue(true),
-        includeInAll = @BoolValue(true),
         nullValue = "NULL",
         store = @BoolValue(true)
     )
@@ -609,7 +534,6 @@ private String customValue;
             max = @FloatValue(0.1f),
             minSegmentSize = @IntValue(500)
         ),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         indexOptions = "",
         norms = @BoolValue(true),
@@ -628,7 +552,6 @@ private String customValue;
         docValues = @BoolValue(true),
         eagerGlobalOrdinals = @BoolValue(true),
         ignoreAbove = @IntValue(350),
-        includeInAll = @BoolValue(true),
         index = @BoolValue(true),
         indexOptions = "docs",
         norms = @BoolValue(true),
@@ -646,6 +569,58 @@ private String customValue;
         maxInputLength = @IntValue(50)
     )
 private String multiFieldValue;
+```
+
+#### Example usage with Scala:
+```scala
+import java.time.OffsetDateTime
+
+import org.frekele.elasticsearch.mapping.MappingBuilderImpl
+import org.frekele.elasticsearch.mapping.annotations._
+import org.frekele.elasticsearch.mapping.annotations.values.IntValue
+
+import scala.annotation.meta.field
+
+case class BookEntity(
+                       @(ElasticKeywordField@field)
+                       isbn: String,
+
+                       @(ElasticTextField@field)
+                       @(ElasticKeywordField@field)(ignoreAbove = new IntValue(256))
+                       @(ElasticCompletionField@field)
+                       name: String,
+
+                       @(ElasticTextField@field)
+                       description: String,
+
+                       @(ElasticDateField@field)
+                       releaseDate: OffsetDateTime,
+
+                       @(ElasticBooleanField@field)
+                       active: Boolean,
+
+                       @(ElasticBinaryField@field)
+                       imageBlob: String,
+
+                       @(ElasticObjectField@field)
+                       author: AuthorEntity
+                     )
+
+case class AuthorEntity(
+                         @(ElasticLongField@field)
+                         id: Long,
+
+                         @(ElasticTextField@field)
+                         name: String,
+
+                         @(ElasticTextField@field)
+                         @(ElasticKeywordField@field)
+                         artisticName: String
+                       )
+
+object Main extends App {
+  println(new MappingBuilderImpl().build(true, classOf[BookEntity]).getContentAsString)
+}
 ```
 
 ## License

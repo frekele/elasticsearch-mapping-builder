@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public interface MappingBuilder extends Serializable {
 
-    public ObjectMapping build(Class... documentClass);
+    public ObjectMapping build(Class documentClass);
 
-    public ObjectMapping build(boolean pretty, Class... documentClass);
+    public ObjectMapping build(boolean pretty, Class documentClass);
 }
